@@ -1,0 +1,34 @@
+.tiltedRight {
+  /*transform: rotate(7deg);/*transform: rotate(7deg);*/
+  rotate: 7deg;
+}
+
+.tiltedLeft {
+  /*transform: rotate(-7deg);/*transform: rotate(-7deg);*/
+  rotate: -7deg;
+}
+
+.mt {
+  margin-top: 10px;
+}
+
+#root {
+  /*width: 300px;
+  height: 100px;*/
+
+  text-align: center;
+
+  /*background-color: rgb(230, 152, 104);*/
+}
+
+#inner-root {
+  /*width: 40px;
+  height: 70px;*/
+
+  display: inline-block;
+}
+
+/* rgb(230, 152, 104) */
+body {
+  background-color: rgb(230, 152, 104);
+}
