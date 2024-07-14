@@ -11,8 +11,12 @@ const app = express();
   });
 });*/
 
-app.use(express.static('public'))
+app.use(express.static('public'));
 
-app.listen(process.env.PORT, () => {
+const webSocketServer = require('./socket/index'); // socket 모듈 로드
+
+
+const server = app.listen(process.env.PORT, () => {
   console.log('Server is running on port http://localhost:' + process.env.PORT);
 });
+webSocketServer(server); // socket 서버 실행
