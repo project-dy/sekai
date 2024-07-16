@@ -27,12 +27,15 @@ function fadeIn(i) {
  * @param {Element} i 
  */
 function fadeOut(i) {
+  let next = i.attributes.next.value;
+  if (next == "sp3") {
+    return;
+  }
+  next = document.getElementById(next);
   i.classList.remove('fadeIn');
   i.classList.add('fadeOut');
   //i.classList.add('hid');
   i.addEventListener('animationend', () => {
-    let next = $1sp.attributes.next.value;
-    next = document.getElementById(next);
     if (next) {
       fadeIn(next);
     }
