@@ -6,35 +6,52 @@
     font-style: normal;
 }
 
+/* https://noonnu.cc/font_page/106 */
+@import url("https://fonts.googleapis.com/css?family=Black+Han+Sans:400");
+
+.attention {
+    font-family: "Black Han Sans", sans-serif;
+    font-size: 2em;
+    color: #01cbb9;
+    text-align: center;
+    margin: 0 0 0 0;
+}
+
 .fonts-scoredream {
     font-family: "S-CoreDream-3Light";
 }
 
 .project-dy {
-  width: 50%;
-  display: inline-block;
+    /*width: 50%;*/
+    display: inline-block;
 }
 
 .logo {
-  border-radius: 70%;
-  overflow: hidden;
+    border-radius: 70%;
+    height: 4.125em;
+    width: 4.125em;
+    margin: 0.5em 0.05em 0 0.1em;
+    /*vertical-align: -0.1em;*/
+    /*vertical-align: baseline;*/
+    /*overflow: hidden;
+    object-fit: contain;*/
 }
 
 .img-description {
-  display: inline-block;
-  text-align: center;
+    display: inline-block;
+    text-align: center;
 }
 
 .stripe {
-  display: inline-block;
-  margin: 0 20px 0 0;
-  border-right: 1px solid rgba(0, 0, 0, .3);
-  padding: 0 23px 0 0;
-  font-size: 24px;
-  font-weight: 500;
-  vertical-align: top;
-  line-height: 49px;
-  /*height: 100px;*/
+    display: inline-block;
+    margin: 0 20px 0 0;
+    border-right: 1px solid rgba(0, 0, 0, 0.3);
+    padding: 0 23px 0 0;
+    font-size: 24px;
+    font-weight: 500;
+    vertical-align: top;
+    line-height: 49px;
+    /*height: 100px;*/
 }
 
 .tiltedRight {

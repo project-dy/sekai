@@ -4,38 +4,39 @@
 
 //eval([]);
 
-const $1sp = document.getElementById('sp1');
-const $2sp = document.getElementById('sp2');
+const root = document.getElementById("root");
+const $sp1 = document.getElementById("sp1");
 
 /**
- * 
- * @param {Element} i 
+ *
+ * @param {Element} i
  */
 function fadeIn(i) {
-  i.classList.remove('hid');
-  i.classList.add('fadeIn');
-  i.addEventListener('animationend', () => {
+  i.classList.remove("hid");
+  i.classList.add("fadeIn");
+  window.titleEvent = root.addEventListener("click", () => {
+    fadeOut(i);
+  });
+  i.addEventListener("animationend", () => {
     setTimeout(() => {
       fadeOut(i);
     }, 3000);
   });
 }
 
-
 /**
- * 
- * @param {Element} i 
+ *
+ * @param {Element} i
  */
 function fadeOut(i) {
-  let next = i.attributes.next.value;
-  if (next == "sp3") {
-    return;
-  }
+  root.removeEventListener("click", window.titleEvent);
+  i.classList.remove("fadeIn");
+  i.classList.add("fadeOut");
+  let next = i.attributes?.next?.value;
+  if (!next) return;
   next = document.getElementById(next);
-  i.classList.remove('fadeIn');
-  i.classList.add('fadeOut');
   //i.classList.add('hid');
-  i.addEventListener('animationend', () => {
+  i.addEventListener("animationend", () => {
     if (next) {
       fadeIn(next);
     }
@@ -44,5 +45,5 @@ function fadeOut(i) {
 }
 
 setTimeout(() => {
-  fadeIn($1sp);
+  fadeIn($sp1);
 }, 500);
