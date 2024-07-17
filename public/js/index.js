@@ -14,6 +14,7 @@ const $sp1 = document.getElementById("sp1");
 function fadeIn(i) {
   i.classList.remove("hid");
   i.classList.add("fadeIn");
+  if (i.attributes?.next?.value == "sp3") return;
   window.titleEvent = root.addEventListener("click", () => {
     fadeOut(i);
   });

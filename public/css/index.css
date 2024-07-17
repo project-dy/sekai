@@ -1,5 +1,3 @@
-@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
-
 @font-face {
     font-family: "S-CoreDream-3Light";
     src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff")
@@ -9,25 +7,24 @@
 }
 
 /* https://noonnu.cc/font_page/106 */
-.black-han-sans-regular {
-    font-family: "Black Han Sans", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-}
-  
+@import url("https://fonts.googleapis.com/css?family=Black+Han+Sans:400");
+
 .attention {
     font-family: "Black Han Sans", sans-serif;
-    font-size: 7em;
+    font-size: 2em;
     color: #01cbb9;
-    /*color: #f45151;*/
     text-align: center;
     margin: 0 0 0 0;
 }
 
-.attention-description {
-    font-family: 'NanumSquare', sans-serif;
-    font-size: 1.5em;
-    text-align: center;
+.title {
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
 }
 
 .fonts-scoredream {
