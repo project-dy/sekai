@@ -34,6 +34,7 @@ function fadeOut(i) {
   i.classList.add("fadeOut");
   let next = i.attributes?.next?.value;
   if (!next) return;
+  //i.classList.add("fadeOut");
   next = document.getElementById(next);
   //i.classList.add('hid');
   i.addEventListener("animationend", () => {
