@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@xterm/xterm':
+        specifier: ^5.5.0
+        version: 5.5.0
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
@@ -31,6 +34,9 @@ importers:
         version: 8.18.0
 
 packages:
+
+  '@xterm/xterm@5.5.0':
+    resolution: {integrity: sha512-hqJHYaQb5OptNunnyAnkHyM8aCjZ1MEIDTQu1iIbbTD/xops91NB5yq1ZK/dC2JDbVWtF23zUtl9JE2NqwT87A==}
 
   a-sync-waterfall@1.0.1:
     resolution: {integrity: sha512-RYTOHHdWipFUliRFMCS4X2Yn2X8M87V/OpSqWzKKOGhzqyUxzyVmhHDH9sAvG+ZuQf/TAOFsLCpMw09I1ufUnA==}
@@ -451,6 +457,8 @@ packages:
         optional: true
 
 snapshots:
+
+  '@xterm/xterm@5.5.0': {}
 
   a-sync-waterfall@1.0.1: {}
 

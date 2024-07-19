@@ -11,6 +11,11 @@
 
 @import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
 
+.the-black {
+    color: white;
+    background-color: black;
+}
+
 .black-han-sans-regular {
     font-family: "Black Han Sans", sans-serif;
     font-weight: 400;
@@ -192,4 +197,11 @@ show when the first load with fullscreen and middle of the screen
 
 .flx {
     display: flex;
+}
+
+
+
+.full-screen {
+    width: 100%;
+    height: 100%;
 }
