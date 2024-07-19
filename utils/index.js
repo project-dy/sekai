@@ -10,7 +10,7 @@ class Sekai {
   register() {
     console.log('register');
     return {
-      c: 500,
+      c: 501,
       m: "Not implemented",
     }
   }

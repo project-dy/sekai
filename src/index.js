@@ -1,3 +1,28 @@
+let store = {
+  user: [],
+  music: [],
+};
+
+let template = {
+  user: {
+    name: "",
+    sn: "",
+    order: "", // 입장 순서
+    solved: "", // 푼 문제
+    correct: [], // 정답 여부 배열
+    score: 0, // 점수
+  },
+  music: {
+    title: "",
+    artist: "",
+    source: "", // is Downloaded(local) or from http
+    url: "",
+    answer: "",
+    hint: "",
+    score: 0,
+  },
+};
+
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -27,7 +52,7 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-//const webSocketServer = require("./socket/index"); // socket 모듈 로드
+const webSocketServer = require("./socket/index"); // socket 모듈 로드
 
 const server = app.listen(process.env.PORT, () => {
   console.log("Server is running on port http://localhost:" + process.env.PORT);
@@ -36,4 +61,19 @@ const server = app.listen(process.env.PORT, () => {
 const Sekai = require("../utils/index"); // utils 모듈 로드
 const sekai = new Sekai(); // Sekai 클래스 인스턴스 생성
 sekai.greet(); // Hello, Sekai 출력
-//webSocketServer(server); // socket 서버 실행
+webSocketServer(server); // socket 서버 실행
+
+app.get("/api", (req, res) => {
+  res.json({
+    c: 501,
+    m: "Not implemented",
+  });
+});
+
+// /api/list 접속자 리스트
+app.get("/api/list", (req, res) => {
+  res.json({
+    c: 501,
+    m: "Not implemented",
+  });
+});
