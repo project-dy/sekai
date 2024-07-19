@@ -9,11 +9,25 @@
 /* https://noonnu.cc/font_page/106 */
 @import url("https://fonts.googleapis.com/css?family=Black+Han+Sans:400");
 
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+
 .black-han-sans-regular {
     font-family: "Black Han Sans", sans-serif;
     font-weight: 400;
     font-style: normal;
-}  
+}
+
+.font-sizes-1 {
+    font-size: 1.5em;
+}
+
+.font-weight-400 {
+    font-weight: 400;
+}
+
+.text-center {
+    text-align: center;
+}
 
 .attention {
     font-family: "Black Han Sans", sans-serif;
