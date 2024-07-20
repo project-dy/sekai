@@ -9,11 +9,23 @@
 /* https://noonnu.cc/font_page/106 */
 @import url("https://fonts.googleapis.com/css?family=Black+Han+Sans:400");
 
-@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+@import url("https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css");
 
-.the-black {
-    color: white;
-    background-color: black;
+/* #2D2E2C */
+@keyframes colorIn {
+    0% {
+        background-color: white;
+    }
+
+    100% {
+        background-color: #2d2e2c;
+    }
+}
+
+.the-background {
+    /*color: white;*/
+    animation: colorIn 100ms ease-in-out;
+    background-color: #2d2e2c;
 }
 
 .black-han-sans-regular {
@@ -198,8 +210,6 @@ show when the first load with fullscreen and middle of the screen
 .flx {
     display: flex;
 }
-
-
 
 .full-screen {
     width: 100%;
