@@ -600,6 +600,9 @@ function initTheRoot() {
               term.writeln("Connected to websocket");
               term.prompt();
             };
+            ws.onmessage = (event) => {
+              term.writeln(event.data);
+            };
           } else if (p[0] == "c") {
             const command = p[1];
             let dataList = p.slice(2);

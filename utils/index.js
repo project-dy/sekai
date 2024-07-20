@@ -1,3 +1,5 @@
+const fs = require("fs");
+const path = require("path");
 const axios = require("axios");
 const cheerio = require("cheerio");
 
@@ -20,6 +22,38 @@ class Admin {
       };
     }
   }
+
+  async crawl(params) {
+    const util = new Util();
+    const result = await util.crawl();
+    // Util.crawl();
+    //const result = Util.crawl(params);
+    //console.log(result);
+    //return result;
+    const rootPath = path.resolve(__dirname, "../");
+    const dataPath = path.resolve(rootPath, "data");
+    fs.writeFileSync(
+      path.resolve(dataPath, "crawled/iChart.json"),
+      JSON.stringify({ data: result }),
+      //String(result),
+      { encoding: "utf8", flag: "w" },
+    );
+    return true;
+  }
+
+  async doIt(params) {
+    const command = params.command;
+    switch (command) {
+      case "crawl":
+        const res = await this.crawl(params);
+        if (res) {
+          return JSON.stringify({ c: 200, m: String(res) });
+        }
+        break;
+      default:
+        return "Command Not Found";
+    }
+  }
 }
 
 class Normal {}
@@ -28,6 +62,7 @@ class Sekai {
   constructor() {
     this.name = "Sekai";
     this.Util = Util;
+    this.Admin = Admin;
   }
 
   greet() {
@@ -196,7 +231,7 @@ class Util {
       });
     });
 
-    //console.log(list);
+    console.log(list);
     return list;
   }
 

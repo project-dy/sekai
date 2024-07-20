@@ -51,6 +51,7 @@ const dataPath = path.resolve(rootPath, "data"); // data 폴더의 절대경로�
 const Sekai = require("../../utils/index"); // utils 모듈 로드
 const sekai = new Sekai(); // Sekai 클래스 인스턴스 생성
 //sekai.greet(); // Hello, Sekai 출력
+const admin = new sekai.Admin();
 
 function webSocketServer(server) {
   // Create a WebSocket server
@@ -82,6 +83,9 @@ function webSocketServer(server) {
       console.log(parsed);
       if (rn == "admin") {
         //console.log("admin!");
+        admin.doIt(parsed).then((result) => {
+          ws.send(result);
+        });
       }
     });
 
