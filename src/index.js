@@ -71,7 +71,7 @@ app.get("/api", (req, res) => {
 });
 
 const util = new sekai.Util();
-util.crawl();
+//util.crawl();
 
 // /api/list 접속자 리스트
 app.get("/api/list", (req, res) => {
