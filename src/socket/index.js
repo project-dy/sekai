@@ -58,6 +58,7 @@ function webSocketServer(server) {
 
   // Store connected clients
   const clients = [];
+  const clientsByRn = {};
   // Handle incoming connections
   wss.on("connection", (ws, req) => {
     // Get the "rn" parameter from the request URL
@@ -66,12 +67,22 @@ function webSocketServer(server) {
     //const rn = req.url.split('?rn=')[1];
     // console.log(rn);
 
-    //
+    // Log the connection
+    console.log(req.url);
+    const rn = req.url.split("?rn=")[1];
+    console.log(`Client ${rn} connected`);
+
+    // Store the WebSocket connection in the clients object
+    if (!clients[rn]) clients[rn] = [];
+    clients[rn].push(ws);
 
     // Handle incoming messages
     ws.on("message", (message) => {
       const parsed = JSON.parse(message);
       console.log(parsed);
+      if (rn == "admin") {
+        //console.log("admin!");
+      }
     });
 
     // Handle connection close

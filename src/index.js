@@ -45,7 +45,7 @@ app.engine("html", nunjucks.render);
 });*/
 
 app.use(express.static("public"));
-app.use('/node_modules', express.static('node_modules'));
+app.use("/node_modules", express.static("node_modules"));
 
 // 기본적으로 nunjucks를 이용한 redering을 모든 get요청에 대하여 처리
 app.get("/", (req, res) => {
@@ -69,6 +69,9 @@ app.get("/api", (req, res) => {
     m: "Not implemented",
   });
 });
+
+const util = new sekai.Util();
+util.crawl();
 
 // /api/list 접속자 리스트
 app.get("/api/list", (req, res) => {

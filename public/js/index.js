@@ -581,14 +581,75 @@ function initTheRoot() {
         },
         description: "A simple example",
       },
+      ws: {
+        f: (p) => {
+          // Create a new websocket
+          console.log(p);
+          if (p[0] == undefined) {
+            term.prompt();
+            return;
+          }
+          if (p[0] == "init") {
+            term.writeln("Connecting to websocket...");
+            const rnParam = "admin";
+            const ws = new WebSocket(
+              `ws://${location.href.split("/")[2]}/socket?rn=${rnParam}`,
+            );
+            window.ws = ws;
+            ws.onopen = () => {
+              term.writeln("Connected to websocket");
+              term.prompt();
+            };
+          } else if (p[0] == "c") {
+            const command = p[1];
+            let dataList = p.slice(2);
+            // parameters may be like a=1 b=2 c=3
+            // we need to convert them to an object and it'll be changed to JSON.
+            const data = {};
+            data.command = command;
+            data.params = [];
+            data.flags = [];
+            dataList.forEach((e, i) => {
+              // if param starts with --
+              if (e.startsWith("--")) {
+                const key = e.slice(2);
+                data.flags.push(key);
+                return;
+              }
+
+              if (e.startsWith("-")) {
+                const key = e.slice(1).split("");
+                key.forEach((k) => {
+                  data.flags.push(k);
+                });
+              }
+
+              const [key, value] = e.split("=");
+              if (!value) {
+                data.params.push({ string: key });
+                return;
+              }
+              //data["params"][key] = value;
+              data.params.push({ [key]: value });
+            });
+            const jsonData = JSON.stringify(data);
+            term.writeln(`Sending command: ${jsonData}`);
+            window.ws.send(jsonData);
+            term.writeln("Command sent");
+            term.prompt();
+          }
+        },
+        description: "Connect to a websocket",
+      },
     };
 
     function runCommand(term, text) {
       const command = text.trim().split(" ")[0];
+      const params = text.trim().split(" ").slice(1);
       if (command.length > 0) {
         term.writeln("");
         if (command in commands) {
-          commands[command].f();
+          commands[command].f(params);
           return;
         }
         term.writeln(`${command}: command not found`);
