@@ -32,13 +32,22 @@ class Admin {
     //return result;
     const rootPath = path.resolve(__dirname, "../");
     const dataPath = path.resolve(rootPath, "data");
+    // If there is no data folder, create one
+    if (!fs.existsSync(dataPath)) {
+      fs.mkdirSync(dataPath);
+    }
+    // If there is no crawled folder, create one
+    if (!fs.existsSync(path.resolve(dataPath, "crawled"))) {
+      fs.mkdirSync(path.resolve(dataPath, "crawled"));
+    }
     fs.writeFileSync(
       path.resolve(dataPath, "crawled/iChart.json"),
       JSON.stringify({ data: result }),
       //String(result),
       { encoding: "utf8", flag: "w" },
     );
-    return true;
+    //return true;
+    return JSON.stringify({ data: result });
   }
 
   async doIt(params) {
@@ -135,6 +144,9 @@ class Util {
       .find(".ichart_score_song>div:nth-child(2)>span>a")
       .text();
     const firstRank = 1;
+    const firstArtist = first
+      .find(".ichart_score_artist>div:nth-child(1)>b")
+      .text();
     const firstB = $(".spage_score_bottom");
     const firstJaksa = firstB
       .find(
@@ -173,6 +185,7 @@ class Util {
       albumArt: "https://" + firstAlbumArt,
       song: firstSong,
       album: firstAlbum,
+      artist: firstArtist,
       jaksa: firstJaksa,
       jakgok: firstJakgok,
       pyeonkok: firstPyeongok,
@@ -192,6 +205,7 @@ class Util {
         .find(".ichart_score2_song2>span>a")
         .text()
         .trim();
+      const artist = $(element).find(".ichart_score2_artist1").text().trim();
       const jaksa = $(element)
         .next()
         .find(".showinfo>span:nth-child(2)")
@@ -224,6 +238,7 @@ class Util {
         albumArt: "https://" + albumArt,
         song: song,
         album: album,
+        artist: artist,
         jaksa: jaksa,
         jakgok: jakgok,
         pyeonkok: pyeongok,

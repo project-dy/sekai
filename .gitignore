@@ -80,6 +80,7 @@ web_modules/
 .env.local
 public/rs.txt
 public/svg
+data
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
