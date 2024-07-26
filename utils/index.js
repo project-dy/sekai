@@ -25,7 +25,6 @@ class Admin {
 
   async crawl(params) {
     const util = new Util();
-    const result = await util.crawl();
     // Util.crawl();
     //const result = Util.crawl(params);
     //console.log(result);
@@ -40,8 +39,22 @@ class Admin {
     if (!fs.existsSync(path.resolve(dataPath, "crawled"))) {
       fs.mkdirSync(path.resolve(dataPath, "crawled"));
     }
+
+    //console.log(JSON.stringify({ data: params }));
+    if (params.params[0]?.string === "iChart") {
+      const result = await util.crawliChart();
+      fs.writeFileSync(
+        path.resolve(dataPath, "crawled/iChart.json"),
+        JSON.stringify({ data: result }),
+        //String(result),
+        { encoding: "utf8", flag: "w" },
+      );
+      //return true;
+      return JSON.stringify({ data: result });
+    }
+    const result = await util.crawlMelon();
     fs.writeFileSync(
-      path.resolve(dataPath, "crawled/iChart.json"),
+      path.resolve(dataPath, "crawled/melon.json"),
       JSON.stringify({ data: result }),
       //String(result),
       { encoding: "utf8", flag: "w" },
@@ -92,7 +105,47 @@ class Util {
     this.name = "Util";
   }
 
-  async crawl() {
+  async crawlMelon() {
+    const list = [];
+    const melonURL = "https://www.melon.com/chart/index.htm";
+    // Connect to the website and get tbody
+    const html = await axios.get(melonURL);
+    const $ = cheerio.load(html.data);
+    const trList = $("tbody>tr");
+    //console.log(trList);
+    trList.each((index, element) => {
+      const rank = $(element).find("td:nth-child(2)>div>span").text().trim();
+      const albumArt = $(element)
+        .find("td:nth-child(4)>div>a>img")
+        .attr("src")
+        .replace("/120", "/480");
+      const title = $(element)
+        .find("td:nth-child(6)>div>div>div:nth-child(1)>span>a")
+        .text()
+        .trim();
+      const artist = $(element)
+        .find("td:nth-child(6)>div>div>div:nth-child(3)>a")
+        .text()
+        .trim();
+      const album = $(element)
+        .find("td:nth-child(7)>div>div>div>a")
+        .text()
+        .trim();
+      /*console.log(
+        `rank: ${rank}, albumArt: ${albumArt}, title: ${title}, artist: ${artist}, album: ${album}`,
+      );*/
+      list.push({
+        rank: rank,
+        albumArt: albumArt,
+        title: title,
+        artist: artist,
+        album: album,
+      });
+    });
+    return list;
+  }
+
+  async crawliChart() {
     const iChartURL = "https://www.instiz.net/iframe_ichart_score.htm";
     // Connect to the website and get tbody
     const html = await axios.get(iChartURL);
