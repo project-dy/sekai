@@ -12,51 +12,51 @@ const $sp1 = document.getElementById("sp1");
  * @param {Element} i
  */
 function fullScreen(i) {
-  i.style.width = "100%";
-  i.style.height = "100%";
+	i.style.width = "100%";
+	i.style.height = "100%";
 }
 
 fetch("/example.txt", (res) => {
-  window.example = res.text();
+	window.example = res.text();
 });
 
 function initTheRoot() {
-  /*document.getElementById("root").style.width = "100%";
+	/*document.getElementById("root").style.width = "100%";
   document.getElementById("root").style.height = "100%";
   document.getElementById("theRoot").style.width = "100%";
   document.getElementById("theRoot").style.height = "100%";*/
-  /*document.body.style.backgroundColor = "#2D2E2C";*/
-  document.body.classList.add("the-background");
+	/*document.body.style.backgroundColor = "#2D2E2C";*/
+	document.body.classList.add("the-background");
 
-  /*var term = new Terminal();
+	/*var term = new Terminal();
   term.open(document.getElementById('theRoot'));
   term.write('Hello from \x1B[1;3;31mxterm.js\x1B[0m $ ')*/
 
-  (function () {
-    // Custom theme to match style of xterm.js logo
-    var baseTheme = {
-      foreground: "#F8F8F8",
-      background: "#2D2E2C",
-      selection: "#5DA5D533",
-      black: "#1E1E1D",
-      brightBlack: "#262625",
-      red: "#CE5C5C",
-      brightRed: "#FF7272",
-      green: "#5BCC5B",
-      brightGreen: "#72FF72",
-      yellow: "#CCCC5B",
-      brightYellow: "#FFFF72",
-      blue: "#5D5DD3",
-      brightBlue: "#7279FF",
-      magenta: "#BC5ED1",
-      brightMagenta: "#E572FF",
-      cyan: "#5DA5D5",
-      brightCyan: "#72F0FF",
-      white: "#F8F8F8",
-      brightWhite: "#FFFFFF",
-    };
-    // vscode-snazzy https://github.com/Tyriar/vscode-snazzy
-    /*var otherTheme = {
+	(function () {
+		// Custom theme to match style of xterm.js logo
+		var baseTheme = {
+			foreground: "#F8F8F8",
+			background: "#2D2E2C",
+			selection: "#5DA5D533",
+			black: "#1E1E1D",
+			brightBlack: "#262625",
+			red: "#CE5C5C",
+			brightRed: "#FF7272",
+			green: "#5BCC5B",
+			brightGreen: "#72FF72",
+			yellow: "#CCCC5B",
+			brightYellow: "#FFFF72",
+			blue: "#5D5DD3",
+			brightBlue: "#7279FF",
+			magenta: "#BC5ED1",
+			brightMagenta: "#E572FF",
+			cyan: "#5DA5D5",
+			brightCyan: "#72F0FF",
+			white: "#F8F8F8",
+			brightWhite: "#FFFFFF",
+		};
+		// vscode-snazzy https://github.com/Tyriar/vscode-snazzy
+		/*var otherTheme = {
       foreground: "#eff0eb",
       background: "#282a36",
       selection: "#97979b33",
@@ -79,63 +79,63 @@ function initTheRoot() {
     };
     var isBaseTheme = true;*/
 
-    var term = new window.Terminal({
-      fontFamily: '"Lilex", "Cascadia Code", Menlo, monospace',
-      theme: baseTheme,
-      cursorBlink: true,
-      allowProposedApi: true,
-    });
-    term.open(document.querySelector(".demo .inner"));
+		var term = new window.Terminal({
+			fontFamily: '"Lilex", "Cascadia Code", Menlo, monospace',
+			theme: baseTheme,
+			cursorBlink: true,
+			allowProposedApi: true,
+		});
+		term.open(document.querySelector(".demo .inner"));
 
-    var isWebglEnabled = false;
-    try {
-      const webgl = new window.WebglAddon.WebglAddon();
-      term.loadAddon(webgl);
-      isWebglEnabled = true;
-    } catch (e) {
-      console.warn("WebGL addon threw an exception during load", e);
-    }
+		var isWebglEnabled = false;
+		try {
+			const webgl = new window.WebglAddon.WebglAddon();
+			term.loadAddon(webgl);
+			isWebglEnabled = true;
+		} catch (e) {
+			console.warn("WebGL addon threw an exception during load", e);
+		}
 
-    const customSettings = {
-      enableSizeReports: true, // whether to enable CSI t reports (see below)
-      pixelLimit: 16777216, // max. pixel size of a single image
-      sixelSupport: true, // enable sixel support
-      sixelScrolling: true, // whether to scroll on image output
-      sixelPaletteLimit: 256, // initial sixel palette size
-      sixelSizeLimit: 25000000, // size limit of a single sixel sequence
-      storageLimit: 128, // FIFO storage limit in MB
-      showPlaceholder: true, // whether to show a placeholder for evicted images
-      iipSupport: true, // enable iTerm IIP support
-      iipSizeLimit: 20000000, // size limit of a single IIP sequence
-    };
+		const customSettings = {
+			enableSizeReports: true, // whether to enable CSI t reports (see below)
+			pixelLimit: 16777216, // max. pixel size of a single image
+			sixelSupport: true, // enable sixel support
+			sixelScrolling: true, // whether to scroll on image output
+			sixelPaletteLimit: 256, // initial sixel palette size
+			sixelSizeLimit: 25000000, // size limit of a single sixel sequence
+			storageLimit: 128, // FIFO storage limit in MB
+			showPlaceholder: true, // whether to show a placeholder for evicted images
+			iipSupport: true, // enable iTerm IIP support
+			iipSizeLimit: 20000000, // size limit of a single IIP sequence
+		};
 
-    try {
-      const imageAddon = new window.ImageAddon.ImageAddon(customSettings);
-      term.loadAddon(imageAddon);
-    } catch (e) {
-      console.warn("Image addon threw an exception during load", e);
-    }
+		try {
+			const imageAddon = new window.ImageAddon.ImageAddon(customSettings);
+			term.loadAddon(imageAddon);
+		} catch (e) {
+			console.warn("Image addon threw an exception during load", e);
+		}
 
-    // Cancel wheel events from scrolling the page if the terminal has scrollback
-    document.querySelector(".xterm").addEventListener("wheel", (e) => {
-      if (term.buffer.active.baseY > 0) {
-        e.preventDefault();
-      }
-    });
+		// Cancel wheel events from scrolling the page if the terminal has scrollback
+		document.querySelector(".xterm").addEventListener("wheel", (e) => {
+			if (term.buffer.active.baseY > 0) {
+				e.preventDefault();
+			}
+		});
 
-    function runFakeTerminal() {
-      if (term._initialized) {
-        return;
-      }
+		function runFakeTerminal() {
+			if (term._initialized) {
+				return;
+			}
 
-      term._initialized = true;
+			term._initialized = true;
 
-      term.prompt = () => {
-        term.write("\r\n$ ");
-      };
+			term.prompt = () => {
+				term.write("\r\n$ ");
+			};
 
-      // TODO: Use a nicer default font
-      /*term.writeln(
+			// TODO: Use a nicer default font
+			/*term.writeln(
         [
           "    Xterm.js is the frontend component that powers many terminals including",
           "                           \x1b[3mVS Code\x1b[0m, \x1b[3mHyper\x1b[0m and \x1b[3mTheia\x1b[0m!",
@@ -158,43 +158,43 @@ function initTheRoot() {
         ].join("\n\r"),
       );*/
 
-      term.writeln("Hello World!, try running `help`.");
-      //addDecoration(term);
-      prompt(term);
+			term.writeln("Hello World!, try running `help`.");
+			//addDecoration(term);
+			prompt(term);
 
-      term.onData((e) => {
-        switch (e) {
-          case "\u0003": // Ctrl+C
-            term.write("^C");
-            prompt(term);
-            break;
-          case "\r": // Enter
-            runCommand(term, command);
-            command = "";
-            break;
-          case "\u007F": // Backspace (DEL)
-            // Do not delete the prompt
-            if (term._core.buffer.x > 2) {
-              term.write("\b \b");
-              if (command.length > 0) {
-                command = command.slice(0, command.length - 1);
-              }
-            }
-            break;
-          default: // Print all other characters for demo
-            if (
-              (e >= String.fromCharCode(0x20) &&
-                e <= String.fromCharCode(0x7e)) ||
-              e >= "\u00a0"
-            ) {
-              command += e;
-              term.write(e);
-            }
-        }
-      });
+			term.onData((e) => {
+				switch (e) {
+					case "\u0003": // Ctrl+C
+						term.write("^C");
+						prompt(term);
+						break;
+					case "\r": // Enter
+						runCommand(term, command);
+						command = "";
+						break;
+					case "\u007F": // Backspace (DEL)
+						// Do not delete the prompt
+						if (term._core.buffer.x > 2) {
+							term.write("\b \b");
+							if (command.length > 0) {
+								command = command.slice(0, command.length - 1);
+							}
+						}
+						break;
+					default: // Print all other characters for demo
+						if (
+							(e >= String.fromCharCode(0x20) &&
+								e <= String.fromCharCode(0x7e)) ||
+							e >= "\u00a0"
+						) {
+							command += e;
+							term.write(e);
+						}
+				}
+			});
 
-      // Create a very simple link provider which hardcodes links for certain lines
-      /*term.registerLinkProvider({
+			// Create a very simple link provider which hardcodes links for certain lines
+			/*term.registerLinkProvider({
         provideLinks(bufferLineNumber, callback) {
           switch (bufferLineNumber) {
             case 2:
@@ -303,377 +303,377 @@ function initTheRoot() {
           callback(undefined);
         },
       });*/
-    }
-    window.term = term;
-    function prompt(term) {
-      command = "";
-      term.write("\r\n$ ");
-    }
+		}
+		window.term = term;
+		function prompt(term) {
+			command = "";
+			term.write("\r\n$ ");
+		}
 
-    var command = "";
-    var commands = {
-      help: {
-        f: () => {
-          const padding = 10;
-          function formatMessage(name, description) {
-            const maxLength = term.cols - padding - 3;
-            let remaining = description;
-            const d = [];
-            while (remaining.length > 0) {
-              // Trim any spaces left over from the previous line
-              remaining = remaining.trimStart();
-              // Check if the remaining text fits
-              if (remaining.length < maxLength) {
-                d.push(remaining);
-                remaining = "";
-              } else {
-                let splitIndex = -1;
-                // Check if the remaining line wraps already
-                if (remaining[maxLength] === " ") {
-                  splitIndex = maxLength;
-                } else {
-                  // Find the last space to use as the split index
-                  for (let i = maxLength - 1; i >= 0; i--) {
-                    if (remaining[i] === " ") {
-                      splitIndex = i;
-                      break;
-                    }
-                  }
-                }
-                d.push(remaining.substring(0, splitIndex));
-                remaining = remaining.substring(splitIndex);
-              }
-            }
-            const message =
-              `  \x1b[36;1m${name.padEnd(padding)}\x1b[0m ${d[0]}` +
-              d.slice(1).map((e) => `\r\n  ${" ".repeat(padding)} ${e}`);
-            return message;
-          }
-          term.writeln(
-            [
-              "Welcome to xterm.js! Try some of the commands below.",
-              "",
-              ...Object.keys(commands).map((e) =>
-                formatMessage(e, commands[e].description),
-              ),
-            ].join("\n\r"),
-          );
-          prompt(term);
-        },
-        description: "Prints this help message",
-      },
-      clear: {
-        f: () => {
-          term.clear();
-          prompt(term);
-        },
-        description: "Clears the screen",
-      },
-      ls: {
-        f: () => {
-          term.writeln(["a", "bunch", "of", "fake", "files"].join("\r\n"));
-          term.prompt(term);
-        },
-        description: "Prints a fake directory structure",
-      },
-      loadtest: {
-        f: () => {
-          let testData = [];
-          let byteCount = 0;
-          for (let i = 0; i < 50; i++) {
-            let count = 1 + Math.floor(Math.random() * 79);
-            byteCount += count + 2;
-            let data = new Uint8Array(count + 2);
-            data[0] = 0x0a; // \n
-            for (let i = 1; i < count + 1; i++) {
-              data[i] = 0x61 + Math.floor(Math.random() * (0x7a - 0x61));
-            }
-            // End each line with \r so the cursor remains constant, this is what ls/tree do and improves
-            // performance significantly due to the cursor DOM element not needing to change
-            data[data.length - 1] = 0x0d; // \r
-            testData.push(data);
-          }
-          let start = performance.now();
-          for (let i = 0; i < 1024; i++) {
-            for (const d of testData) {
-              term.write(d);
-            }
-          }
-          // Wait for all data to be parsed before evaluating time
-          term.write("", () => {
-            let time = Math.round(performance.now() - start);
-            let mbs = ((byteCount / 1024) * (1 / (time / 1000))).toFixed(2);
-            term.write(
-              `\n\r\nWrote ${byteCount}kB in ${time}ms (${mbs}MB/s) using the ${isWebglEnabled ? "webgl" : "canvas"} renderer`,
-            );
-            term.prompt();
-          });
-        },
-        description: "Simulate a lot of data coming from a process",
-      },
-      chars: {
-        f: () => {
-          const _1to8 = [];
-          for (let i = 1; i <= 8; i++) {
-            _1to8.push(i);
-          }
-          const _1to16 = [];
-          for (let i = 1; i <= 16; i++) {
-            _1to16.push(i);
-          }
-          const _1to24 = [];
-          for (let i = 1; i <= 24; i++) {
-            _1to24.push(i);
-          }
-          const _1to32 = [];
-          for (let i = 1; i <= 32; i++) {
-            _1to32.push(i);
-          }
-          const _0to35 = [];
-          for (let i = 0; i <= 35; i++) {
-            _0to35.push(i);
-          }
-          const _1to64 = [];
-          for (let i = 1; i <= 64; i++) {
-            _1to64.push(i);
-          }
-          const _0to255 = [];
-          for (let i = 17; i <= 255; i++) {
-            _0to255.push(i);
-          }
-          const lines = [
-            ["Ascii ─", "abc123"],
-            ["CJK ─", "汉语, 漢語, 日本語, 한국어"],
-            [
-              "Powerline ─",
-              "\ue0b2\ue0b0\ue0b3\ue0b1\ue0b6\ue0b4\ue0b7\ue0b5\ue0ba\ue0b8\ue0bd\ue0b9\ue0be\ue0bc",
-            ],
-            ["Box drawing ┬", "┌─┬─┐ ┏━┳━┓ ╔═╦═╗ ┌─┲━┓ ╲   ╱"],
-            ["            │", "│ │ │ ┃ ┃ ┃ ║ ║ ║ │ ┃ ┃  ╲ ╱"],
-            ["            │", "├─┼─┤ ┣━╋━┫ ╠═╬═╣ ├─╄━┩   ╳"],
-            ["            │", "│ │ │ ┃ ┃ ┃ ║ ║ ║ │ │ │  ╱ ╲"],
-            ["            └", "└─┴─┘ ┗━┻━┛ ╚═╩═╝ └─┴─┘ ╱   ╲"],
-            ["Block elem ─", "░▒▓█ ▁▂▃▄▅▆▇█ ▏▎▍▌▋▊▉"],
-            ["Emoji ─", "😉 👋"],
-            [
-              "16 color ─",
-              [
-                ..._1to8.map((e) => `\x1b[3${e - 1}m●`),
-                ..._1to8.map((e) => `\x1b[1;3${e - 1}m●`),
-              ].join(""),
-            ],
-            [
-              "256 color ┬",
-              [..._0to35.map((e) => `\x1b[38;5;${16 + 36 * 0 + e}m●`)].join(""),
-            ],
-            [
-              "          │",
-              [..._0to35.map((e) => `\x1b[38;5;${16 + 36 * 1 + e}m●`)].join(""),
-            ],
-            [
-              "          │",
-              [..._0to35.map((e) => `\x1b[38;5;${16 + 36 * 2 + e}m●`)].join(""),
-            ],
-            [
-              "          │",
-              [..._0to35.map((e) => `\x1b[38;5;${16 + 36 * 3 + e}m●`)].join(""),
-            ],
-            [
-              "          │",
-              [..._0to35.map((e) => `\x1b[38;5;${16 + 36 * 4 + e}m●`)].join(""),
-            ],
-            [
-              "          │",
-              [..._0to35.map((e) => `\x1b[38;5;${16 + 36 * 5 + e}m●`)].join(""),
-            ],
-            [
-              "          └",
-              [..._1to24.map((e) => `\x1b[38;5;${232 + e - 1}m●`)].join(""),
-            ],
-            [
-              "True color ┬",
-              [..._1to64.map((e) => `\x1b[38;2;${64 * 0 + e - 1};0;0m●`)].join(
-                "",
-              ),
-            ],
-            [
-              "           │",
-              [..._1to64.map((e) => `\x1b[38;2;${64 * 1 + e - 1};0;0m●`)].join(
-                "",
-              ),
-            ],
-            [
-              "           │",
-              [..._1to64.map((e) => `\x1b[38;2;${64 * 2 + e - 1};0;0m●`)].join(
-                "",
-              ),
-            ],
-            [
-              "           └",
-              [..._1to64.map((e) => `\x1b[38;2;${64 * 3 + e - 1};0;0m●`)].join(
-                "",
-              ),
-            ],
-            [
-              "Styles ─",
-              [
-                "\x1b[1mBold",
-                "\x1b[2mFaint",
-                "\x1b[3mItalics",
-                "\x1b[7mInverse",
-                "\x1b[9mStrikethrough",
-                "\x1b[8mInvisible",
-              ].join("\x1b[0m, "),
-            ],
-            [
-              "Underlines ─",
-              [
-                "\x1b[4:1mStraight",
-                "\x1b[4:2mDouble",
-                "\x1b[4:3mCurly",
-                "\x1b[4:4mDotted",
-                "\x1b[4:5mDashed",
-              ].join("\x1b[0m, "),
-            ],
-          ];
-          const maxLength = lines.reduce((p, c) => Math.max(p, c[0].length), 0);
-          term.write("\r\n");
-          term.writeln(
-            lines
-              .map((e) => `${e[0].padStart(maxLength)}  ${e[1]}\x1b[0m`)
-              .join("\r\n"),
-          );
-          term.prompt();
-        },
-        description:
-          "Prints a wide range of characters and styles that xterm.js can handle",
-      },
-      example: {
-        f: () => {
-          term.writeln("This is a simple example");
-          //term.writeln(window.example);
+		var command = "";
+		var commands = {
+			help: {
+				f: () => {
+					const padding = 10;
+					function formatMessage(name, description) {
+						const maxLength = term.cols - padding - 3;
+						let remaining = description;
+						const d = [];
+						while (remaining.length > 0) {
+							// Trim any spaces left over from the previous line
+							remaining = remaining.trimStart();
+							// Check if the remaining text fits
+							if (remaining.length < maxLength) {
+								d.push(remaining);
+								remaining = "";
+							} else {
+								let splitIndex = -1;
+								// Check if the remaining line wraps already
+								if (remaining[maxLength] === " ") {
+									splitIndex = maxLength;
+								} else {
+									// Find the last space to use as the split index
+									for (let i = maxLength - 1; i >= 0; i--) {
+										if (remaining[i] === " ") {
+											splitIndex = i;
+											break;
+										}
+									}
+								}
+								d.push(remaining.substring(0, splitIndex));
+								remaining = remaining.substring(splitIndex);
+							}
+						}
+						const message =
+							`  \x1b[36;1m${name.padEnd(padding)}\x1b[0m ${d[0]}` +
+							d.slice(1).map((e) => `\r\n  ${" ".repeat(padding)} ${e}`);
+						return message;
+					}
+					term.writeln(
+						[
+							"Welcome to xterm.js! Try some of the commands below.",
+							"",
+							...Object.keys(commands).map((e) =>
+								formatMessage(e, commands[e].description),
+							),
+						].join("\n\r"),
+					);
+					prompt(term);
+				},
+				description: "Prints this help message",
+			},
+			clear: {
+				f: () => {
+					term.clear();
+					prompt(term);
+				},
+				description: "Clears the screen",
+			},
+			ls: {
+				f: () => {
+					term.writeln(["a", "bunch", "of", "fake", "files"].join("\r\n"));
+					term.prompt(term);
+				},
+				description: "Prints a fake directory structure",
+			},
+			loadtest: {
+				f: () => {
+					let testData = [];
+					let byteCount = 0;
+					for (let i = 0; i < 50; i++) {
+						let count = 1 + Math.floor(Math.random() * 79);
+						byteCount += count + 2;
+						let data = new Uint8Array(count + 2);
+						data[0] = 0x0a; // \n
+						for (let i = 1; i < count + 1; i++) {
+							data[i] = 0x61 + Math.floor(Math.random() * (0x7a - 0x61));
+						}
+						// End each line with \r so the cursor remains constant, this is what ls/tree do and improves
+						// performance significantly due to the cursor DOM element not needing to change
+						data[data.length - 1] = 0x0d; // \r
+						testData.push(data);
+					}
+					let start = performance.now();
+					for (let i = 0; i < 1024; i++) {
+						for (const d of testData) {
+							term.write(d);
+						}
+					}
+					// Wait for all data to be parsed before evaluating time
+					term.write("", () => {
+						let time = Math.round(performance.now() - start);
+						let mbs = ((byteCount / 1024) * (1 / (time / 1000))).toFixed(2);
+						term.write(
+							`\n\r\nWrote ${byteCount}kB in ${time}ms (${mbs}MB/s) using the ${isWebglEnabled ? "webgl" : "canvas"} renderer`,
+						);
+						term.prompt();
+					});
+				},
+				description: "Simulate a lot of data coming from a process",
+			},
+			chars: {
+				f: () => {
+					const _1to8 = [];
+					for (let i = 1; i <= 8; i++) {
+						_1to8.push(i);
+					}
+					const _1to16 = [];
+					for (let i = 1; i <= 16; i++) {
+						_1to16.push(i);
+					}
+					const _1to24 = [];
+					for (let i = 1; i <= 24; i++) {
+						_1to24.push(i);
+					}
+					const _1to32 = [];
+					for (let i = 1; i <= 32; i++) {
+						_1to32.push(i);
+					}
+					const _0to35 = [];
+					for (let i = 0; i <= 35; i++) {
+						_0to35.push(i);
+					}
+					const _1to64 = [];
+					for (let i = 1; i <= 64; i++) {
+						_1to64.push(i);
+					}
+					const _0to255 = [];
+					for (let i = 17; i <= 255; i++) {
+						_0to255.push(i);
+					}
+					const lines = [
+						["Ascii ─", "abc123"],
+						["CJK ─", "汉语, 漢語, 日本語, 한국어"],
+						[
+							"Powerline ─",
+							"\ue0b2\ue0b0\ue0b3\ue0b1\ue0b6\ue0b4\ue0b7\ue0b5\ue0ba\ue0b8\ue0bd\ue0b9\ue0be\ue0bc",
+						],
+						["Box drawing ┬", "┌─┬─┐ ┏━┳━┓ ╔═╦═╗ ┌─┲━┓ ╲   ╱"],
+						["            │", "│ │ │ ┃ ┃ ┃ ║ ║ ║ │ ┃ ┃  ╲ ╱"],
+						["            │", "├─┼─┤ ┣━╋━┫ ╠═╬═╣ ├─╄━┩   ╳"],
+						["            │", "│ │ │ ┃ ┃ ┃ ║ ║ ║ │ │ │  ╱ ╲"],
+						["            └", "└─┴─┘ ┗━┻━┛ ╚═╩═╝ └─┴─┘ ╱   ╲"],
+						["Block elem ─", "░▒▓█ ▁▂▃▄▅▆▇█ ▏▎▍▌▋▊▉"],
+						["Emoji ─", "😉 👋"],
+						[
+							"16 color ─",
+							[
+								..._1to8.map((e) => `\x1b[3${e - 1}m●`),
+								..._1to8.map((e) => `\x1b[1;3${e - 1}m●`),
+							].join(""),
+						],
+						[
+							"256 color ┬",
+							[..._0to35.map((e) => `\x1b[38;5;${16 + 36 * 0 + e}m●`)].join(""),
+						],
+						[
+							"          │",
+							[..._0to35.map((e) => `\x1b[38;5;${16 + 36 * 1 + e}m●`)].join(""),
+						],
+						[
+							"          │",
+							[..._0to35.map((e) => `\x1b[38;5;${16 + 36 * 2 + e}m●`)].join(""),
+						],
+						[
+							"          │",
+							[..._0to35.map((e) => `\x1b[38;5;${16 + 36 * 3 + e}m●`)].join(""),
+						],
+						[
+							"          │",
+							[..._0to35.map((e) => `\x1b[38;5;${16 + 36 * 4 + e}m●`)].join(""),
+						],
+						[
+							"          │",
+							[..._0to35.map((e) => `\x1b[38;5;${16 + 36 * 5 + e}m●`)].join(""),
+						],
+						[
+							"          └",
+							[..._1to24.map((e) => `\x1b[38;5;${232 + e - 1}m●`)].join(""),
+						],
+						[
+							"True color ┬",
+							[..._1to64.map((e) => `\x1b[38;2;${64 * 0 + e - 1};0;0m●`)].join(
+								"",
+							),
+						],
+						[
+							"           │",
+							[..._1to64.map((e) => `\x1b[38;2;${64 * 1 + e - 1};0;0m●`)].join(
+								"",
+							),
+						],
+						[
+							"           │",
+							[..._1to64.map((e) => `\x1b[38;2;${64 * 2 + e - 1};0;0m●`)].join(
+								"",
+							),
+						],
+						[
+							"           └",
+							[..._1to64.map((e) => `\x1b[38;2;${64 * 3 + e - 1};0;0m●`)].join(
+								"",
+							),
+						],
+						[
+							"Styles ─",
+							[
+								"\x1b[1mBold",
+								"\x1b[2mFaint",
+								"\x1b[3mItalics",
+								"\x1b[7mInverse",
+								"\x1b[9mStrikethrough",
+								"\x1b[8mInvisible",
+							].join("\x1b[0m, "),
+						],
+						[
+							"Underlines ─",
+							[
+								"\x1b[4:1mStraight",
+								"\x1b[4:2mDouble",
+								"\x1b[4:3mCurly",
+								"\x1b[4:4mDotted",
+								"\x1b[4:5mDashed",
+							].join("\x1b[0m, "),
+						],
+					];
+					const maxLength = lines.reduce((p, c) => Math.max(p, c[0].length), 0);
+					term.write("\r\n");
+					term.writeln(
+						lines
+							.map((e) => `${e[0].padStart(maxLength)}  ${e[1]}\x1b[0m`)
+							.join("\r\n"),
+					);
+					term.prompt();
+				},
+				description:
+					"Prints a wide range of characters and styles that xterm.js can handle",
+			},
+			example: {
+				f: () => {
+					term.writeln("This is a simple example");
+					//term.writeln(window.example);
 
-          // create canvas and load image and get the image's data and sixel it
-          const canvas = document.createElement("canvas");
-          const ctx = canvas.getContext("2d");
-          const img = new Image();
-          img.src = "/bluff.jpg";
-          img.onload = () => {
-            canvas.width = img.width;
-            canvas.height = img.height;
-            ctx.drawImage(img, 0, 0);
-            const data = ctx.getImageData(0, 0, img.width, img.height).data;
-            /*const sixel = new Sixel();
+					// create canvas and load image and get the image's data and sixel it
+					const canvas = document.createElement("canvas");
+					const ctx = canvas.getContext("2d");
+					const img = new Image();
+					img.src = "/bluff.jpg";
+					img.onload = () => {
+						canvas.width = img.width;
+						canvas.height = img.height;
+						ctx.drawImage(img, 0, 0);
+						const data = ctx.getImageData(0, 0, img.width, img.height).data;
+						/*const sixel = new Sixel();
             sixel.write(data, img.width, img.height);
             term.write(sixel.end());*/
-            const sixeledImg = sixel.image2sixel(
-              data,
-              img.width,
-              img.height,
-              256,
-              1,
-            );
-            term.write(sixeledImg);
-            term.prompt();
-          };
+						const sixeledImg = sixel.image2sixel(
+							data,
+							img.width,
+							img.height,
+							256,
+							1,
+						);
+						term.write(sixeledImg);
+						term.prompt();
+					};
 
-          //term.prompt();
-        },
-        description: "A simple example",
-      },
-      ws: {
-        f: (p) => {
-          // Create a new websocket
-          console.log(p);
-          if (p[0] == undefined) {
-            term.prompt();
-            return;
-          }
-          if (p[0] == "init") {
-            term.writeln("Connecting to websocket...");
-            const rnParam = "admin";
-            const ws = new WebSocket(
-              `ws://${location.href.split("/")[2]}/socket?rn=${rnParam}`,
-            );
-            window.ws = ws;
-            ws.onopen = () => {
-              term.writeln("Connected to websocket");
-              term.prompt();
-            };
-            ws.onmessage = (event) => {
-              term.writeln(event.data);
-            };
-          } else if (p[0] == "c") {
-            const command = p[1];
-            let dataList = p.slice(2);
-            // parameters may be like a=1 b=2 c=3
-            // we need to convert them to an object and it'll be changed to JSON.
-            const data = {};
-            data.command = command;
-            data.params = [];
-            data.flags = [];
-            dataList.forEach((e, i) => {
-              // if param starts with --
-              if (e.startsWith("--")) {
-                const key = e.slice(2);
-                data.flags.push(key);
-                return;
-              }
+					//term.prompt();
+				},
+				description: "A simple example",
+			},
+			ws: {
+				f: (p) => {
+					// Create a new websocket
+					console.log(p);
+					if (p[0] == undefined) {
+						term.prompt();
+						return;
+					}
+					if (p[0] == "init") {
+						term.writeln("Connecting to websocket...");
+						const rnParam = "admin";
+						const ws = new WebSocket(
+							`ws://${location.href.split("/")[2]}/socket?rn=${rnParam}`,
+						);
+						window.ws = ws;
+						ws.onopen = () => {
+							term.writeln("Connected to websocket");
+							term.prompt();
+						};
+						ws.onmessage = (event) => {
+							term.writeln(event.data);
+						};
+					} else if (p[0] == "c") {
+						const command = p[1];
+						let dataList = p.slice(2);
+						// parameters may be like a=1 b=2 c=3
+						// we need to convert them to an object and it'll be changed to JSON.
+						const data = {};
+						data.command = command;
+						data.params = [];
+						data.flags = [];
+						dataList.forEach((e, i) => {
+							// if param starts with --
+							if (e.startsWith("--")) {
+								const key = e.slice(2);
+								data.flags.push(key);
+								return;
+							}
 
-              if (e.startsWith("-")) {
-                const key = e.slice(1).split("");
-                key.forEach((k) => {
-                  data.flags.push(k);
-                });
-              }
+							if (e.startsWith("-")) {
+								const key = e.slice(1).split("");
+								key.forEach((k) => {
+									data.flags.push(k);
+								});
+							}
 
-              const [key, value] = e.split("=");
-              if (!value) {
-                data.params.push({ string: key });
-                return;
-              }
-              //data["params"][key] = value;
-              data.params.push({ [key]: value });
-            });
-            const jsonData = JSON.stringify(data);
-            term.writeln(`Sending command: ${jsonData}`);
-            window.ws.send(jsonData);
-            term.writeln("Command sent");
-            term.prompt();
-          }
-        },
-        description: "Connect to a websocket",
-      },
-    };
+							const [key, value] = e.split("=");
+							if (!value) {
+								data.params.push({ string: key });
+								return;
+							}
+							//data["params"][key] = value;
+							data.params.push({ [key]: value });
+						});
+						const jsonData = JSON.stringify(data);
+						term.writeln(`Sending command: ${jsonData}`);
+						window.ws.send(jsonData);
+						term.writeln("Command sent");
+						term.prompt();
+					}
+				},
+				description: "Connect to a websocket",
+			},
+		};
 
-    function runCommand(term, text) {
-      const command = text.trim().split(" ")[0];
-      const params = text.trim().split(" ").slice(1);
-      if (command.length > 0) {
-        term.writeln("");
-        if (command in commands) {
-          commands[command].f(params);
-          return;
-        }
-        term.writeln(`${command}: command not found`);
-      }
-      prompt(term);
-    }
+		function runCommand(term, text) {
+			const command = text.trim().split(" ")[0];
+			const params = text.trim().split(" ").slice(1);
+			if (command.length > 0) {
+				term.writeln("");
+				if (command in commands) {
+					commands[command].f(params);
+					return;
+				}
+				term.writeln(`${command}: command not found`);
+			}
+			prompt(term);
+		}
 
-    runFakeTerminal();
-  })();
+		runFakeTerminal();
+	})();
 
-  function addDecoration(term) {
-    const marker = term.registerMarker(15);
-    const decoration = term.registerDecoration({ marker, x: 44 });
-    decoration.onRender((element) => {
-      element.classList.add("link-hint-decoration");
-      element.innerText = "Try clicking italic text";
-      // must be inlined to override inlined width/height coming from xterm
-      element.style.height = "";
-      element.style.width = "";
-    });
-  }
+	function addDecoration(term) {
+		const marker = term.registerMarker(15);
+		const decoration = term.registerDecoration({ marker, x: 44 });
+		decoration.onRender((element) => {
+			element.classList.add("link-hint-decoration");
+			element.innerText = "Try clicking italic text";
+			// must be inlined to override inlined width/height coming from xterm
+			element.style.height = "";
+			element.style.width = "";
+		});
+	}
 }
 
 /**
@@ -681,24 +681,24 @@ function initTheRoot() {
  * @param {Element} i
  */
 function fadeIn(i) {
-  i.classList.remove("hid");
-  i.classList.add("fadeIn");
-  // if (i.attributes?.next?.value == "sp3") return;
-  console.log(i.id);
-  if (i.id == "theRoot") {
-    if (document.getElementsByClassName("xterm").length == 0) {
-      initTheRoot();
-    }
-    return;
-  }
-  window.titleEvent = root.addEventListener("click", () => {
-    fadeOut(i);
-  });
-  i.addEventListener("animationend", () => {
-    setTimeout(() => {
+	i.classList.remove("hid");
+	i.classList.add("fadeIn");
+	// if (i.attributes?.next?.value == "sp3") return;
+	console.log(i.id);
+	if (i.id == "theRoot") {
+		if (document.getElementsByClassName("xterm").length == 0) {
+			initTheRoot();
+		}
+		return;
+	}
+	window.titleEvent = root.addEventListener("click", () => {
+		fadeOut(i);
+	});
+	i.addEventListener("animationend", () => {
+		/*setTimeout(() => {
       fadeOut(i);
-    }, 3000);
-  });
+    }, 3000);*/
+	});
 }
 
 /**
@@ -706,23 +706,25 @@ function fadeIn(i) {
  * @param {Element} i
  */
 function fadeOut(i) {
-  root.removeEventListener("click", window.titleEvent);
-  i.classList.remove("fadeIn");
-  i.classList.add("fadeOut");
-  let next = i.attributes?.next?.value;
-  if (!next) return;
-  //i.classList.add("fadeOut");
-  next = document.getElementById(next);
-  i.addEventListener("animationend", () => {
-    i.classList.add("hid");
-    if (next) {
-      fadeIn(next);
-      return;
-    }
-    //console.log(next);
-  });
+	root.removeEventListener("click", window.titleEvent);
+	i.classList.remove("fadeIn");
+	i.classList.add("fadeOut");
+	let next = i.attributes?.next?.value;
+	if (!next) return;
+	//i.classList.add("fadeOut");
+	next = document.getElementById(next);
+	i.addEventListener("animationend", () => {
+		i.classList.add("hid");
+		if (next) {
+			fadeIn(next);
+			return;
+		}
+		//console.log(next);
+	});
 }
 
-setTimeout(() => {
-  fadeIn($sp1);
-}, 500);
+window.addEventListener("load", () => {
+	setTimeout(() => {
+		fadeIn($sp1);
+	}, 500);
+});
