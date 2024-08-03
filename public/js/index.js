@@ -695,9 +695,9 @@ function fadeIn(i) {
 		fadeOut(i);
 	});
 	i.addEventListener("animationend", () => {
-		/*setTimeout(() => {
-      fadeOut(i);
-    }, 3000);*/
+		setTimeout(() => {
+			fadeOut(i);
+		}, 3000);
 	});
 }
 
