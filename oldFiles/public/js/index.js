@@ -640,6 +640,14 @@ function initTheRoot() {
 						window.ws.send(jsonData);
 						term.writeln("Command sent");
 						term.prompt();
+
+						/*
+						jsonData = JSON.stringify({
+							command: string,
+							params: object[],
+							flags: string[],
+							});
+					 */
 					}
 				},
 				description: "Connect to a websocket",
