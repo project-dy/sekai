@@ -1,6 +1,0 @@
-{
-	"watch": ["src/server", "utils"],
-	"exec": "tsx src/server/index.ts",
-	"ext": "ts,js",
-	"ignore": ["*.test.ts", "node_modules"]
-}
