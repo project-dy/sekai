@@ -1,0 +1,65 @@
+name: Deploy to Cloudflare Pages
+run-name: Deploy to Cloudflare Pages
+
+on: [push]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20]
+    permissions:
+      contents: read
+      deployments: write
+    name: Publish to Cloudflare Pages
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Run a build step here if your project requires
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: "18"
+      # - name: Install dependencies
+      #   run: npm install -g pnpm && pnpm install
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        # with:
+        #   version: 9
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "pnpm"
+
+      - name: Cache pnpm store
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.local/share/pnpm/store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build
+
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: 23fdccbdbc34ad824b2f72f3f37b7a99
+          projectName: sekai
+          directory: build
+          # Optional: Enable this if you want to have GitHub Deployments triggered
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          # Optional: Switch what branch you are publishing to.
+          # By default this will be the branch which triggered this workflow
+          # branch: main
+          # Optional: Change the working directory
+          # workingDirectory: my-site
+          # Optional: Change the Wrangler version, allows you to point to a specific version or a tag such as `beta`
+          # wranglerVersion: '3'
