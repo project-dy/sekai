@@ -91,7 +91,7 @@ async function createVite() {
 createVite();*/
 webSocketServer(server);
 
-app.get("*", express.static("dist")); // vite build 결과물을 제공
+app.get("*", express.static("build")); // 빌드된 파일 제공
 
 app.get("/b/api", (req, res) => {
   res.json({

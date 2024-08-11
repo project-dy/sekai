@@ -1,4 +1,5 @@
 <script lang="ts">
+  import "./+page.css";
   import svelteLogo from "$lib/images/svelte.svg";
   import viteLogo from "$lib/images/vite.svg";
   import Counter from "$lib/Counter.svelte";
@@ -14,7 +15,7 @@
       <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
     </a>
   </div>
-  <h1>Vite + Svelte + Example</h1>
+  <h1>Vite + SvelteKit</h1>
 
   <div class="card">
     <Counter />

@@ -166,12 +166,29 @@ class Sekai {
   }
 }
 
-interface Song {
-  rank: string;
-  albumArt: string | undefined;
-  title: string;
-  artist: string;
-  album: string;
+/*
+    list.push({
+      rank: firstRank,
+      albumArt: "https://" + firstAlbumArt,
+      song: firstSong,
+      album: firstAlbum,
+      artist: firstArtist,
+      jaksa: firstJaksa,
+      jakgok: firstJakgok,
+      pyeonkok: firstPyeongok,
+      youtube: "https://www.youtube.com/watch?v=" + firstYoutube,
+    });
+*/
+interface iChartSong {
+  rank: string,
+  albumArt: string,
+  song: string,
+  album: string,
+  artist: string,
+  jaksa: string | undefined,
+  jakgok: string | undefined,
+  pyeonkok: string | undefined,
+  youtube: string,
 }
 
 interface MelonSong {
@@ -367,8 +384,9 @@ class Util {
     }
 
     */
+   
 
-    let list = [];
+    let list: iChartSong[] = [];
 
     const first = $(".spage_score_item_1st");
     const firstAlbumArt = first.find(".ichart_score_img>div>img").attr("src");
@@ -378,7 +396,7 @@ class Util {
     const firstAlbum = first
       .find(".ichart_score_song>div:nth-child(2)>span>a")
       .text();
-    const firstRank = 1;
+    const firstRank = "1위";
     const firstArtist = first
       .find(".ichart_score_artist>div:nth-child(1)>b")
       .text();
