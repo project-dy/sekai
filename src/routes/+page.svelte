@@ -4,9 +4,11 @@
   import viteLogo from "$lib/images/vite.svg";
   import Counter from "$lib/Counter.svelte";
   import Passcode from "$lib/Passcode.svelte";
+  import Admin from "$lib/Admin.svelte";
 </script>
 
 <main>
+  <Admin />
   <div>
     <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
       <img src={viteLogo} class="logo" alt="Vite Logo" />
