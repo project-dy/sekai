@@ -1,11 +1,14 @@
 <script lang="ts">
+  export let ws: WebSocket;
   import { browser } from "$app/environment";
   let wsMessage: string;
   if (browser) {
     const rnParam = "admin";
-    const ws = new WebSocket(
-      `ws://${location.href.split("/")[2]}/b/socket?rn=${rnParam}`,
-    );
+    if (!ws) {
+      ws = new WebSocket(
+        `ws://${location.href.split("/")[2]}/b/socket?rn=${rnParam}`,
+      );
+    }
     ws.onopen = () => {
       console.log("WebSocket connection established");
       wsMessage = "WebSocket connection established\n";

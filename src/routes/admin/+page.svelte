@@ -4,9 +4,29 @@
   import viteLogo from "$lib/images/vite.svg";
   import Counter from "$lib/Counter.svelte";
   import Passcode from "$lib/Passcode.svelte";
+  import Admin from "$lib/Admin.svelte";
+
+  import { browser } from "$app/environment";
+
+  let ws: WebSocket;
+  if (browser) {
+    const rnParam = "admin";
+    ws = new WebSocket(
+      `ws://${location.href.split("/")[2]}/b/socket?rn=${rnParam}`,
+    );
+    ws.onopen = () => {
+      console.log("WebSocket connection established");
+    };
+    ws.onmessage = (event) => {
+      console.log(event.data);
+      const data = JSON.parse(event.data);
+      console.log(data);
+    };
+  }
 </script>
 
 <main>
+  <Admin {ws} />
   <div>
     <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
       <img src={viteLogo} class="logo" alt="Vite Logo" />
