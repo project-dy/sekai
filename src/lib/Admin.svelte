@@ -11,13 +11,14 @@
     }
     ws.onopen = () => {
       console.log("WebSocket connection established");
-      wsMessage = "WebSocket connection established\n";
+      //wsMessage = "WebSocket connection established\n";
+      wsMessage = "";
     };
     ws.onmessage = (event) => {
       console.log(event.data);
       const data = JSON.parse(event.data);
       console.log(data);
-      wsMessage += `${data.message}\n`;
+      wsMessage = `${data.m}\n`;
     };
   }
 </script>

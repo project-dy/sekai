@@ -115,7 +115,7 @@ function webSocketServer(server: Server) {
 
     // Send a welcome message to the client
     //ws.send(`Welcome, client ${rn}!`);
-    ws.send(JSON.stringify({ message: `Welcome, client ${rn}!` }));
+    ws.send(JSON.stringify({ m: `Welcome, client ${rn}!` }));
   });
 }
 

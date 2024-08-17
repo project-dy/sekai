@@ -3,7 +3,7 @@
   import svelteLogo from "$lib/images/svelte.svg";
   import viteLogo from "$lib/images/vite.svg";
   import Counter from "$lib/Counter.svelte";
-  import Passcode from "$lib/Passcode.svelte";
+  import Command from "$lib/Command.svelte";
   import Admin from "$lib/Admin.svelte";
 
   import { browser } from "$app/environment";
@@ -39,7 +39,7 @@
 
   <div class="card">
     <Counter />
-    <Passcode />
+    <Command {ws} />
   </div>
 
   <p>

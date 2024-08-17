@@ -124,9 +124,10 @@ class Admin {
         break;
       }
       default:
-        return "Command Not Found";
+        //return "Command Not Found";
+        return JSON.stringify({ c: 404, m: "Command Not Found" });
     }
-    return "Command Not Found";
+    return JSON.stringify({ c: 404, m: "Command Not Found" });
   }
 }
 
@@ -180,15 +181,15 @@ class Sekai {
     });
 */
 interface iChartSong {
-  rank: string,
-  albumArt: string,
-  song: string,
-  album: string,
-  artist: string,
-  jaksa: string | undefined,
-  jakgok: string | undefined,
-  pyeonkok: string | undefined,
-  youtube: string,
+  rank: string;
+  albumArt: string;
+  song: string;
+  album: string;
+  artist: string;
+  jaksa: string | undefined;
+  jakgok: string | undefined;
+  pyeonkok: string | undefined;
+  youtube: string;
 }
 
 interface MelonSong {
@@ -384,7 +385,6 @@ class Util {
     }
 
     */
-   
 
     let list: iChartSong[] = [];
 
