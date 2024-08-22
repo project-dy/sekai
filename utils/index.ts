@@ -33,6 +33,14 @@ interface Params {
   flags: string[];
 }
 
+interface Room {
+  id: number;
+  name: string;
+  users: string[];
+}
+
+export const rooms: Room[] = [];
+
 class Admin {
   constructor() {
     //this.name = "Admin";

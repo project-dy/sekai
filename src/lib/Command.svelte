@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let ws: WebSocket;
+  //export let ws: WebSocket;
   import "./Command.scss";
   //import { hasContext } from "svelte";
 
@@ -75,7 +75,7 @@
     console.log(inputValue);
     //ws.send(inputValue);
     const inputList = inputValue.split(" ");
-    ws.send(formatInput(inputList));
+    //ws.send(formatInput(inputList));
   }
 </script>
 

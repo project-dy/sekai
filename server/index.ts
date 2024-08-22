@@ -91,6 +91,8 @@ async function createVite() {
 createVite();*/
 webSocketServer(server);
 
+app.use(express.json());
+
 app.get("*", express.static("build")); // 빌드된 파일 제공
 
 app.get("/b/api", (req, res) => {
@@ -100,14 +102,30 @@ app.get("/b/api", (req, res) => {
   });
 });
 
-//const util = new sekai.Util();
-//const util = sekai.getUtil();
-//util.crawl();
+import { rooms } from "../utils/index";
+app.get("/b/api/room", (req, res) => {
+	res.json(rooms);
+});
 
-// /api/list 접속자 리스트
-app.get("/b/api/list", (req, res) => {
-  res.json({
-    c: 501,
-    m: "Not implemented",
-  });
+function checkRoom(name) {
+	return rooms.find((room) => room.name === name);
+}
+
+app.post("/b/api/room/create", (req, res) => {
+	const name = req.body.name;
+	// 6자리 랜덤 숫자 생성
+	let random = Math.floor(Math.random() * 1000000);
+	// 유무 확인
+	let result = checkRoom(random);
+	while (result) {
+		random = Math.floor(Math.random() * 1000000);
+		result = checkRoom(random);
+	}
+	const room = {
+		id: random,
+		name: name,
+		users: [],
+	};
+	rooms.push(room);
+	res.json(room);
 });

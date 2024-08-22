@@ -1,30 +1,21 @@
 <script lang="ts">
-  export let ws: WebSocket;
   import { browser } from "$app/environment";
-  let wsMessage: string;
-  if (browser) {
-    const rnParam = "admin";
-    if (!ws) {
-      ws = new WebSocket(
-        `ws://${location.href.split("/")[2]}/b/socket?rn=${rnParam}`,
-      );
+  const increment = () => {
+    if (browser) {
+      const url = `/b/api/room/create`;
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({name: prompt('방 이름은?')}) // Add your request payload here
+      }).then((res) => {
+        console.log(res);
+      });
     }
-    ws.onopen = () => {
-      console.log("WebSocket connection established");
-      //wsMessage = "WebSocket connection established\n";
-      wsMessage = "";
-    };
-    ws.onmessage = (event) => {
-      console.log(event.data);
-      const data = JSON.parse(event.data);
-      console.log(data);
-      wsMessage = `${data.m}\n`;
-    };
-  }
+  };
 </script>
 
-<main>
-  <h3>
-    {wsMessage}
-  </h3>
-</main>
+<button on:click={increment}>
+  방 생성
+</button>

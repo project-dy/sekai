@@ -26,7 +26,6 @@
 </script>
 
 <main>
-  <Admin {ws} />
   <div>
     <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
       <img src={viteLogo} class="logo" alt="Vite Logo" />
@@ -36,10 +35,11 @@
     </a>
   </div>
   <h1>Vite + SvelteKit</h1>
-
+  
   <div class="card">
     <Counter />
-    <Command {ws} />
+    <Command />
+    <Admin/>
   </div>
 
   <p>
