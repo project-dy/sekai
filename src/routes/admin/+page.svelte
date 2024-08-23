@@ -9,18 +9,18 @@
   import { browser } from "$app/environment";
 
   let ws: WebSocket;
-  if (browser) {
-    const rnParam = "admin";
+  if (browser) { // CSR(브라우저)에서만 동작
+    const rnParam = "admin"; // 웹소켓 연결을 위한 룸넘버 파라미터(관리자 파라미터)
     ws = new WebSocket(
-      `ws://${location.href.split("/")[2]}/b/socket?rn=${rnParam}`,
+      `ws://${location.href.split("/")[2]}/b/socket?rn=${rnParam}`, // 접속할 웹소켓 주소
     );
-    ws.onopen = () => {
+    ws.onopen = () => { // 접속 성공시
       console.log("WebSocket connection established");
     };
-    ws.onmessage = (event) => {
-      console.log(event.data);
-      const data = JSON.parse(event.data);
-      console.log(data);
+    ws.onmessage = (event) => { // 메시지 수신시
+      console.log(event.data); // 수신한 데이터 출력 (raw)
+      const data = JSON.parse(event.data); // 수신한 데이터를 JSON으로 파싱
+      console.log(data); // 수신한 데이터 출력 (JSON formatted)
     };
   }
 </script>
@@ -37,8 +37,8 @@
   <h1>Vite + SvelteKit</h1>
   
   <div class="card">
-    <Counter />
-    <Command />
+    <!-- <Counter /> -->
+    <!-- <Command /> -->
     <Admin/>
   </div>
 

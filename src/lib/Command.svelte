@@ -7,7 +7,7 @@
   //let inputValues = ["", "", "", "", "", ""]; // 입력값을 저장할 배열
   let inputValue: string = "";
 
-  function handleInput(event: Event) {
+  function handleInput(event: Event) { // 입력값 변경시
     const input = event.target as HTMLInputElement;
     //event.target.nextElementSibling?.focus();
     //input.nextElementSibling?.focus();
@@ -16,65 +16,15 @@
     inputValue = input.value;
   }
 
-  function checkInput() {
+  function checkInput() { // 입력값 확인
     if (!inputValue) return false;
     submitInput(inputValue);
     return true;
   }
 
-  function formatInput(p: string[]) {
-    const command = p[0];
-    let dataList = p.slice(1);
-    // parameters may be like a=1 b=2 c=3
-    // we need to convert them to an object and it'll be changed to JSON.
-    interface Data {
-      command: string;
-      params: { [key: string]: string }[];
-      flags: string[];
-    }
-    // const data = {};
-    // data.command = command;
-    // data.params = [];
-    // data.flags = [];
-    const data: Data = {
-      command: command,
-      params: [],
-      flags: [],
-    };
-    dataList.forEach((e, i) => {
-      // if param starts with --
-      if (e.startsWith("--")) {
-        const key = e.slice(2);
-        data.flags.push(key);
-        return;
-      }
-
-      if (e.startsWith("-")) {
-        const key = e.slice(1).split("");
-        key.forEach((k) => {
-          data.flags.push(k);
-        });
-      }
-
-      const [key, value] = e.split("=");
-      if (!value) {
-        data.params.push({ string: key });
-        return;
-      }
-      //data["params"][key] = value;
-      data.params.push({ [key]: value });
-    });
-    const jsonData = JSON.stringify(data);
-    return jsonData;
-    // console.log(`Sending command: ${jsonData}`);
-    // //ws.send(jsonData);
-    // console.log("Command sent");
-  }
-
   function submitInput(inputValue: string) {
     console.log(inputValue);
     //ws.send(inputValue);
-    const inputList = inputValue.split(" ");
     //ws.send(formatInput(inputList));
   }
 </script>
