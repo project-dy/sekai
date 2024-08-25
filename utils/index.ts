@@ -34,7 +34,7 @@ interface Params {
 }
 
 interface Room {
-  id: number;
+  id: string;
   name: string;
   users: string[];
 }

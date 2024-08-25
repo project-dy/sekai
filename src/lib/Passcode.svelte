@@ -58,6 +58,7 @@
       value=""
       autofocus
     />
+    
     <input
       type="number"
       min="0"
@@ -70,6 +71,7 @@
       inputmode="numeric"
       value=""
     />
+
     <input
       type="number"
       min="0"
@@ -82,6 +84,7 @@
       inputmode="numeric"
       value=""
     />
+
     <input
       type="number"
       min="0"

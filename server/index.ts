@@ -104,28 +104,30 @@ app.get("/b/api", (req, res) => {
 
 import { rooms } from "../utils/index";
 app.get("/b/api/room", (req, res) => {
-	res.json(rooms);
+  res.json(rooms);
 });
 
 function checkRoom(name) {
-	return rooms.find((room) => room.name === name);
+  return rooms.find((room) => room.name === name);
 }
 
 app.post("/b/api/room/create", (req, res) => {
-	const name = req.body.name;
-	// 6자리 랜덤 숫자 생성
-	let random = Math.floor(Math.random() * 1000000);
-	// 유무 확인
-	let result = checkRoom(random);
-	while (result) {
-		random = Math.floor(Math.random() * 1000000);
-		result = checkRoom(random);
-	}
-	const room = {
-		id: random,
-		name: name,
-		users: [],
-	};
-	rooms.push(room);
-	res.json(room);
+  const name = req.body.name;
+  // 6자리 랜덤 숫자 생성
+  let random = Math.floor(Math.random() * 1000000);
+  // 유무 확인
+  let result = checkRoom(random);
+  while (result) {
+    random = Math.floor(Math.random() * 1000000);
+    result = checkRoom(random);
+  }
+  // 6자리 문자열로 변환
+  const randomStr = random.toString().padStart(6, "0");
+  const room = {
+    id: randomStr,
+    name: name,
+    users: [],
+  };
+  rooms.push(room);
+  res.json(room);
 });
