@@ -131,3 +131,40 @@ app.post("/b/api/room/create", (req, res) => {
   rooms.push(room);
   res.json(room);
 });
+
+app.get("/b/api/room/:id", (req, res) => {
+  const id = req.params.id;
+  const room = rooms.find((room) => room.id === id);
+  if (!room) {
+    res.status(404).json({
+      c: 404,
+      m: "Room not found",
+    });
+    return;
+  }
+  res.json(room);
+});
+
+app.post("/b/api/room/:id", (req, res) => {
+  const id = req.params.id;
+  const user = req.body.name;
+  const room = rooms.find((room) => room.id === id);
+  if (!room) {
+    res.status(404).json({
+      c: 404,
+      m: "Room not found",
+    });
+    return;
+  }
+  // 중복 닉네임 확인
+  const duplicate = room.users.find((u) => u === user);
+  if (duplicate) {
+    res.status(409).json({
+      c: 409,
+      m: "Duplicate nickname",
+    });
+    return;
+  }
+  room.users.push(user);
+  res.json(room);
+});

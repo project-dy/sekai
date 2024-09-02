@@ -30,7 +30,7 @@
     });
     console.log(Number(roomCodeList.join("")));
     if (back) return false;
-
+    checkFromServer(Number(roomCodeList.join("")));
     // When the value looks good
     //document.getElementById("submitted").checked = "true";
 
@@ -38,6 +38,41 @@
     //console.log(window.roomCodeVal);
     //initTheWebSocket(window.roomCodeVal);
     return true;
+  }
+
+  let isExecuted = false;
+  function checkFromServer(rc: number) {
+    if (isExecuted) return;
+    isExecuted = true;
+    console.log(rc);
+    let name = prompt("이름은?");
+    if (!name) { // name이 없으면
+      setTimeout(() => {
+        isExecuted = false;
+        checkFromServer(rc); // 재귀 호출(콜스택 오버플로우 방지를 위해 다른 쓰레드로 넘김)
+      }, 0);
+      return; // 함수 종료
+    };
+    // post 방 코드
+    fetch(`/b/api/room/${rc}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({name: name}),
+    }).then((res) => {
+      console.log(res);
+      if (res.ok) {
+        res.json().then((data) => {
+          console.log(data);
+          (document.getElementById("submitted") as HTMLInputElement).checked = true;
+          //alert(`방 코드: ${data.id}`);
+          //fillRoomCode(data.id);
+        });
+      } else {
+        alert("방 접속 실패");
+      }
+    });
   }
 </script>
 
