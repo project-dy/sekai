@@ -10,9 +10,16 @@
     const input = event.target as HTMLInputElement;
     //event.target.nextElementSibling?.focus();
     //input.nextElementSibling?.focus();
-    const next = input.nextElementSibling as HTMLElement;
-    next?.focus();
-    inputValues.push(input.value);
+
+    if (/[^0-9.]/.test(input.value)) { // 숫자가 아닌 값이 있을 때
+      input.value = input.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+
+    } else { // 숫자일 때
+      // input.value = input.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+      const next = input.nextElementSibling as HTMLElement;
+      next?.focus();
+      inputValues.push(input.value);
+    }
   }
 
   function checkRoomCode() {
@@ -81,7 +88,7 @@
 
   <form id="roomCodeForm">
     <input
-      type="number"
+      class="number"
       min="0"
       max="9"
       maxlength="1"
@@ -95,7 +102,7 @@
     />
     
     <input
-      type="number"
+      class="number"
       min="0"
       max="9"
       maxlength="1"
@@ -108,7 +115,7 @@
     />
 
     <input
-      type="number"
+      class="number"
       min="0"
       max="9"
       maxlength="1"
@@ -121,7 +128,7 @@
     />
 
     <input
-      type="number"
+      class="number"
       min="0"
       max="9"
       maxlength="1"
@@ -134,7 +141,7 @@
     />
 
     <input
-      type="number"
+      class="number"
       min="0"
       max="9"
       maxlength="1"
@@ -147,7 +154,7 @@
     />
 
     <input
-      type="number"
+      class="number"
       min="0"
       max="9"
       maxlength="1"
