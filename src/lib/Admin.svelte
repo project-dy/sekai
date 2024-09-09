@@ -43,6 +43,38 @@
     const roomCode = document.getElementById("roomCode");
     if (!roomCode) return;
     roomCode.style.display = "block";
+    connectWs(Number(code));
+  }
+  function connectWs(code: number) {
+    if (!code) return;
+    const url = location.origin.replace("http", "ws").split("/admin")[0];
+    let ws: WebSocket = new WebSocket(`${url}/b/ws?rn=admin${code}&name=admin`); // 웹소켓 연결
+    ws.onopen = () => {
+      console.log("connected");
+    };
+    ws.onmessage = (event) => {
+      console.log(event.data);
+      const data = JSON.parse(event.data);
+      if (data.c === "connected") {
+        addList(data.m);
+      }
+    };
+  }
+  function addList(name: string) {
+    // const list = document.getElementById("list");
+    // if (list) {
+    //   list.textContent += name;
+    // }
+    const list = document.getElementById("list");
+    if (!list) return;
+    // const li = document.createElement("li");
+    // li.textContent = name;
+    // list.appendChild(li);
+    const button = document.createElement("button");
+    button.textContent = name;
+    button.style.padding = "0px";
+    button.style.margin = "1em";
+    list.appendChild(button);
   }
 </script>
 
@@ -139,3 +171,5 @@
     <span class="indicator"></span>
   </form>
 </div>
+
+<div id="list"></div>

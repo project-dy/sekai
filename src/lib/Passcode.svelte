@@ -75,11 +75,22 @@
           (document.getElementById("submitted") as HTMLInputElement).checked = true;
           //alert(`방 코드: ${data.id}`);
           //fillRoomCode(data.id);
+          connectWs(Number(data.id), name);
         });
       } else {
         alert("방 접속 실패");
       }
     });
+  }
+
+  function connectWs(code: number, name: string) {
+    if (!code) return;
+    const url = location.origin.replace("http", "ws").split('/admin')[0];
+    let ws: WebSocket = new WebSocket(`${url}/b/ws?rn=${code}&name=${name}`);
+    ws.onopen = () => {
+      console.log("connected");
+      ws.send(JSON.stringify({name: name}));
+    };
   }
 </script>
 

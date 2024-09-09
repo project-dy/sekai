@@ -70,7 +70,7 @@ function webSocketServer(server: Server) {
 
   // Store connected clients
   interface ClientsByRn {
-    [key: string]: WebSocket[];
+    [key: string]: { ws: WebSocket, name: string }[];
   }
   const clients: ClientsByRn = {};
   //const clientsByRn = {};
@@ -87,12 +87,26 @@ function webSocketServer(server: Server) {
     let rn: string;
     //const rn: string = req.url.split("?rn=")[1];
     if (!req.url?.includes("?rn=")) return;
-    rn = req.url.split("?rn=")[1];
+    rn = req.url.split("?rn=")[1].split("&")[0];
     console.log(`Client ${rn} connected`);
 
     // Store the WebSocket connection in the clients object
     if (!clients[rn]) clients[rn] = [];
-    clients[rn].push(ws);
+    // const name = req.url.split("name=")[1];
+    const name = decodeURI(req.url.split("name=")[1]);
+    clients[rn].push({ ws, name: name });
+    // console.log(`$name: ${name}, ${rn.includes('admin')}`);
+    if (!rn.includes('admin')) {
+      // Send a message to admin
+      const adminWs = clients[`admin${rn}`];
+      // console.log(`adminWs: ${adminWs}, ${JSON.stringify(clients)}`);
+      if (adminWs) {
+        adminWs.forEach((admin) => {
+          admin.ws.send(JSON.stringify({ c: `connected`, m: name }));
+          console.log(`Send a message to admin ${admin.name} from ${rn}:${name}`);
+        });
+      }
+    }
 
     // Handle incoming messages
     ws.on("message", (message) => {
@@ -103,6 +117,9 @@ function webSocketServer(server: Server) {
         admin.doIt(parsed).then((result) => {
           ws.send(result);
         });
+      } else if (rn.includes('rn')){
+        const rnReal = rn.split('admin')[1];
+        console.log(rnReal);
       }
     });
 

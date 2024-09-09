@@ -9,7 +9,7 @@
   import { browser } from "$app/environment";
 
   let ws: WebSocket;
-  if (browser) {
+  /*if (browser) {
     // CSR(브라우저)에서만 동작
     const rnParam = "admin"; // 웹소켓 연결을 위한 룸넘버 파라미터(관리자 파라미터)
     ws = new WebSocket(
@@ -25,7 +25,7 @@
       const data = JSON.parse(event.data); // 수신한 데이터를 JSON으로 파싱
       console.log(data); // 수신한 데이터 출력 (JSON formatted)
     };
-  }
+  }*/
 </script>
 
 <main>
