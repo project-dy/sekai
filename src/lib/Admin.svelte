@@ -1,7 +1,7 @@
 <script lang="ts">
   import "./Admin.scss";
   import { browser } from "$app/environment";
-  const increment = () => {
+  const handle = () => {
     if (browser) {
       const name = prompt("방 이름은?");
       if (!name) return;
@@ -78,7 +78,7 @@
   }
 </script>
 
-<button on:click={increment}> 방 생성 </button>
+<button on:click={handle}> 방 생성 </button>
 
 <div id="roomCode" style="display:none;">
   <input id="submitted" type="checkbox" tabindex="-1" />

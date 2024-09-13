@@ -6,7 +6,7 @@
   // import Command from "$lib/Command.svelte";
   import Admin from "$lib/Admin.svelte";
 
-  import { browser } from "$app/environment";
+  // import { browser } from "$app/environment";
 
   let ws: WebSocket;
   /*if (browser) {
