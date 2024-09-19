@@ -105,6 +105,7 @@
       maxlength="1"
       placeholder=" "
       id="n1"
+      autocomplete="off"
       on:input={handleInput}
       pattern="[0-9]*"
       inputmode="numeric"
@@ -118,6 +119,7 @@
       max="9"
       maxlength="1"
       placeholder=" "
+      autocomplete="off"
       on:input={handleInput}
       id="n2"
       pattern="[0-9]*"
@@ -131,6 +133,7 @@
       max="9"
       maxlength="1"
       placeholder=" "
+      autocomplete="off"
       on:input={handleInput}
       id="n3"
       pattern="[0-9]*"
@@ -144,6 +147,7 @@
       max="9"
       maxlength="1"
       placeholder=" "
+      autocomplete="off"
       on:input={handleInput}
       id="n4"
       pattern="[0-9]*"
@@ -157,6 +161,7 @@
       max="9"
       maxlength="1"
       placeholder=" "
+      autocomplete="off"
       on:input={handleInput}
       id="n5"
       pattern="[0-9]*"
@@ -170,6 +175,7 @@
       max="9"
       maxlength="1"
       placeholder=" "
+      autocomplete="off"
       on:input={handleInput}
       id="n6"
       pattern="[0-9]*"

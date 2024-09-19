@@ -6,7 +6,10 @@
   import Passcode from "$lib/Passcode.svelte";
 </script>
 
-<main>
+<main
+  style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" 
+  unselectable="on"
+>
   <div>
     <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
       <img src={viteLogo} class="logo" alt="Vite Logo" />

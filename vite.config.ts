@@ -21,5 +21,12 @@ export default defineConfig({
 				ws: true
 			}
 		}
+	},
+	css: {
+		preprocessorOptions: {
+			scss: {
+				silenceDeprecations: ["legacy-js-api"],
+			},
+		},
 	}
 });
