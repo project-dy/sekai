@@ -73,6 +73,9 @@
         res.json().then((data) => {
           console.log(data);
           (document.getElementById("submitted") as HTMLInputElement).checked = true;
+          (document.getElementById("roomCode") as HTMLElement).style.display = "none";
+          (document.getElementById("welcome") as HTMLElement).style.display = "block";
+          (document.getElementById("welcome") as HTMLElement).innerText = `${name}님, 환영합니다.`;
           //alert(`방 코드: ${data.id}`);
           //fillRoomCode(data.id);
           connectWs(Number(data.id), name);
@@ -95,6 +98,7 @@
 </script>
 
 <div id="roomCode">
+  <h1 style="font-size: 2em;">방 코드를 입력해주세요.</h1>
   <input id="submitted" type="checkbox" tabindex="-1" />
 
   <form id="roomCodeForm">
@@ -199,3 +203,6 @@
     <span class="indicator"></span>
   </form>
 </div>
+<h2 id="welcome" style="display: none;">
+  님, 환영합니다.
+</h2>
