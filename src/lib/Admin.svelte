@@ -1,7 +1,8 @@
 <script lang="ts">
   import "./Admin.scss";
   import { browser } from "$app/environment";
-  const handle = () => {
+  let ws: WebSocket;
+  let handle = () => {
     if (browser) {
       const name = prompt("방 이름은?");
       if (!name) return;
@@ -44,11 +45,19 @@
     if (!roomCode) return;
     roomCode.style.display = "block";
     connectWs(Number(code));
+    const theButton = document.getElementById("theButton");
+    if (!theButton) return;
+    theButton.innerText = "시작";
+    theButton.onclick = () => {
+      handle = () => {
+        ws.send(JSON.stringify({ c: "start" }));
+      };
+    };
   }
   function connectWs(code: number) {
     if (!code) return;
     const url = location.origin.replace("http", "ws").split("/admin")[0];
-    let ws: WebSocket = new WebSocket(`${url}/b/ws?rn=admin${code}&name=admin`); // 웹소켓 연결
+    ws = new WebSocket(`${url}/b/ws?rn=admin${code}&name=admin`); // 웹소켓 연결
     ws.onopen = () => {
       console.log("connected");
     };
@@ -78,7 +87,7 @@
   }
 </script>
 
-<button on:click={handle}> 방 생성 </button>
+<button id="theButton" on:click={handle}> 방 생성 </button>
 
 <div id="roomCode" style="display:none;">
   <input id="submitted" type="checkbox" tabindex="-1" />

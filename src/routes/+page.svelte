@@ -1,13 +1,13 @@
 <script lang="ts">
   import "./+page.css";
-  import svelteLogo from "$lib/images/svelte.svg";
-  import viteLogo from "$lib/images/vite.svg";
-  import Counter from "$lib/Counter.svelte";
+  // import svelteLogo from "$lib/images/svelte.svg";
+  // import viteLogo from "$lib/images/vite.svg";
+  // import Counter from "$lib/Counter.svelte";
   import Passcode from "$lib/Passcode.svelte";
 </script>
 
 <main
-  style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" 
+  style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;"
   unselectable="on"
 >
   <!-- <div>
@@ -37,7 +37,7 @@
 </main>
 
 <style>
-  .logo {
+  /* .logo {
     height: 6em;
     padding: 1.5em;
     will-change: filter;
@@ -51,5 +51,5 @@
   }
   .read-the-docs {
     color: #888;
-  }
+  } */
 </style>

@@ -11,10 +11,13 @@
     //event.target.nextElementSibling?.focus();
     //input.nextElementSibling?.focus();
 
-    if (/[^0-9.]/.test(input.value)) { // 숫자가 아닌 값이 있을 때
-      input.value = input.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
-
-    } else { // 숫자일 때
+    if (/[^0-9.]/.test(input.value)) {
+      // 숫자가 아닌 값이 있을 때
+      input.value = input.value
+        .replace(/[^0-9.]/g, "")
+        .replace(/(\..*)\./g, "$1");
+    } else {
+      // 숫자일 때
       // input.value = input.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
       const next = input.nextElementSibling as HTMLElement;
       next?.focus();
@@ -37,7 +40,7 @@
     });
     console.log(Number(roomCodeList.join("")));
     if (back) return false;
-    checkFromServer(Number(roomCodeList.join("")));
+    checkFromServer(roomCodeList.join(""));
     // When the value looks good
     //document.getElementById("submitted").checked = "true";
 
@@ -48,34 +51,39 @@
   }
 
   let isExecuted = false;
-  function checkFromServer(rc: number) {
+  function checkFromServer(rc: string) {
     if (isExecuted) return;
     isExecuted = true;
     console.log(rc);
     let name = prompt("이름은?");
-    if (!name) { // name이 없으면
+    if (!name) {
+      // name이 없으면
       setTimeout(() => {
         isExecuted = false;
         checkFromServer(rc); // 재귀 호출(콜스택 오버플로우 방지를 위해 다른 쓰레드로 넘김)
       }, 0);
       return; // 함수 종료
-    };
+    }
     // post 방 코드
     fetch(`/b/api/room/${rc}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({name: name}),
+      body: JSON.stringify({ name: name }),
     }).then((res) => {
       console.log(res);
       if (res.ok) {
         res.json().then((data) => {
           console.log(data);
-          (document.getElementById("submitted") as HTMLInputElement).checked = true;
-          (document.getElementById("roomCode") as HTMLElement).style.display = "none";
-          (document.getElementById("welcome") as HTMLElement).style.display = "block";
-          (document.getElementById("welcome") as HTMLElement).innerText = `${name}님, 환영합니다.`;
+          (document.getElementById("submitted") as HTMLInputElement).checked =
+            true;
+          (document.getElementById("roomCode") as HTMLElement).style.display =
+            "none";
+          (document.getElementById("welcome") as HTMLElement).style.display =
+            "block";
+          (document.getElementById("welcome") as HTMLElement).innerText =
+            `${name}님, 환영합니다.`;
           //alert(`방 코드: ${data.id}`);
           //fillRoomCode(data.id);
           connectWs(Number(data.id), name);
@@ -88,11 +96,11 @@
 
   function connectWs(code: number, name: string) {
     if (!code) return;
-    const url = location.origin.replace("http", "ws").split('/admin')[0];
+    const url = location.origin.replace("http", "ws").split("/admin")[0];
     let ws: WebSocket = new WebSocket(`${url}/b/ws?rn=${code}&name=${name}`);
     ws.onopen = () => {
       console.log("connected");
-      ws.send(JSON.stringify({name: name}));
+      ws.send(JSON.stringify({ name: name }));
     };
   }
 </script>
@@ -116,7 +124,7 @@
       value=""
       autofocus
     />
-    
+
     <input
       class="number"
       min="0"
@@ -203,6 +211,4 @@
     <span class="indicator"></span>
   </form>
 </div>
-<h2 id="welcome" style="display: none;">
-  님, 환영합니다.
-</h2>
+<h2 id="welcome" style="display: none;">님, 환영합니다.</h2>

@@ -8,7 +8,7 @@
 
   // import { browser } from "$app/environment";
 
-  let ws: WebSocket;
+  // let ws: WebSocket;
   /*if (browser) {
     // CSR(브라우저)에서만 동작
     const rnParam = "admin"; // 웹소켓 연결을 위한 룸넘버 파라미터(관리자 파라미터)
@@ -44,7 +44,7 @@
     <!-- <Command /> -->
     <Admin />
   </div>
-<!-- 
+  <!--
   <p>
     Check out <a
       href="https://github.com/sveltejs/kit#readme"
