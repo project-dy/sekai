@@ -48,11 +48,11 @@
     const theButton = document.getElementById("theButton");
     if (!theButton) return;
     theButton.innerText = "시작";
-    theButton.onclick = () => {
-      handle = () => {
-        ws.send(JSON.stringify({ c: "start" }));
-      };
+    handle = () => {
+      ws.send(JSON.stringify({ command: "start" }));
     };
+    // theButton.onclick = () => {
+    // };
   }
   function connectWs(code: number) {
     if (!code) return;

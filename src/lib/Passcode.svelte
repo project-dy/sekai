@@ -102,6 +102,14 @@
       console.log("connected");
       ws.send(JSON.stringify({ name: name }));
     };
+    ws.onmessage = (event) => {
+      console.log(event.data);
+      const data = JSON.parse(event.data);
+      console.log(data);
+      if (data.m == "start") {
+        alert("시작");
+      }
+    };
   }
 </script>
 

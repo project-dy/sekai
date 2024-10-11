@@ -112,11 +112,33 @@ function webSocketServer(server: Server) {
     // Handle incoming messages
     ws.on("message", (message) => {
       const parsed = JSON.parse(String(message));
-      console.log(parsed);
-      if (rn == "admin") {
-        //console.log("admin!");
+      console.log(rn, parsed);
+      if (rn.includes("admin")) {
+        // console.log("admin!");
         admin.doIt(parsed).then((result) => {
-          ws.send(result);
+          // const parsed = JSON.parse(String(message));
+          // const json = JSON.parse(result);
+          // console.log(json);
+          const parsed = JSON.parse(result);
+          const c = parsed.c;
+          if (c === 200)
+            {ws.send(result);}
+          if (c === 100) {
+            // Send a message to the client not admin
+            // TODO: rn으로 찾아서 보내기
+            const rnReal = rn.split("admin")[1];
+            // console.log(clients, rnReal);
+            const clientWs = clients[rnReal];
+            if (clientWs) {
+              clientWs.forEach((client) => {
+                client.ws.send(result);
+                console.log(
+                  `Send a message to client ${client.name} from admin ${rnReal}`,
+                );
+              });
+            }
+
+          }
         });
       } else if (rn.includes("rn")) {
         const rnReal = rn.split("admin")[1];

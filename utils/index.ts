@@ -115,6 +115,7 @@ class Admin {
   }
 
   async doIt(params: Params): Promise<string> {
+    // const command = params.command;
     const command = params.command;
     switch (command) {
       case "crawl": {
@@ -130,6 +131,9 @@ class Admin {
           return JSON.stringify({ c: 200, m: String(res) });
         }
         break;
+      }
+      case "start": {
+        return JSON.stringify({ c: 100, m: "start" });
       }
       default:
         //return "Command Not Found";
