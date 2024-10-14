@@ -62,6 +62,8 @@ const sekai = new Sekai(); // Sekai 클래스 인스턴스 생성
 //const admin = new sekai.Admin();
 const admin = sekai.getAdmin();
 
+import { rooms } from "../../utils/index";
+
 import { Server } from "http";
 
 function webSocketServer(server: Server) {
@@ -103,7 +105,7 @@ function webSocketServer(server: Server) {
         adminWs.forEach((admin) => {
           admin.ws.send(JSON.stringify({ c: `connected`, m: name }));
           console.log(
-            `Send a message to admin ${admin.name} from ${rn}:${name}`,
+            `Send a message to admin ${admin.name} from ${rn}:${name}`
           );
         });
       }
@@ -121,8 +123,9 @@ function webSocketServer(server: Server) {
           // console.log(json);
           const parsed = JSON.parse(result);
           const c = parsed.c;
-          if (c === 200)
-            {ws.send(result);}
+          if (c === 200) {
+            ws.send(result);
+          }
           if (c === 100) {
             // Send a message to the client not admin
             // TODO: rn으로 찾아서 보내기
@@ -133,11 +136,10 @@ function webSocketServer(server: Server) {
               clientWs.forEach((client) => {
                 client.ws.send(result);
                 console.log(
-                  `Send a message to client ${client.name} from admin ${rnReal}`,
+                  `Send a message to client ${client.name} from admin ${rnReal}`
                 );
               });
             }
-
           }
         });
       } else if (rn.includes("rn")) {
@@ -155,7 +157,13 @@ function webSocketServer(server: Server) {
 
     // Send a welcome message to the client
     //ws.send(`Welcome, client ${rn}!`);
-    ws.send(JSON.stringify({ m: `Welcome, client ${rn}!` }));
+    console.log(rooms);
+    function getRoomName(id: string) {
+      const room = rooms.find((room) => room.id === id);
+      return room?.name;
+    }
+    const roomName = getRoomName(rn);
+    ws.send(JSON.stringify({ m: `Welcome, client ${rn}! on ${roomName}` }));
   });
 }
 

@@ -39,7 +39,7 @@ interface Room {
   users: string[];
 }
 
-export const rooms: Room[] = [];
+export let rooms: Room[] = [];
 
 class Admin {
   constructor() {
@@ -115,6 +115,7 @@ class Admin {
   }
 
   async doIt(params: Params): Promise<string> {
+    // console.log(rooms);
     // const command = params.command;
     const command = params.command;
     switch (command) {

@@ -103,7 +103,11 @@
       ws.send(JSON.stringify({ name: name }));
     };
     const quiz = document.getElementById("quiz");
-    if (!quiz) return;
+    const quizTitle = document.getElementById("quizTitle");
+    const quizPadding = document.getElementById("quizPadding");
+    const quizContent = document.getElementById("quizContent");
+    const quizSubmit = document.getElementById("quizSubmit");
+    if (!quiz || !quizTitle || !quizPadding || !quizContent || !quizSubmit) return;
     ws.onmessage = (event) => {
       console.log(event.data);
       const data = JSON.parse(event.data);
@@ -113,6 +117,8 @@
           "none";
         // alert("시작");
         quiz.style.display = "block";
+        quizTitle.innerText = name;
+        quizPadding.innerText = "invisible";
       }
     };
   }
@@ -227,6 +233,7 @@
 <h2 id="welcome" style="display: none;">님, 환영합니다.</h2>
 <div id="quiz" style="display: none;">
   <h1 id="quizTitle">퀴즈</h1>
-  <div id="quizContent"></div>
-  <button id="quizSubmit">제출</button>
+  <h1 id="quizPadding" style="color: rgba(0, 0, 0, 0);">error</h1>
+  <div id="quizContent" style="display: none;"></div>
+  <button id="quizSubmit" style="display: none;">제출</button>
 </div>
