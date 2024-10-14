@@ -102,12 +102,17 @@
       console.log("connected");
       ws.send(JSON.stringify({ name: name }));
     };
+    const quiz = document.getElementById("quiz");
+    if (!quiz) return;
     ws.onmessage = (event) => {
       console.log(event.data);
       const data = JSON.parse(event.data);
       console.log(data);
       if (data.m == "start") {
-        alert("시작");
+        (document.getElementById("welcome") as HTMLElement).style.display =
+          "none";
+        // alert("시작");
+        quiz.style.display = "block";
       }
     };
   }
@@ -220,3 +225,8 @@
   </form>
 </div>
 <h2 id="welcome" style="display: none;">님, 환영합니다.</h2>
+<div id="quiz" style="display: none;">
+  <h1 id="quizTitle">퀴즈</h1>
+  <div id="quizContent"></div>
+  <button id="quizSubmit">제출</button>
+</div>
