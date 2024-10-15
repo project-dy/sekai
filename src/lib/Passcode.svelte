@@ -112,6 +112,10 @@
       console.log(event.data);
       const data = JSON.parse(event.data);
       console.log(data);
+      if (data.m.startsWith("Welcome")){
+        quizTitle.innerText = data.m.split("on ")[1];
+        
+      }
       if (data.m == "start") {
         (document.getElementById("welcome") as HTMLElement).style.display =
           "none";
