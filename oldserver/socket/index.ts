@@ -56,36 +56,15 @@ import WebSocket, { WebSocketServer } from "ws";
 //const dataPath = path.resolve(rootPath, "data"); // data 폴더의 절대경로를 dataPath에 저장
 
 //const Sekai = require("../../../utils/index"); // utils 모듈 로드
-// import Sekai from "../../utils/index";
-// const sekai = new Sekai(); // Sekai 클래스 인스턴스 생성
+import Sekai from "../../utils/index";
+const sekai = new Sekai(); // Sekai 클래스 인스턴스 생성
 //sekai.greet(); // Hello, Sekai 출력
 //const admin = new sekai.Admin();
-// const admin = sekai.getAdmin();
+const admin = sekai.getAdmin();
 
 import { rooms } from "../../utils/index";
 
 import { Server } from "http";
-
-import fs from "fs";
-
-let _commands = {
-
-}
-
-// Import commands from commands folder
-fs.existsSync("./server/socket/commands") && fs.readdirSync("./server/socket/commands").forEach((file) => {
-  if (!["mjs", "js", "ts"].includes(file.split(".").at(-1) || "")) 
-    return console.warn(
-  "./server/socket/commands"+file, "의 확장자가 잘못되었습니다. js, mjs, ts 중 하나여야 합니다.");
-  try {
-    const command = import(`./commands/${file}`);
-    const commandName = file.split(".")[0];
-    _commands[commandName] = command;
-    console.log(file, "로드성공");
-  } catch (error) {
-    console.error(file, "로드실패\n", error);
-  }
-});
 
 function webSocketServer(server: Server) {
   // Create a WebSocket server
@@ -138,32 +117,31 @@ function webSocketServer(server: Server) {
       console.log(rn, parsed);
       if (rn.includes("admin")) {
         // console.log("admin!");
-        // admin.doIt(parsed).then((result) => {
-        //   // const parsed = JSON.parse(String(message));
-        //   // const json = JSON.parse(result);
-        //   // console.log(json);
-        //   const parsed = JSON.parse(result);
-        //   const c = parsed.c;
-        //   if (c === 200) {
-        //     ws.send(result);
-        //   }
-        //   if (c === 100) {
-        //     // Send a message to the client not admin
-        //     // TODO: rn으로 찾아서 보내기
-        //     const rnReal = rn.split("admin")[1];
-        //     // console.log(clients, rnReal);
-        //     const clientWs = clients[rnReal];
-        //     if (clientWs) {
-        //       clientWs.forEach((client) => {
-        //         client.ws.send(result);
-        //         console.log(
-        //           `Send a message to client ${client.name} from admin ${rnReal}`
-        //         );
-        //       });
-        //     }
-        //   }
-        // });
-
+        admin.doIt(parsed).then((result) => {
+          // const parsed = JSON.parse(String(message));
+          // const json = JSON.parse(result);
+          // console.log(json);
+          const parsed = JSON.parse(result);
+          const c = parsed.c;
+          if (c === 200) {
+            ws.send(result);
+          }
+          if (c === 100) {
+            // Send a message to the client not admin
+            // TODO: rn으로 찾아서 보내기
+            const rnReal = rn.split("admin")[1];
+            // console.log(clients, rnReal);
+            const clientWs = clients[rnReal];
+            if (clientWs) {
+              clientWs.forEach((client) => {
+                client.ws.send(result);
+                console.log(
+                  `Send a message to client ${client.name} from admin ${rnReal}`
+                );
+              });
+            }
+          }
+        });
       } else if (rn.includes("rn")) {
         const rnReal = rn.split("admin")[1];
         console.log(rnReal);
