@@ -62,40 +62,95 @@ import WebSocket, { WebSocketServer } from "ws";
 //const admin = new sekai.Admin();
 // const admin = sekai.getAdmin();
 
-import { rooms } from "../../utils/index";
+// import { rooms } from "../../utils/index";
+import { rooms } from "..";
 
 import { Server } from "http";
 
 import fs from "fs";
 
-let _commands = {
-
+export interface CommandParams {
+  rn: string;
+  isAdmin: boolean;
+  params: string[];
+  ws: WebSocket;
 }
 
-// Import commands from commands folder
-fs.existsSync("./server/socket/commands") && fs.readdirSync("./server/socket/commands").forEach((file) => {
-  if (!["mjs", "js", "ts"].includes(file.split(".").at(-1) || "")) 
-    return console.warn(
-  "./server/socket/commands"+file, "의 확장자가 잘못되었습니다. js, mjs, ts 중 하나여야 합니다.");
-  try {
-    const command = import(`./commands/${file}`);
-    const commandName = file.split(".")[0];
-    _commands[commandName] = command;
-    console.log(file, "로드성공");
-  } catch (error) {
-    console.error(file, "로드실패\n", error);
+const _commands = {};
+
+if (fs.existsSync("./server/socket/commands"))
+  fs.readdirSync("./server/socket/commands").forEach(async (file: string) => {
+    if (!["mjs", "js", "ts"].includes(file.split(".").at(-1) || ""))
+      return console.warn(
+        "./server/socket/commands/" + file,
+        "의 확장자가 잘못되었습니다. 확장자는 mjs, js, ts만 가능합니다.",
+      );
+    try {
+      const command: { default: () => ["string1", "string2"] } = await import(
+        "./commands/" + file
+      );
+      const commandName = file.substring(0, file.lastIndexOf("."));
+      // _commands[commandName] = command[commandName];
+      _commands[commandName] = command.default;
+      console.log(
+        `./server/socket/commands/${file} > ${commandName} 을(를) 로드했습니다.`,
+      );
+    } catch (error) {
+      console.error(file, "로드 실패:", error);
+    }
+  });
+
+const MITM_lol = async (
+  param: CommandParams,
+  originalFunc: (params: CommandParams) => Promise<[string, string]>,
+) => {
+  if (!param) {
+    console.warn(
+      "params가 없습니다. params를 확인해주세요. params는 CommandParams 타입이어야 합니다.",
+    );
+    return;
   }
+  const result = originalFunc(param);
+  if (!(result instanceof Promise)) {
+    console.warn("Not a promise.");
+    return;
+  }
+  return await result;
+};
+const commands = new Proxy(_commands, {
+  get(target, prop) {
+    const originalFunc = target[prop];
+    if (typeof originalFunc === "function")
+      return (param: CommandParams) => MITM_lol(param, originalFunc);
+    return originalFunc;
+  },
 });
+
+// // Import commands from commands folder
+// fs.existsSync("./server/socket/commands") && fs.readdirSync("./server/socket/commands").forEach((file) => {
+//   if (!["mjs", "js", "ts"].includes(file.split(".").at(-1) || ""))
+//     return console.warn(
+//   "./server/socket/commands"+file, "의 확장자가 잘못되었습니다. js, mjs, ts 중 하나여야 합니다.");
+//   try {
+//     const command = import(`./commands/${file}`);
+//     const commandName = file.split(".")[0];
+//     _commands[commandName] = command;
+//     console.log(file, "로드성공");
+//   } catch (error) {
+//     console.error(file, "로드실패\n", error);
+//   }
+// });
+
+// Store connected clients
+interface ClientsByRn {
+  [key: string]: { ws: WebSocket; name: string }[];
+}
+export const clients: ClientsByRn = {};
 
 function webSocketServer(server: Server) {
   // Create a WebSocket server
   const wss = new WebSocketServer({ server });
 
-  // Store connected clients
-  interface ClientsByRn {
-    [key: string]: { ws: WebSocket; name: string }[];
-  }
-  const clients: ClientsByRn = {};
   //const clientsByRn = {};
   // Handle incoming connections
   wss.on("connection", (ws, req) => {
@@ -116,57 +171,53 @@ function webSocketServer(server: Server) {
     if (!clients[rn]) clients[rn] = [];
     // const name = req.url.split("name=")[1];
     const name = decodeURI(req.url.split("name=")[1]);
-    clients[rn].push({ ws, name: name });
+    // clients[rn].push({ ws, name: name }); // 옛날거
     // console.log(`$name: ${name}, ${rn.includes('admin')}`);
-    if (!rn.includes("admin")) {
-      // Send a message to admin
-      const adminWs = clients[`admin${rn}`];
-      // console.log(`adminWs: ${adminWs}, ${JSON.stringify(clients)}`);
-      if (adminWs) {
-        adminWs.forEach((admin) => {
-          admin.ws.send(JSON.stringify({ c: `connected`, m: name }));
-          console.log(
-            `Send a message to admin ${admin.name} from ${rn}:${name}`
-          );
-        });
-      }
-    }
+    // if (!rn.includes("admin")) {
+    //   // Send a message to admin
+    //   const adminWs = clients[`admin${rn}`];
+    //   // console.log(`adminWs: ${adminWs}, ${JSON.stringify(clients)}`);
+    //   if (adminWs) {
+    //     adminWs.forEach((admin) => {
+    //       // admin.ws.send(JSON.stringify({ c: `connected`, m: name }));
+    //       admin.ws.send("connected");
+    //       console.log(
+    //         `Send a message to admin ${admin.name} from ${rn}:${name}`,
+    //       );
+    //     });
+    //   }
+    // }
 
     // Handle incoming messages
     ws.on("message", (message) => {
-      const parsed = JSON.parse(String(message));
-      console.log(rn, parsed);
-      if (rn.includes("admin")) {
-        // console.log("admin!");
-        // admin.doIt(parsed).then((result) => {
-        //   // const parsed = JSON.parse(String(message));
-        //   // const json = JSON.parse(result);
-        //   // console.log(json);
-        //   const parsed = JSON.parse(result);
-        //   const c = parsed.c;
-        //   if (c === 200) {
-        //     ws.send(result);
-        //   }
-        //   if (c === 100) {
-        //     // Send a message to the client not admin
-        //     // TODO: rn으로 찾아서 보내기
-        //     const rnReal = rn.split("admin")[1];
-        //     // console.log(clients, rnReal);
-        //     const clientWs = clients[rnReal];
-        //     if (clientWs) {
-        //       clientWs.forEach((client) => {
-        //         client.ws.send(result);
-        //         console.log(
-        //           `Send a message to client ${client.name} from admin ${rnReal}`
-        //         );
-        //       });
-        //     }
-        //   }
-        // });
-
-      } else if (rn.includes("rn")) {
-        const rnReal = rn.split("admin")[1];
-        console.log(rnReal);
+      const msg = String(message);
+      console.log(rn, msg);
+      const rnReal = rn.includes("admin") ? rn.split("admin")[1] : rn;
+      const isAdmin = rn.includes("admin");
+      const params = msg.split(" ");
+      const command = params.shift();
+      const commandParams: CommandParams = {
+        rn: rnReal,
+        isAdmin,
+        params,
+        ws,
+      };
+      if (command && commands[command]) {
+        // console.log(commands);
+        // console.log(commands[command]);
+        commands[command](commandParams).then(([admin, client]) => {
+          console.log(`admin: ${admin}, client: ${client}`);
+          if (admin) {
+            console.log(`admin${rnReal} ${clients[`admin${rnReal}`]} ${admin}`);
+            clients[`admin${rnReal}`].forEach((c) => c.ws.send(admin));
+          }
+          if (client)
+            clients[rnReal].forEach((c) => {
+              c.ws.send(client);
+            });
+        });
+      } else {
+        ws.send("Command not found");
       }
     });
 

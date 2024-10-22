@@ -49,7 +49,7 @@
     if (!theButton) return;
     theButton.innerText = "시작";
     handle = () => {
-      ws.send(JSON.stringify({ command: "start" }));
+      ws.send("start");
     };
     // theButton.onclick = () => {
     // };
@@ -60,12 +60,15 @@
     ws = new WebSocket(`${url}/b/ws?rn=admin${code}&name=admin`); // 웹소켓 연결
     ws.onopen = () => {
       console.log("connected");
+      ws.send("adminInit");
     };
     ws.onmessage = (event) => {
       console.log(event.data);
-      const data = JSON.parse(event.data);
-      if (data.c === "connected") {
-        addList(data.m);
+      const data = event.data;
+      if (!data) return;
+      // console.log(data);
+      if (data.startsWith("register")) {
+        addList(data.split("register ")[1]);
       }
     };
   }

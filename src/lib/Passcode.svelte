@@ -1,11 +1,13 @@
 <script lang="ts">
   import "./Passcode.scss";
+  import { browser } from "$app/environment";
+  if (browser)
+    (document.getElementById("submitted") as HTMLInputElement).checked = false;
   //import { hasContext } from "svelte";
 
   //let inputRefs: HTMLInputElement[] = []; // 입력 필드 참조 배열
   //let inputValues = ["", "", "", "", "", ""]; // 입력값을 저장할 배열
   let inputValues: string[] = [];
-
   function handleInput(event: Event) {
     const input = event.target as HTMLInputElement;
     //event.target.nextElementSibling?.focus();
@@ -21,11 +23,23 @@
       // input.value = input.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
       const next = input.nextElementSibling as HTMLElement;
       next?.focus();
-      inputValues.push(input.value);
+      // inputValues.push(input.value);
     }
   }
 
+  function getRoomCode() {
+    inputValues[0] = (document.getElementById("n1") as HTMLInputElement).value;
+    inputValues[1] = (document.getElementById("n2") as HTMLInputElement).value;
+    inputValues[2] = (document.getElementById("n3") as HTMLInputElement).value;
+    inputValues[3] = (document.getElementById("n4") as HTMLInputElement).value;
+    inputValues[4] = (document.getElementById("n5") as HTMLInputElement).value;
+    inputValues[5] = (document.getElementById("n6") as HTMLInputElement).value;
+
+    console.log(inputValues);
+  }
+
   function checkRoomCode() {
+    getRoomCode();
     /*const roomCodeList = [];*/
     const roomCodeList = inputValues;
     let back = false;
@@ -100,23 +114,24 @@
     let ws: WebSocket = new WebSocket(`${url}/b/ws?rn=${code}&name=${name}`);
     ws.onopen = () => {
       console.log("connected");
-      ws.send(JSON.stringify({ name: name }));
+      // ws.send(JSON.stringify({ name: name }));
+      ws.send("register " + name);
     };
     const quiz = document.getElementById("quiz");
     const quizTitle = document.getElementById("quizTitle");
     const quizPadding = document.getElementById("quizPadding");
     const quizContent = document.getElementById("quizContent");
     const quizSubmit = document.getElementById("quizSubmit");
-    if (!quiz || !quizTitle || !quizPadding || !quizContent || !quizSubmit) return;
+    if (!quiz || !quizTitle || !quizPadding || !quizContent || !quizSubmit)
+      return;
     ws.onmessage = (event) => {
-      console.log(event.data);
-      const data = JSON.parse(event.data);
+      // console.log(event.data);
+      const data = event.data;
       console.log(data);
-      if (data.m.startsWith("Welcome")){
-        quizTitle.innerText = data.m.split("on ")[1];
-        
+      if (data == "registered") {
+        quizTitle.innerText = data.split(" ")[1];
       }
-      if (data.m == "start") {
+      if (data == "start") {
         (document.getElementById("welcome") as HTMLElement).style.display =
           "none";
         // alert("시작");

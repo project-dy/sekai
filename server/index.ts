@@ -38,7 +38,7 @@ interface Room {
   users: string[];
 }
 
-let rooms: Room[] = [];
+export let rooms: Room[] = [];
 app.get("/b/api/room", (req, res) => {
   res.json(rooms);
 });
