@@ -170,7 +170,7 @@ function webSocketServer(server: Server) {
     // Store the WebSocket connection in the clients object
     if (!clients[rn]) clients[rn] = [];
     // const name = req.url.split("name=")[1];
-    const name = decodeURI(req.url.split("name=")[1]);
+    // const name = decodeURI(req.url.split("name=")[1]);
     // clients[rn].push({ ws, name: name }); // 옛날거
     // console.log(`$name: ${name}, ${rn.includes('admin')}`);
     // if (!rn.includes("admin")) {
@@ -205,17 +205,22 @@ function webSocketServer(server: Server) {
       if (command && commands[command]) {
         // console.log(commands);
         // console.log(commands[command]);
-        commands[command](commandParams).then(([admin, client]) => {
-          console.log(`admin: ${admin}, client: ${client}`);
-          if (admin) {
-            console.log(`admin${rnReal} ${clients[`admin${rnReal}`]} ${admin}`);
-            clients[`admin${rnReal}`].forEach((c) => c.ws.send(admin));
-          }
-          if (client)
-            clients[rnReal].forEach((c) => {
-              c.ws.send(client);
-            });
-        });
+        const isAdminOnly = command.startsWith("admin");
+        if (!isAdminOnly || (isAdminOnly && isAdmin))
+          // 관리자 전용이 아니거나 관리자 전용 명령을 관리자가 실행하는 경우
+          commands[command](commandParams).then(([admin, client]) => {
+            console.log(`admin: ${admin}, client: ${client}`);
+            if (admin) {
+              console.log(
+                `admin${rnReal} ${clients[`admin${rnReal}`]} ${admin}`,
+              );
+              clients[`admin${rnReal}`].forEach((c) => c.ws.send(admin));
+            }
+            if (client && clients[rnReal])
+              clients[rnReal].forEach((c) => {
+                c.ws.send(client);
+              });
+          });
       } else {
         ws.send("Command not found");
       }

@@ -48,8 +48,10 @@
     const theButton = document.getElementById("theButton");
     if (!theButton) return;
     theButton.innerText = "시작";
-    handle = () => {
+    handle = async () => {
       ws.send("start");
+      const clip = await navigator.clipboard.readText();
+      console.log(clip);
     };
     // theButton.onclick = () => {
     // };

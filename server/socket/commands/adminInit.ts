@@ -1,5 +1,5 @@
 import { clients, CommandParams } from "..";
-import { rooms } from "../..";
+// import { rooms } from "../..";
 /**
  * Register a new client
  * @param params 커맨드 파라미터
