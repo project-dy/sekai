@@ -49,7 +49,7 @@
     if (!theButton) return;
     theButton.innerText = "시작";
     handle = async () => {
-      ws.send("start");
+      ws.send("adminStart");
       const clip = await navigator.clipboard.readText();
       console.log(clip);
     };
