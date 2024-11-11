@@ -24,5 +24,6 @@ if (fs.existsSync("./quiz"))
  */
 export default async (params: CommandParams) => {
   console.log(params);
-  // TODO: 만들어라
+  // TODO: 만들어라 \n 귀찮
+  return ["sample", ""];
 };

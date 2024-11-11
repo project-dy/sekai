@@ -1,0 +1,14 @@
+{
+  "name": "으악 정보부 살려", 
+  "data": [
+    {
+
+      "name": "문제1", 
+      "str": "노래를 듣고 제목을 맞추세요.", 
+      "songTitle": "Mili - world.execute(me);",
+      "answer": "world.execute(me);", 
+      "altAnswer": ["world.execute(me)", "Mili - world.execute(me);", "Mili - world.execute(me)"],
+      "hint":""
+    }
+  ]
+}

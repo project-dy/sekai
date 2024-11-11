@@ -66,13 +66,15 @@
     };
     ws.onmessage = (event) => {
       console.log(event.data);
-      const data = event.data;
+      const data:string = event.data;
       if (!data) return;
       // console.log(data);
       if (data.startsWith("register")) {
         addList(data.split("register ")[1]);
       }
     };
+    // @ts-expect-error window에 ws를 넣어줌 (디버그 목적임 ㅇㅇ)
+    window.ws = ws;
   }
   function addList(name: string) {
     // const list = document.getElementById("list");
