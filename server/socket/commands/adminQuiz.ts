@@ -1,4 +1,4 @@
-import { clients, CommandParams } from "..";
+import { CommandParams } from "..";
 import fs from "fs";
 // import { rooms } from "../..";
 /**
