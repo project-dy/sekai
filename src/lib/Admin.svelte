@@ -71,6 +71,14 @@
       // console.log(data);
       if (data.startsWith("register")) {
         addList(data.split("register ")[1]);
+      } else if (data.startsWith("youtube")) {
+        const audio = new Audio(data.replace("youtube","/b/audio"));
+        audio.volume = 0.01;
+        audio.load();
+        audio.play();
+        audio.loop = true;
+        // @ts-expect-error window에 audio를 넣어줌 (디버그 목적임 ㅇㅇ)
+        window.audio = audio;
       }
     };
     // @ts-expect-error window에 ws를 넣어줌 (디버그 목적임 ㅇㅇ)

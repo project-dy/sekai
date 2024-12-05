@@ -104,3 +104,5 @@ app.post("/b/api/room/:id", (req, res) => {
   room.users.push(user);
   res.json(room);
 });
+
+app.use("/b/audio", express.static("audio"));
