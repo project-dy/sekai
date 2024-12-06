@@ -50,8 +50,12 @@
     theButton.innerText = "시작";
     handle = async () => {
       ws.send("adminStart");
-      const clip = await navigator.clipboard.readText();
-      console.log(clip);
+      const id: string =
+        atob(new URL(location.href).searchParams.get("id") || "") ||
+        (await navigator.clipboard.readText()) ||
+        prompt("id") ||
+        "noneinfo01";
+      console.log(id);
     };
     // theButton.onclick = () => {
     // };
@@ -66,14 +70,14 @@
     };
     ws.onmessage = (event) => {
       console.log(event.data);
-      const data:string = event.data;
+      const data: string = event.data;
       if (!data) return;
       // console.log(data);
       if (data.startsWith("register")) {
         addList(data.split("register ")[1]);
       } else if (data.startsWith("youtube")) {
-        const audio = new Audio(data.replace("youtube","/b/audio"));
-        audio.volume = 0.01;
+        const audio = new Audio(data.replace("youtube", "/b/audio"));
+        audio.volume = 1;
         audio.load();
         audio.play();
         audio.loop = true;
@@ -102,98 +106,100 @@
   }
 </script>
 
-<button id="theButton" on:click={handle}> 방 생성 </button>
+<div id="roomCodeDiv">
+  <button id="theButton" on:click={handle}> 방 생성 </button>
 
-<div id="roomCode" style="display:none;">
-  <input id="submitted" type="checkbox" tabindex="-1" />
+  <div id="roomCode" style="display:none;">
+    <input id="submitted" type="checkbox" tabindex="-1" />
 
-  <form id="roomCodeForm">
-    <input
-      type="number"
-      min="0"
-      max="9"
-      maxlength="1"
-      placeholder=" "
-      id="n1"
-      disabled
-      pattern="[0-9]*"
-      inputmode="numeric"
-      value=""
-      autofocus
-    />
-    <input
-      type="number"
-      min="0"
-      max="9"
-      maxlength="1"
-      placeholder=" "
-      disabled
-      id="n2"
-      pattern="[0-9]*"
-      inputmode="numeric"
-      value=""
-    />
-    <input
-      type="number"
-      min="0"
-      max="9"
-      maxlength="1"
-      placeholder=" "
-      disabled
-      id="n3"
-      pattern="[0-9]*"
-      inputmode="numeric"
-      value=""
-    />
-    <input
-      type="number"
-      min="0"
-      max="9"
-      maxlength="1"
-      placeholder=" "
-      disabled
-      id="n4"
-      pattern="[0-9]*"
-      inputmode="numeric"
-      value=""
-    />
+    <form id="roomCodeForm">
+      <input
+        type="number"
+        min="0"
+        max="9"
+        maxlength="1"
+        placeholder=" "
+        id="n1"
+        disabled
+        pattern="[0-9]*"
+        inputmode="numeric"
+        value=""
+        autofocus
+      />
+      <input
+        type="number"
+        min="0"
+        max="9"
+        maxlength="1"
+        placeholder=" "
+        disabled
+        id="n2"
+        pattern="[0-9]*"
+        inputmode="numeric"
+        value=""
+      />
+      <input
+        type="number"
+        min="0"
+        max="9"
+        maxlength="1"
+        placeholder=" "
+        disabled
+        id="n3"
+        pattern="[0-9]*"
+        inputmode="numeric"
+        value=""
+      />
+      <input
+        type="number"
+        min="0"
+        max="9"
+        maxlength="1"
+        placeholder=" "
+        disabled
+        id="n4"
+        pattern="[0-9]*"
+        inputmode="numeric"
+        value=""
+      />
 
-    <input
-      type="number"
-      min="0"
-      max="9"
-      maxlength="1"
-      placeholder=" "
-      disabled
-      id="n5"
-      pattern="[0-9]*"
-      inputmode="numeric"
-      value=""
-    />
+      <input
+        type="number"
+        min="0"
+        max="9"
+        maxlength="1"
+        placeholder=" "
+        disabled
+        id="n5"
+        pattern="[0-9]*"
+        inputmode="numeric"
+        value=""
+      />
 
-    <input
-      type="number"
-      min="0"
-      max="9"
-      maxlength="1"
-      placeholder=" "
-      disabled
-      id="n6"
-      pattern="[0-9]*"
-      inputmode="numeric"
-      value=""
-    />
+      <input
+        type="number"
+        min="0"
+        max="9"
+        maxlength="1"
+        placeholder=" "
+        disabled
+        id="n6"
+        pattern="[0-9]*"
+        inputmode="numeric"
+        value=""
+      />
 
-    <button class="submit" disabled aria-label="방 코드 확인" tabindex="0"
-    ></button>
-    <!--
-			for="submitted"
-			type="button"
-		-->
-    <!--for="submitted"-->
+      <button class="submit" disabled aria-label="방 코드 확인" tabindex="0"
+      ></button>
+      <!--
+        for="submitted"
+        type="button"
+      -->
+      <!--for="submitted"-->
 
-    <span class="indicator"></span>
-  </form>
+      <span class="indicator"></span>
+    </form>
+  </div>
+
+  <div id="list"></div>
 </div>
-
-<div id="list"></div>

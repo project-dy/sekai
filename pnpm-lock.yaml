@@ -26,6 +26,9 @@ importers:
       fs:
         specifier: 0.0.1-security
         version: 0.0.1-security
+      jsfuck:
+        specifier: ^0.4.0
+        version: 0.4.0
       nodemon:
         specifier: ^3.1.7
         version: 3.1.7
@@ -1996,6 +1999,10 @@ packages:
 
   js-yaml@4.1.0:
     resolution: {integrity: sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==}
+    hasBin: true
+
+  jsfuck@0.4.0:
+    resolution: {integrity: sha512-0abJoD5ZnOVXtA2p3EuCmj/jXacYvSTLOWZarJ6Ohj8mzl7fCYdhXICwjSFp7YLUhAZjy82yCIFO6D89CrhAJg==}
     hasBin: true
 
   json-buffer@3.0.1:
@@ -5218,6 +5225,8 @@ snapshots:
   js-yaml@4.1.0:
     dependencies:
       argparse: 2.0.1
+
+  jsfuck@0.4.0: {}
 
   json-buffer@3.0.1: {}
 

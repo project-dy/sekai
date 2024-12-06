@@ -140,6 +140,8 @@
         quizPadding.innerText = "invisible";
       }
     };
+    // @ts-expect-error window에 ws를 넣어줌 (디버그 목적임 ㅇㅇ)
+    window.ws = ws;
   }
 </script>
 

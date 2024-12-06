@@ -22,14 +22,30 @@ export class Youtube {
   }
   async get(trackNumber: string) {
     console.log(trackNumber);
-    const res = (await readdir(`./audio/${this.name}`));
+    const res = await readdir(`./audio/${this.name}`);
     console.log(res);
     for (const e of res) {
       if (e.startsWith(trackNumber)) return e;
     }
     return "Not Found";
   }
+  async list() {
+    const res = await readdir(`./audio/${this.name}`);
+    console.log(res);
+    const list: string[] = [];
+    for (const e of res) {
+      list.push(e.split(" - ")[0]);
+    }
+    return list || "Not Found";
+  }
+  async jsonInit() {
+    const res = await readdir(`./audio/${this.name}`);
+    console.log(res);
+  }
 }
 
 // const youtube = new Youtube("noneinfo01", "https://www.youtube.com/playlist?list=PLg_-6HyedP074nICRharnuEmYt8jnsjOv", "1", "");
 // youtube.download();
+
+const youtube = new Youtube("noneinfo01");
+youtube.jsonInit();
