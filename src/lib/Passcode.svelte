@@ -108,7 +108,12 @@
     });
   }
 
+  let reconnectInterval: NodeJS.Timeout;
+
   function connectWs(code: number, name: string) {
+    try {
+      clearInterval(reconnectInterval);
+    } catch {}
     if (!code) return;
     const url = location.origin.replace("http", "ws").split("/admin")[0];
     let ws: WebSocket = new WebSocket(`${url}/b/ws?rn=${code}&name=${name}`);
@@ -139,6 +144,10 @@
         quizTitle.innerText = name;
         quizPadding.innerText = "invisible";
       }
+    };
+    ws.onclose = (event) => {
+      console.error(event);
+      reconnectInterval = setInterval(connectWs, 3000, code, name);
     };
     // @ts-expect-error window에 ws를 넣어줌 (디버그 목적임 ㅇㅇ)
     window.ws = ws;

@@ -54,13 +54,17 @@
         atob(new URL(location.href).searchParams.get("id") || "") ||
         (await navigator.clipboard.readText()) ||
         prompt("id") ||
-        "noneinfo01";
+        "info";
       console.log(id);
     };
     // theButton.onclick = () => {
     // };
   }
+  let reconnectInterval: NodeJS.Timeout;
   function connectWs(code: number) {
+    try {
+      clearInterval(reconnectInterval);
+    } catch {}
     if (!code) return;
     const url = location.origin.replace("http", "ws").split("/admin")[0];
     ws = new WebSocket(`${url}/b/ws?rn=admin${code}&name=admin`); // 웹소켓 연결
@@ -84,6 +88,10 @@
         // @ts-expect-error window에 audio를 넣어줌 (디버그 목적임 ㅇㅇ)
         window.audio = audio;
       }
+    };
+    ws.onclose = (event) => {
+      console.error(event);
+      reconnectInterval = setInterval(connectWs, 3000, code);
     };
     // @ts-expect-error window에 ws를 넣어줌 (디버그 목적임 ㅇㅇ)
     window.ws = ws;
