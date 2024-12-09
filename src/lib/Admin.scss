@@ -149,3 +149,29 @@ form {
 		background-position-x: 60%;
 	}
 }
+
+
+.full {
+	width: 100vw;
+	height: 100vh;
+	position: absolute;
+	z-index: 100000000;
+	left: 0;
+	top: 0;
+	// background-color: rgba(0, 0, 0, 0.7);
+}
+
+.popup {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	z-index: 100000000;
+	top: 0;
+	left: 0;
+	align-items: center;
+	box-sizing: border-box;
+}
+
+.inner {
+	background-color: #fff;
+}

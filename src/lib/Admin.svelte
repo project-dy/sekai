@@ -210,4 +210,15 @@
   </div>
 
   <div id="list"></div>
+
+  <div class="full hidden">
+    <h1>준비</h1>
+  </div>
+
+  <div class="popup self-center content-center hidden">
+    <div class="inner">
+      <h1>연결 끊김</h1>
+      <p id="retrySecond">다시시도 대기중.</p>
+    </div>
+  </div>
 </div>
