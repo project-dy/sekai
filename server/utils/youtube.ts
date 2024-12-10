@@ -1,13 +1,7 @@
 import { exec } from "child_process";
 import { readdir, readFile, writeFile } from "fs/promises";
 import path from "path";
-
-interface metadata {
-  id: string;
-  fileName: string;
-  youtubeTitle: string;
-  correctAnswers: string[];
-}
+import type { metadataMap } from "../../types/index.d.ts";
 
 export class Youtube {
   private playlist?: string =
@@ -56,35 +50,62 @@ export class Youtube {
       correctAnswers: string[]
     }
     */
-    const list: metadata[] = [];
+    // const list: metadata[] = [];
+    let jsonMeta: string;
+    try {
+      jsonMeta = (await readFile(`./meta/${this.name}.json`)).toString();
+    } catch {
+      jsonMeta = "";
+    }
+    const list: metadataMap = jsonMeta ? JSON.parse(jsonMeta) : {};
     folderRes.forEach((e: string) => {
       const id = e.split(" - ")[0];
       const fileName = e;
-      const youtubeTitle = path.parse(e).name.split(" - ")[1];
+      // console.log(JSON.stringify(path.parse(e)));
+      const youtubeTitle = path.parse(e).name.replace(`${id} - `, "");
       const correctAnswers = [youtubeTitle];
-      list.push({ id, fileName, youtubeTitle, correctAnswers });
+      if (list[id] && list[id].id == id && list[id].fileName == fileName) {
+        return;
+      }
+      // list.push({ id, fileName, youtubeTitle, correctAnswers });
+      list[id] = { id, fileName, youtubeTitle, correctAnswers };
     });
-    await writeFile(`./meta/${this.name}.json`, JSON.stringify(list));
-    const jsonMeta = (await readFile(`./meta/${this.name}.json`)).toString();
-    console.log(JSON.parse(jsonMeta));
+    await writeFile(`./meta/${this.name}.json`, JSON.stringify(list, null, 2));
+    jsonMeta = (await readFile(`./meta/${this.name}.json`)).toString();
+    // console.log(JSON.parse(jsonMeta));
   }
   async getJSON() {
     const jsonMeta = (await readFile(`./meta/${this.name}.json`)).toString();
-    console.log(JSON.parse(jsonMeta));
+    // console.log(JSON.parse(jsonMeta));
+    return jsonMeta;
   }
 }
 
 // const youtube = new Youtube("info", "https://www.youtube.com/playlist?list=PLXrBBJfGINdu9uK-Lg2JSx4NenI-881Yw", "1", "");
 // youtube.download();
 
-// const youtube = new Youtube("noneinfo01");
-// youtube.jsonInit();
+const youtube = new Youtube("info");
+youtube.jsonInit();
 
 /*
 function test(order) {
   try{window.audio.pause();}catch{}
   ws.send("adminYoutube info "+String(order).padStart(3, "0"));
-  if (order==126) return;
+  if (order==132) return;
   window.timeout = setTimeout(test, 2500, order+1);
+}test(1)
+*/
+
+/* 
+function test(order) {
+  try{window.audio.pause();}catch{}
+  ws.send("adminYoutube info "+String(order).padStart(3, "0"));
+  setTimeout(()=>{
+    audio.loop = false;
+    audio.onended = ()=>{
+      console.log('1');
+      test(order+1);
+    }
+  }, 100);
 }test(1)
 */

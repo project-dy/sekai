@@ -1,6 +1,8 @@
 <script lang="ts">
   import "./Admin.scss";
   import { browser } from "$app/environment";
+  import type { metadataMap } from "$types/index.d.ts";
+  let obj: metadataMap;
   let ws: WebSocket;
   let handle = () => {
     if (browser) {
@@ -87,6 +89,8 @@
         audio.loop = true;
         // @ts-expect-error window에 audio를 넣어줌 (디버그 목적임 ㅇㅇ)
         window.audio = audio;
+      } else if (data.startsWith("ytMeta")) {
+        obj = JSON.parse(data.replace("ytMeta", ""));
       }
     };
     ws.onclose = (event) => {
@@ -108,7 +112,7 @@
     // list.appendChild(li);
     const button = document.createElement("button");
     button.textContent = name;
-    button.style.padding = "0px";
+    button.style.padding = "2px";
     button.style.margin = "1em";
     list.appendChild(button);
   }
