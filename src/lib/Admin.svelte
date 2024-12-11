@@ -6,7 +6,8 @@
   let ws: WebSocket;
   let handle = () => {
     if (browser) {
-      const name = prompt("방 이름은?");
+      // const name = prompt("방 이름은?");
+      const name = "random";
       if (!name) return;
       // CSR(브라우저)에서만 동작
       const url = `/b/api/room/create`; // API URL
@@ -58,6 +59,7 @@
         prompt("id") ||
         "info";
       console.log(id);
+      ws.send("adminQuizReady");
     };
     // theButton.onclick = () => {
     // };

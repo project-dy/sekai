@@ -92,10 +92,16 @@
           console.log(data);
           (document.getElementById("submitted") as HTMLInputElement).checked =
             true;
-          (document.getElementById("roomCode") as HTMLElement).style.display =
-            "none";
-          (document.getElementById("welcome") as HTMLElement).style.display =
-            "block";
+          // (document.getElementById("roomCode") as HTMLElement).style.display =
+          //   "none";
+          (document.getElementById("roomCode") as HTMLElement).classList.add(
+            "hidden"
+          );
+          // (document.getElementById("welcome") as HTMLElement).style.display =
+          //   "block";
+          (document.getElementById("welcome") as HTMLElement).classList.remove(
+            "hidden"
+          );
           (document.getElementById("welcome") as HTMLElement).innerText =
             `${name}님, 환영합니다.`;
           //alert(`방 코드: ${data.id}`);
@@ -135,14 +141,18 @@
       console.log(data);
       if (data == "registered") {
         quizTitle.innerText = data.split(" ")[1];
-      }
-      if (data == "start") {
-        (document.getElementById("welcome") as HTMLElement).style.display =
-          "none";
+      } else if (data == "start") {
+        (document.getElementById("welcome") as HTMLElement).classList.add(
+          "hidden"
+        );
         // alert("시작");
         quiz.style.display = "block";
         quizTitle.innerText = name;
         quizPadding.innerText = "invisible";
+      } else if (data == "ready") {
+        (document.getElementById("welcome") as HTMLElement).classList.add(
+          "hidden"
+        );
       }
     };
     ws.onclose = (event) => {
@@ -260,10 +270,10 @@
     <span class="indicator"></span>
   </form>
 </div>
-<h2 id="welcome" style="display: none;">님, 환영합니다.</h2>
-<div id="quiz" style="display: none;">
+<h2 id="welcome" class="hidden">님, 환영합니다.</h2>
+<div id="quiz" class="hidden">
   <h1 id="quizTitle">퀴즈</h1>
   <h1 id="quizPadding" style="color: rgba(0, 0, 0, 0);">error</h1>
-  <div id="quizContent" style="display: none;"></div>
-  <button id="quizSubmit" style="display: none;">제출</button>
+  <div id="quizContent" class="hidden"></div>
+  <button id="quizSubmit" class="hidden">제출</button>
 </div>
