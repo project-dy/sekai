@@ -93,11 +93,16 @@
         window.audio = audio;
       } else if (data.startsWith("ytMeta")) {
         obj = JSON.parse(data.replace("ytMeta", ""));
+      } else if (data == "ready") {
+        (document.getElementById("ready") as HTMLDivElement).classList.remove(
+          "hidden"
+        );
       }
     };
     ws.onclose = (event) => {
       console.error(event);
       reconnectInterval = setInterval(connectWs, 3000, code);
+      location.replace("./#popup1");
     };
     // @ts-expect-error window에 ws를 넣어줌 (디버그 목적임 ㅇㅇ)
     window.ws = ws;
@@ -217,7 +222,7 @@
 
   <div id="list"></div>
 
-  <div class="full hidden">
+  <div id="ready" class="full hidden">
     <h1>준비</h1>
   </div>
 
@@ -225,6 +230,18 @@
     <div class="inner">
       <h1>연결 끊김</h1>
       <p id="retrySecond">다시시도 대기중.</p>
+    </div>
+  </div>
+</div>
+<!-- <a class="button" href="#popup1">Let me Pop up</a> -->
+
+<div id="popup1" class="overlay">
+  <div class="popup">
+    <h2>Here i am</h2>
+    <a class="close" href="#list">&times;</a>
+    <div class="content">
+      Thank to pop me out of that button, but now i'm done so you can close this
+      window.
     </div>
   </div>
 </div>
