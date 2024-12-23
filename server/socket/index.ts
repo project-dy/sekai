@@ -83,7 +83,7 @@ if (fs.existsSync("./server/socket/commands"))
     if (!["mjs", "js", "ts"].includes(file.split(".").at(-1) || ""))
       return console.warn(
         "./server/socket/commands/" + file,
-        "의 확장자가 잘못되었습니다. 확장자는 mjs, js, ts만 가능합니다.",
+        "의 확장자가 잘못되었습니다. 확장자는 mjs, js, ts만 가능합니다."
       );
     try {
       const command: { default: () => ["string1", "string2"] } = await import(
@@ -93,7 +93,7 @@ if (fs.existsSync("./server/socket/commands"))
       // _commands[commandName] = command[commandName];
       _commands[commandName] = command.default;
       console.log(
-        `./server/socket/commands/${file} > ${commandName} 을(를) 로드했습니다.`,
+        `./server/socket/commands/${file} > ${commandName} 을(를) 로드했습니다.`
       );
     } catch (error) {
       console.error(file, "로드 실패:", error);
@@ -102,11 +102,11 @@ if (fs.existsSync("./server/socket/commands"))
 
 const MITM_lol = async (
   param: CommandParams,
-  originalFunc: (params: CommandParams) => Promise<[string, string]>,
+  originalFunc: (params: CommandParams) => Promise<[string, string]>
 ) => {
   if (!param) {
     console.warn(
-      "params가 없습니다. params를 확인해주세요. params는 CommandParams 타입이어야 합니다.",
+      "params가 없습니다. params를 확인해주세요. params는 CommandParams 타입이어야 합니다."
     );
     return;
   }
@@ -143,7 +143,7 @@ const commands = new Proxy(_commands, {
 
 // Store connected clients
 interface ClientsByRn {
-  [key: string]: { ws: WebSocket; name: string }[];
+  [key: string]: { ws: WebSocket; name: string; connected: boolean }[];
 }
 export const clients: ClientsByRn = {};
 
@@ -164,29 +164,17 @@ function webSocketServer(server: Server) {
     console.log(req.url);
     //const rn: string = req.url.split("?rn=")[1];
     if (!req.url?.includes("?rn=")) return;
-    const rn: string = req.url.split("?rn=")[1].split("&")[0];
-    console.log(`Client ${rn} connected`);
+    // const rn: string = req.url.split("?rn=")[1].split("&")[0];
+
+    const urlParameters = new URL(
+      ("ws://localhost:3001" + req.url).replace("ws", "http")
+    );
+    const rn: string | null = urlParameters.searchParams.get("rn");
+    if (rn == null) return;
+    // console.log(`Client ${rn} connected`);
 
     // Store the WebSocket connection in the clients object
     if (!clients[rn]) clients[rn] = [];
-    // const name = req.url.split("name=")[1];
-    // const name = decodeURI(req.url.split("name=")[1]);
-    // clients[rn].push({ ws, name: name }); // 옛날거
-    // console.log(`$name: ${name}, ${rn.includes('admin')}`);
-    // if (!rn.includes("admin")) {
-    //   // Send a message to admin
-    //   const adminWs = clients[`admin${rn}`];
-    //   // console.log(`adminWs: ${adminWs}, ${JSON.stringify(clients)}`);
-    //   if (adminWs) {
-    //     adminWs.forEach((admin) => {
-    //       // admin.ws.send(JSON.stringify({ c: `connected`, m: name }));
-    //       admin.ws.send("connected");
-    //       console.log(
-    //         `Send a message to admin ${admin.name} from ${rn}:${name}`,
-    //       );
-    //     });
-    //   }
-    // }
 
     // Handle incoming messages
     ws.on("message", (message) => {
@@ -211,9 +199,9 @@ function webSocketServer(server: Server) {
           commands[command](commandParams).then(([admin, client]) => {
             console.log(`admin: ${admin}, client: ${client}`);
             if (admin) {
-              console.log(
-                `admin${rnReal} ${clients[`admin${rnReal}`]} ${admin}`,
-              );
+              // console.log(
+              //   `admin${rnReal} ${clients[`admin${rnReal}`]} ${admin}`
+              // );
               clients[`admin${rnReal}`].forEach((c) => c.ws.send(admin));
             }
             if (client && clients[rnReal])
@@ -229,7 +217,10 @@ function webSocketServer(server: Server) {
     // Handle connection close
     ws.on("close", () => {
       // Remove the WebSocket connection from the stored clients
-      delete clients[rn];
+      // delete clients[rn];
+      const temp = clients[rn].findIndex((e) => e.ws === ws);
+      // console.log(ws);
+      clients[rn][temp].connected = false;
       console.log(`Client ${rn} disconnected`);
     });
 

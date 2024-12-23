@@ -22,8 +22,9 @@ if (fs.existsSync("./quiz"))
  * @returns 관리자 응답
  * @description 작업 성공시에만 관리자에게 반환. 클라이언트에게 반환 안함.
  */
-export default async (params: CommandParams) => {
-  console.log(params);
+export default async () => {
+  //params: CommandParams
+  // console.log(params);
   // TODO: 만들어라 \n 귀찮
   return ["sample", ""];
 };

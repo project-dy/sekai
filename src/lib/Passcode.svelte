@@ -126,7 +126,7 @@
     ws.onopen = () => {
       console.log("connected");
       // ws.send(JSON.stringify({ name: name }));
-      ws.send("register " + name);
+      // ws.send("register " + name);
     };
     const quiz = document.getElementById("quiz");
     const quizTitle = document.getElementById("quizTitle");

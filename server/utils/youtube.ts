@@ -81,10 +81,15 @@ export class Youtube {
   }
 }
 
-// const youtube = new Youtube("info", "https://www.youtube.com/playlist?list=PLXrBBJfGINdu9uK-Lg2JSx4NenI-881Yw", "1", "");
+const youtube = new Youtube(
+  "info",
+  "https://www.youtube.com/playlist?list=PLXrBBJfGINdu9uK-Lg2JSx4NenI-881Yw",
+  "1",
+  ""
+);
 // youtube.download();
 
-const youtube = new Youtube("info");
+// const youtube = new Youtube("info");
 youtube.jsonInit();
 
 /*
