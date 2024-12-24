@@ -9,5 +9,5 @@
 export default async () => {
   //params: CommandParams
   // console.log(params.params);
-  return ["", ""];
+  return ["showform", "showform"];
 };

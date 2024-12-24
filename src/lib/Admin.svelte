@@ -59,6 +59,7 @@
         prompt("id") ||
         "info";
       console.log(id);
+      ws.send("");
       ws.send("adminQuizReady");
     };
     // theButton.onclick = () => {

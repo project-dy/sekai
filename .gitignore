@@ -157,4 +157,4 @@ build
 venv
 temp
 audio
-meta
+# meta

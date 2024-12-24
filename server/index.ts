@@ -11,7 +11,7 @@ import http from "http";
 const server = http.createServer(app);
 server.listen(process.env.PORT || 3000, () => {
   console.log(
-    "Server is running on port http://localhost:" + process.env.PORT || 3000,
+    "Server is running on port http://localhost:" + process.env.PORT || 3000
   );
 });
 
@@ -106,3 +106,5 @@ app.post("/b/api/room/:id", (req, res) => {
 });
 
 app.use("/b/audio", express.static("audio"));
+
+//
