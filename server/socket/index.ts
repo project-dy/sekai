@@ -83,7 +83,7 @@ if (fs.existsSync("./server/socket/commands"))
     if (!["mjs", "js", "ts"].includes(file.split(".").at(-1) || ""))
       return console.warn(
         "./server/socket/commands/" + file,
-        "의 확장자가 잘못되었습니다. 확장자는 mjs, js, ts만 가능합니다."
+        "의 확장자가 잘못되었습니다. 확장자는 mjs, js, ts만 가능합니다.",
       );
     try {
       const command: { default: () => ["string1", "string2"] } = await import(
@@ -93,7 +93,7 @@ if (fs.existsSync("./server/socket/commands"))
       // _commands[commandName] = command[commandName];
       _commands[commandName] = command.default;
       console.log(
-        `./server/socket/commands/${file} > ${commandName} 을(를) 로드했습니다.`
+        `./server/socket/commands/${file} > ${commandName} 을(를) 로드했습니다.`,
       );
     } catch (error) {
       console.error(file, "로드 실패:", error);
@@ -102,11 +102,11 @@ if (fs.existsSync("./server/socket/commands"))
 
 const MITM_lol = async (
   param: CommandParams,
-  originalFunc: (params: CommandParams) => Promise<[string, string]>
+  originalFunc: (params: CommandParams) => Promise<[string, string]>,
 ) => {
   if (!param) {
     console.warn(
-      "params가 없습니다. params를 확인해주세요. params는 CommandParams 타입이어야 합니다."
+      "params가 없습니다. params를 확인해주세요. params는 CommandParams 타입이어야 합니다.",
     );
     return;
   }
@@ -167,11 +167,13 @@ function webSocketServer(server: Server) {
     // const rn: string = req.url.split("?rn=")[1].split("&")[0];
 
     const urlParameters = new URL(
-      ("ws://localhost:3001" + req.url).replace("ws", "http")
+      ("ws://localhost:3001" + req.url).replace("ws", "http"),
     );
     const rn: string | null = urlParameters.searchParams.get("rn");
     if (rn == null) return;
-    // console.log(`Client ${rn} connected`);
+    const name: string | null = urlParameters.searchParams.get("name");
+    if (!name) ws.close();
+    console.log(`Client ${rn}:${name} connected`);
 
     // Store the WebSocket connection in the clients object
     if (!clients[rn]) clients[rn] = [];
@@ -220,7 +222,7 @@ function webSocketServer(server: Server) {
       // delete clients[rn];
       const temp = clients[rn].findIndex((e) => e.ws === ws);
       // console.log(ws);
-      clients[rn][temp].connected = false;
+      if (clients[rn] && clients[rn][temp]) clients[rn][temp].connected = false;
       console.log(`Client ${rn} disconnected`);
     });
 

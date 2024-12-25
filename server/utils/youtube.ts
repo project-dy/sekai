@@ -18,7 +18,7 @@ export class Youtube {
   }
   async download() {
     const result = await exec(
-      `yt-dlp --downloader aria2c --downloader-args '-c -j 3 -x 3 -s 3 -k 1M' ${this.playlist} -I ${this.from}:${this.until} -f bestaudio -o "./audio/${this.name}/%(playlist_index)s - %(title)s.%(ext)s"`
+      `yt-dlp --downloader aria2c --downloader-args '-c -j 3 -x 3 -s 3 -k 1M' ${this.playlist} -I ${this.from}:${this.until} -f bestaudio -o "./audio/${this.name}/%(playlist_index)s - %(title)s.%(ext)s"`,
     );
     console.log(result);
   }
@@ -43,7 +43,7 @@ export class Youtube {
   async jsonInit() {
     const folderRes = await readdir(`./audio/${this.name}`);
     console.log(folderRes);
-    /* 
+    /*
     {
       id: string,
       fileName: string,
@@ -85,7 +85,7 @@ const youtube = new Youtube(
   "info",
   "https://www.youtube.com/playlist?list=PLXrBBJfGINdu9uK-Lg2JSx4NenI-881Yw",
   "1",
-  ""
+  "",
 );
 // youtube.download();
 
@@ -101,7 +101,7 @@ function test(order) {
 }test(1)
 */
 
-/* 
+/*
 function test(order) {
   try{window.audio.pause();}catch{}
   ws.send("adminYoutube info "+String(order).padStart(3, "0"));
