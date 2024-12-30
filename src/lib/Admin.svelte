@@ -74,6 +74,9 @@
     const url = location.origin.replace("http", "ws").split("/admin")[0];
     ws = new WebSocket(`${url}/b/ws?rn=admin${code}&name=admin`); // 웹소켓 연결
     ws.onopen = () => {
+      try {
+        clearInterval(reconnectInterval);
+      } catch {}
       console.log("connected");
       ws.send("adminInit");
     };

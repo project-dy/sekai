@@ -124,35 +124,64 @@
     const url = location.origin.replace("http", "ws").split("/admin")[0];
     let ws: WebSocket = new WebSocket(`${url}/b/ws?rn=${code}&name=${name}`);
     ws.onopen = () => {
+      try {
+        clearInterval(reconnectInterval);
+      } catch {}
       console.log("connected");
       // ws.send(JSON.stringify({ name: name }));
       // ws.send("register " + name);
     };
-    const quiz = document.getElementById("quiz");
-    const quizTitle = document.getElementById("quizTitle");
-    const quizPadding = document.getElementById("quizPadding");
-    const quizContent = document.getElementById("quizContent");
-    const quizSubmit = document.getElementById("quizSubmit");
-    if (!quiz || !quizTitle || !quizPadding || !quizContent || !quizSubmit)
-      return;
+    // const quiz = document.getElementById("quiz");
+    // const quizTitle = document.getElementById("quizTitle");
+    // const quizPadding = document.getElementById("quizPadding");
+    // const quizContent = document.getElementById("quizContent");
+    // const quizSubmit = document.getElementById("quizSubmit");
+    // if (!quiz || !quizTitle || !quizPadding || !quizContent || !quizSubmit)
+    //   return;
     ws.onmessage = (event) => {
-      // console.log(event.data);
+      // debugger;
+      console.log(event.data);
       const data = event.data;
       console.log(data);
       if (data == "registered") {
-        quizTitle.innerText = data.split(" ")[1];
+        // quizTitle.innerText = data.split(" ")[1];
       } else if (data == "start") {
         (document.getElementById("welcome") as HTMLElement).classList.add(
           "hidden"
         );
         // alert("시작");
-        quiz.style.display = "block";
-        quizTitle.innerText = name;
-        quizPadding.innerText = "invisible";
+        // quiz.style.display = "block";
+        // quizTitle.innerText = name;
+        // quizPadding.innerText = "invisible";
       } else if (data == "ready") {
         (document.getElementById("welcome") as HTMLElement).classList.add(
           "hidden"
         );
+        (
+          document.getElementById("quizInput") as HTMLInputElement
+        ).addEventListener("keydown", (event) => {
+          if (event.key == "Enter") {
+            (document.getElementById("quizSubmit") as HTMLInputElement).click();
+          }
+        });
+        (
+          document.getElementById("quizSubmit") as HTMLButtonElement
+        ).addEventListener("click", () => {
+          const valueToSend = (document.getElementById("quizInput") as HTMLInputElement).value;
+          if (!valueToSend) {
+            alert("다시 입력해주세요");
+            return;
+          }
+          ws.send(
+            "answer " +
+              valueToSend
+          );
+        });
+        (document.getElementById("quiz") as HTMLElement).classList.remove(
+          "hidden"
+        );
+      } else {
+        console.log(data);
       }
     };
     ws.onclose = (event) => {
@@ -272,8 +301,10 @@
 </div>
 <h2 id="welcome" class="hidden">님, 환영합니다.</h2>
 <div id="quiz" class="hidden">
-  <h1 id="quizTitle">퀴즈</h1>
-  <h1 id="quizPadding" style="color: rgba(0, 0, 0, 0);">error</h1>
-  <div id="quizContent" class="hidden"></div>
-  <button id="quizSubmit" class="hidden">제출</button>
+<!-- <div id="quiz"> -->
+  <!-- <h1 id="quizTitle">퀴즈</h1> -->
+  <!-- <h1 id="quizPadding" style="color: rgba(0, 0, 0, 0);">error</h1> -->
+  <!-- <div id="quizContent" class="hidden"></div> -->
+  <input id="quizInput" />
+  <button id="quizSubmit">제출</button>
 </div>
