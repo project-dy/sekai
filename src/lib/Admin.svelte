@@ -80,6 +80,7 @@
       console.log("connected");
       ws.send("adminInit");
     };
+    let audio: HTMLAudioElement;
     ws.onmessage = (event) => {
       console.log(event.data);
       const data: string = event.data;
@@ -88,7 +89,10 @@
       if (data.startsWith("register")) {
         addList(data.split("register ")[1]);
       } else if (data.startsWith("youtube")) {
-        const audio = new Audio(data.replace("youtube", "/b/audio"));
+        try {
+          audio.pause();
+        } catch {}
+        audio = new Audio(data.replace("youtube", "/b/audio"));
         audio.volume = 1;
         audio.load();
         audio.play();
