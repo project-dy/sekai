@@ -1,47 +1,3 @@
-/*
-
-
-Websocket: 실시간 통신 규격
-웹 소켓
-웹을 통한 소켓(해석기를 통한) (실시간) 통신
-http 하이퍼       텍스트 트랜스퍼    프로토콜
-     겁나 대단한  문자   교환(통신)  규약(방식)
-
-
-     선언 상수 변수 함수 객체 리스트 튜플
-     사용
-     조건문
-     반복문
-     함수
-
-const list = [
-     [
-        [0.1,0.2,0.3]
-      ],2,3],
-     [4,5,6],
-     [7,8,9]
-]
-
-const 상수 = 3.14;
-상수 = 123; // ㅂㄱㄴ
-
-let 변수 = 3.14;
-변수 = 123; // ㅆㄱㄴ
-
-list[0]; // = [1,2,3]
-list[0][0]; // = 1
-
-function f(x) {
-     return x * x;
-}
-
-f(3); // = 9
-
-const 결과 = f(3);
-console.log(결과); // = 9
-
-*/
-
 // import { fileURLToPath } from "url";
 // const __dirname = fileURLToPath(new URL(".", import.meta.url));
 //const __filename = fileURLToPath(import.meta.url);
@@ -265,3 +221,22 @@ function webSocketServer(server: Server) {
 
 //module.exports = webSocketServer;
 export default webSocketServer;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
