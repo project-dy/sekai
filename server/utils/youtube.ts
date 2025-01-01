@@ -11,7 +11,7 @@ export class Youtube {
   private name?: string | undefined = "";
   constructor(name?: string, playlist?: string, from?: string, until?: string) {
     this.playlist = playlist;
-    console.log(this.playlist);
+    // console.log(this.playlist);
     this.from = from;
     this.until = until;
     this.name = name;
@@ -23,9 +23,9 @@ export class Youtube {
     console.log(result);
   }
   async get(trackNumber: string) {
-    console.log(trackNumber);
+    // console.log(trackNumber);
     const res = await readdir(`./audio/${this.name}`);
-    console.log(res);
+    // console.log(res);
     for (const e of res) {
       if (e.startsWith(trackNumber)) return e;
     }
@@ -33,7 +33,7 @@ export class Youtube {
   }
   async list() {
     const res = await readdir(`./audio/${this.name}`);
-    console.log(res);
+    // console.log(res);
     const list: string[] = [];
     for (const e of res) {
       list.push(e.split(" - ")[0]);

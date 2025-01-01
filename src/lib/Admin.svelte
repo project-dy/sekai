@@ -35,6 +35,7 @@
       });
     }
   };
+  let id = "info";
   function fillRoomCode(code: string) {
     const codeArray = String(code).split(""); // TypeScript는 타입을 추론하지만 해당 타입으로 들어온다는 보장이 없기 때문에 string으로 변환
     const roomCodeForm = document.getElementById("roomCodeForm");
@@ -53,9 +54,9 @@
     theButton.innerText = "시작";
     handle = async () => {
       ws.send("adminStart");
-      const id: string =
+      id =
         atob(new URL(location.href).searchParams.get("id") || "") ||
-        (await navigator.clipboard.readText()) ||
+        // (await navigator.clipboard.readText()) ||
         prompt("id") ||
         "info";
       console.log(id);
@@ -65,18 +66,22 @@
     // theButton.onclick = () => {
     // };
   }
-  let reconnectInterval: NodeJS.Timeout;
+  let currentSong: string;
+  let currentAnswers: string[];
+  let reconnectInterval: ReturnType<typeof setTimeout>;
   function connectWs(code: number) {
     try {
       clearInterval(reconnectInterval);
-    } catch {}
+      // eslint-disable-next-line no-empty
+    } catch {} // 에러 핸들링 필요 없음
     if (!code) return;
     const url = location.origin.replace("http", "ws").split("/admin")[0];
     ws = new WebSocket(`${url}/b/ws?rn=admin${code}&name=admin`); // 웹소켓 연결
     ws.onopen = () => {
       try {
         clearInterval(reconnectInterval);
-      } catch {}
+        // eslint-disable-next-line no-empty
+      } catch {} // 에러 핸들링 필요 없음
       console.log("connected");
       ws.send("adminInit");
     };
@@ -91,8 +96,11 @@
       } else if (data.startsWith("youtube")) {
         try {
           audio.pause();
+          // eslint-disable-next-line no-empty
         } catch {}
-        audio = new Audio(data.replace("youtube", "/b/audio"));
+        // audio = new Audio(data.replace("youtube", "/b/audio"));
+        audio = document.getElementById("audioPlayer") as HTMLAudioElement;
+        audio.src = data.replace("youtube", "/b/audio");
         audio.volume = 1;
         audio.load();
         audio.play();
@@ -103,8 +111,13 @@
         obj = JSON.parse(data.replace("ytMeta", ""));
       } else if (data == "ready") {
         (document.getElementById("ready") as HTMLDivElement).classList.remove(
-          "hidden"
+          "hidden",
         );
+      } else if (data.startsWith("setSong")) {
+        currentSong = data.replace("setSong", "").split("$")[0];
+        currentAnswers = JSON.parse(data.replace("setSong", "").split("$")[1]);
+        console.log(id, currentAnswers);
+        ws.send(`adminYoutube ${id} ${currentSong}`);
       }
     };
     ws.onclose = (event) => {
@@ -232,11 +245,10 @@
 
   <div id="ready" class="full hidden">
     <h1>준비</h1>
+    <audio id="audioPlayer" controls />
   </div>
 
-  <div id="player">
-
-  </div>
+  <div id="player"></div>
 </div>
 <!-- <a class="button" href="#popup1">Let me Pop up</a> -->
 

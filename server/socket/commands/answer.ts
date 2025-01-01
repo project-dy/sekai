@@ -11,6 +11,6 @@ import { CommandParams } from "..";
 export default async (params: CommandParams) => {
   // console.log(params.params);
   // 클라에서 답 다 정리(특수문자 제거 공백 제거후 제출.)
-  console.log(params);
-  return [``, ""];
+  console.log(params.params.join(" "));
+  return [`answer${params.name}$${params.params.join(" ")}`, ""];
 };

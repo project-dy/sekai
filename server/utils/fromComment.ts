@@ -9,7 +9,7 @@ export class ChartDoongi {
   private songList: string[];
   constructor(name: string, meta?: string) {
     this.meta = meta;
-    console.log(this.meta);
+    // console.log(this.meta);
     this.name = name;
     if (!meta) {
       return;
@@ -22,21 +22,21 @@ export class ChartDoongi {
     });
     list = list.filter((item) => item !== "");
     this.songList = list;
-    console.log(this.songList);
+    // console.log(this.songList);
   }
   async download() {
     this.songList.forEach((e, i) => {
       if (e == "") return;
       const result = execSync(
-        `yt-dlp ytsearch:${'"' + (e + " 가사").replace(/(["'$`\\])/g, "\\$1") + '"'} -f bestaudio -o "./audio/${this.name}/${i + 1} - %(title)s.%(ext)s"`
+        `yt-dlp ytsearch:${'"' + (e + " 가사").replace(/(["'$`\\])/g, "\\$1") + '"'} -f bestaudio -o "./audio/${this.name}/${i + 1} - %(title)s.%(ext)s"`,
       );
       console.log(result);
     });
   }
   async get(trackNumber: string) {
-    console.log(trackNumber);
+    // console.log(trackNumber);
     const res = await readdir(`./audio/${this.name}`);
-    console.log(res);
+    // console.log(res);
     for (const e of res) {
       if (e.startsWith(trackNumber)) return e;
     }
@@ -44,7 +44,7 @@ export class ChartDoongi {
   }
   async list() {
     const res = await readdir(`./audio/${this.name}`);
-    console.log(res);
+    // console.log(res);
     const list: string[] = [];
     for (const e of res) {
       list.push(e.split(" - ")[0]);
@@ -53,8 +53,8 @@ export class ChartDoongi {
   }
   async jsonInit() {
     const folderRes = await readdir(`./audio/${this.name}`);
-    console.log(folderRes);
-    /* 
+    // console.log(folderRes);
+    /*
     {
       id: string,
       fileName: string,
@@ -197,7 +197,7 @@ const chatDoongi = new ChartDoongi(
 049. Just Bones - Zorro 2:32:26
 
 050.  Letter To Myself - 태연 2:34:38
-`
+`,
 );
 chatDoongi.jsonInit();
 // chatDoongi.download();
@@ -211,7 +211,7 @@ function test(order) {
 }test(1)
 */
 
-/* 
+/*
 function test(order) {
   try{window.audio.pause();}catch{}
   ws.send("adminYoutube info "+String(order).padStart(3, "0"));

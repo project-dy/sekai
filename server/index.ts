@@ -11,7 +11,7 @@ import http from "http";
 const server = http.createServer(app);
 server.listen(process.env.PORT || 3000, () => {
   console.log(
-    "Server is running on port http://localhost:" + process.env.PORT || 3000
+    "Server is running on port http://localhost:" + process.env.PORT || 3000,
   );
 });
 
@@ -36,15 +36,26 @@ interface Room {
   id: string;
   name: string;
   users: string[];
+  currentSong: string;
+  currentAnswers: string[];
 }
 
 export const rooms: Room[] = [];
-app.get("/b/api/room", (req, res) => {
-  res.json(rooms);
-});
+// app.get("/b/api/room", (req, res) => {
+//   res.json(rooms);
+// });
 
 function checkRoom(name) {
   return rooms.find((room) => room.name === name);
+}
+
+export function getRoomIndex(id: string): number {
+  const index = rooms.findIndex((room) => room.id === id);
+  if (index === -1) {
+    // console.log(rooms);
+    throw new Error("Room not found");
+  }
+  return index;
 }
 
 app.post("/b/api/room/create", (req, res) => {
@@ -63,6 +74,8 @@ app.post("/b/api/room/create", (req, res) => {
     id: randomStr,
     name: name,
     users: [],
+    currentSong: "",
+    currentAnswers: [],
   };
   rooms.push(room);
   res.json(room);
