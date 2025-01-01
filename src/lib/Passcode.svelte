@@ -95,12 +95,12 @@
           // (document.getElementById("roomCode") as HTMLElement).style.display =
           //   "none";
           (document.getElementById("roomCode") as HTMLElement).classList.add(
-            "hidden"
+            "hidden",
           );
           // (document.getElementById("welcome") as HTMLElement).style.display =
           //   "block";
           (document.getElementById("welcome") as HTMLElement).classList.remove(
-            "hidden"
+            "hidden",
           );
           (document.getElementById("welcome") as HTMLElement).innerText =
             `${name}님, 환영합니다.`;
@@ -147,7 +147,7 @@
         // quizTitle.innerText = data.split(" ")[1];
       } else if (data == "start") {
         (document.getElementById("welcome") as HTMLElement).classList.add(
-          "hidden"
+          "hidden",
         );
         // alert("시작");
         // quiz.style.display = "block";
@@ -155,7 +155,7 @@
         // quizPadding.innerText = "invisible";
       } else if (data == "ready") {
         (document.getElementById("welcome") as HTMLElement).classList.add(
-          "hidden"
+          "hidden",
         );
         (
           document.getElementById("quizInput") as HTMLInputElement
@@ -167,18 +167,23 @@
         (
           document.getElementById("quizSubmit") as HTMLButtonElement
         ).addEventListener("click", () => {
-          const valueToSend = (document.getElementById("quizInput") as HTMLInputElement).value;
+          const valueToSend = (
+            document.getElementById("quizInput") as HTMLInputElement
+          ).value;
           if (!valueToSend) {
             alert("다시 입력해주세요");
             return;
           }
-          ws.send(
-            "answer " +
-              valueToSend
-          );
+          ws.send("answer " + valueToSend);
+          (
+            document.getElementById("quizSubmit") as HTMLButtonElement
+          ).innerText = "제출중";
+          (
+            document.getElementById("quizSubmit") as HTMLButtonElement
+          ).disabled = true;
         });
         (document.getElementById("quiz") as HTMLElement).classList.remove(
-          "hidden"
+          "hidden",
         );
       } else {
         console.log(data);
@@ -301,7 +306,7 @@
 </div>
 <h2 id="welcome" class="hidden">님, 환영합니다.</h2>
 <div id="quiz" class="hidden">
-<!-- <div id="quiz"> -->
+  <!-- <div id="quiz"> -->
   <!-- <h1 id="quizTitle">퀴즈</h1> -->
   <!-- <h1 id="quizPadding" style="color: rgba(0, 0, 0, 0);">error</h1> -->
   <!-- <div id="quizContent" class="hidden"></div> -->
