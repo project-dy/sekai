@@ -252,7 +252,7 @@
 </div>
 <!-- <a class="button" href="#popup1">Let me Pop up</a> -->
 
-<div id="popup1" class="overlay">
+<div id="popup1" class="overlay full">
   <div class="popup">
     <h2>Here i am</h2>
     <a class="close" href="#list">&times;</a>
