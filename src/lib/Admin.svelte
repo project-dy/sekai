@@ -104,7 +104,7 @@
         audio.volume = 1;
         audio.load();
         audio.play();
-        audio.loop = true;
+        audio.loop = false;
         // @ts-expect-error window에 audio를 넣어줌 (디버그 목적임 ㅇㅇ)
         window.audio = audio;
       } else if (data.startsWith("ytMeta")) {
