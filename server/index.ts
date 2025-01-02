@@ -122,3 +122,4 @@ app.post("/b/api/room/:id", (req, res) => {
 app.use("/b/audio", express.static("audio"));
 
 //
+app.use(express.static("build")); // 빌드된 파일 제공
