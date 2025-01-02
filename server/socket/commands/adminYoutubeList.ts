@@ -11,5 +11,5 @@ export default async (params: CommandParams) => {
   // console.log(params.params);
   const youtube = new Youtube(params.params[0]);
   const list = await youtube.list();
-  return [`${JSON.stringify(list)}`, ""];
+  return [`ytList${JSON.stringify(list)}`, ""];
 };

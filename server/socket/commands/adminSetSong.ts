@@ -26,6 +26,6 @@ export default async (params: CommandParams) => {
   rooms[getRoomIndex(params.rn)].currentAnswers = song.correctAnswers;
   return [
     `setSong${params.params[1]}$${JSON.stringify(rooms[getRoomIndex(params.rn)].currentAnswers)}`,
-    "",
+    "showForm",
   ];
 };
