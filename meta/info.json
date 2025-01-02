@@ -157,11 +157,7 @@
     "id": "112",
     "fileName": "112 - ここで生きてる.webm",
     "youtubeTitle": "ここで生きてる",
-    "correctAnswers": [
-      "ここで生きてる",
-      "코코데 이키테루",
-      "여기에 살아있어"
-    ]
+    "correctAnswers": ["ここで生きてる", "코코데 이키테루", "여기에 살아있어"]
   },
   "113": {
     "id": "113",
@@ -215,10 +211,7 @@
     "id": "116",
     "fileName": "116 - Karakara.webm",
     "youtubeTitle": "Karakara",
-    "correctAnswers": [
-      "Karakara",
-      "카라카라"
-    ]
+    "correctAnswers": ["Karakara", "카라카라"]
   },
   "117": {
     "id": "117",
@@ -235,11 +228,7 @@
     "id": "118",
     "fileName": "118 - 【初音ミク】 恋愛裁判 Love Trial 【オリジナルMV】.webm",
     "youtubeTitle": "【初音ミク】 恋愛裁判 Love Trial 【オリジナルMV】",
-    "correctAnswers": [
-      "恋愛裁判",
-      "연애재판",
-      "Love Trial"
-    ]
+    "correctAnswers": ["恋愛裁判", "연애재판", "Love Trial"]
   },
   "119": {
     "id": "119",
@@ -267,10 +256,7 @@
     "id": "121",
     "fileName": "121 - 【MV】MOTTAI／P丸様。.webm",
     "youtubeTitle": "【MV】MOTTAI／P丸様。",
-    "correctAnswers": [
-      "【MV】MOTTAI／P丸様。",
-      "MOTTAI"
-    ]
+    "correctAnswers": ["【MV】MOTTAI／P丸様。", "MOTTAI"]
   },
   "122": {
     "id": "122",
@@ -318,21 +304,13 @@
     "id": "126",
     "fileName": "126 - flos⧸R Sound Design feat.初音ミク.webm",
     "youtubeTitle": "flos⧸R Sound Design feat.初音ミク",
-    "correctAnswers": [
-      "flos⧸R Sound Design feat.初音ミク",
-      "flos"
-    ]
+    "correctAnswers": ["flos⧸R Sound Design feat.初音ミク", "flos"]
   },
   "127": {
     "id": "127",
     "fileName": "127 - 初音ミク「メルト」.webm",
     "youtubeTitle": "初音ミク「メルト」",
-    "correctAnswers": [
-      "初音ミク「メルト」",
-      "멜트",
-      "メルト",
-      "메루토"
-    ]
+    "correctAnswers": ["初音ミク「メルト」", "멜트", "メルト", "메루토"]
   },
   "128": {
     "id": "128",
@@ -366,7 +344,8 @@
     "youtubeTitle": "Booo! - TOKOTOKO（西沢さんP） feat.音街ウナ",
     "correctAnswers": [
       "Booo! - TOKOTOKO（西沢さんP） feat.音街ウナ",
-      "Booo!"
+      "Booo!",
+      "부!"
     ]
   },
   "131": {
@@ -435,22 +414,13 @@
     "id": "136",
     "fileName": "136 - ひとりごつ.webm",
     "youtubeTitle": "ひとりごつ",
-    "correctAnswers": [
-      "ひとりごつ",
-      "히토리고츠",
-      "혼잣말"
-    ]
+    "correctAnswers": ["ひとりごつ", "히토리고츠", "혼잣말"]
   },
   "137": {
     "id": "137",
     "fileName": "137 - キャットラビング ⧸ 香椎モイミ feat. 可不.webm",
     "youtubeTitle": "キャットラビング ⧸ 香椎モイミ feat. 可不",
-    "correctAnswers": [
-      "キャットラビング",
-      "캣 러빙",
-      "Cat Loving",
-      "켓 러빙"
-    ]
+    "correctAnswers": ["キャットラビング", "캣 러빙", "Cat Loving", "켓 러빙"]
   },
   "138": {
     "id": "138",
@@ -488,10 +458,7 @@
     "id": "141",
     "fileName": "141 - 「Creditless」Konosuba OP ⧸ Opening 1「UHD 60FPS」.webm",
     "youtubeTitle": "「Creditless」Konosuba OP ⧸ Opening 1「UHD 60FPS」",
-    "correctAnswers": [
-      "fantastic dreamer",
-      "판타스틱 드리머"
-    ]
+    "correctAnswers": ["fantastic dreamer", "판타스틱 드리머"]
   },
   "142": {
     "id": "142",
@@ -629,7 +596,8 @@
     "youtubeTitle": "tuki.『晩餐歌』Official Music Video",
     "correctAnswers": [
       "tuki.『晩餐歌』Official Music Video",
-      "만찬가"
+      "만찬가",
+      "晩餐歌"
     ]
   },
   "155": {
@@ -750,11 +718,7 @@
     "id": "165",
     "fileName": "165 - 【Kanaria】BRAIN.webm",
     "youtubeTitle": "【Kanaria】BRAIN",
-    "correctAnswers": [
-      "【Kanaria】BRAIN",
-      "BRAIN",
-      "브레인"
-    ]
+    "correctAnswers": ["【Kanaria】BRAIN", "BRAIN", "브레인"]
   },
   "166": {
     "id": "166",
@@ -778,11 +742,7 @@
     "id": "167",
     "fileName": "167 - テトリス ⧸ 重音テトSV.webm",
     "youtubeTitle": "テトリス ⧸ 重音テトSV",
-    "correctAnswers": [
-      "Tetoris",
-      "테토리스",
-      "テトリス"
-    ]
+    "correctAnswers": ["Tetoris", "테토리스", "テトリス"]
   },
   "168": {
     "id": "168",
@@ -874,11 +834,7 @@
     "id": "176",
     "fileName": "176 - DECO＊27 - ヒバナ feat. 初音ミク.webm",
     "youtubeTitle": "DECO＊27 - ヒバナ feat. 初音ミク",
-    "correctAnswers": [
-      "DECO＊27 - ヒバナ feat. 初音ミク",
-      "히바나",
-      "불꽃"
-    ]
+    "correctAnswers": ["DECO＊27 - ヒバナ feat. 初音ミク", "히바나", "불꽃"]
   },
   "177": {
     "id": "177",
@@ -916,11 +872,7 @@
     "id": "180",
     "fileName": "180 - ピノキオピー - 内臓ありますか feat. 初音ミク ⧸ What's Inside.webm",
     "youtubeTitle": "ピノキオピー - 内臓ありますか feat. 初音ミク ⧸ What's Inside",
-    "correctAnswers": [
-      "What's Inside",
-      "내장이 있나요",
-      "内臓ありますか"
-    ]
+    "correctAnswers": ["What's Inside", "내장이 있나요", "内臓ありますか"]
   },
   "181": {
     "id": "181",
@@ -971,10 +923,7 @@
     "id": "185",
     "fileName": "185 - さよならプリンセス ⧸ 初音ミク.webm",
     "youtubeTitle": "さよならプリンセス ⧸ 初音ミク",
-    "correctAnswers": [
-      "さよならプリンセス ⧸ 初音ミク",
-      "안녕 프린세스"
-    ]
+    "correctAnswers": ["さよならプリンセス ⧸ 初音ミク", "안녕 프린세스"]
   },
   "186": {
     "id": "186",
@@ -1001,11 +950,7 @@
     "id": "188",
     "fileName": "188 - イガク - 重音テト.webm",
     "youtubeTitle": "イガク - 重音テト",
-    "correctAnswers": [
-      "イガク - 重音テト",
-      "의학",
-      "이가쿠"
-    ]
+    "correctAnswers": ["イガク - 重音テト", "의학", "이가쿠"]
   },
   "189": {
     "id": "189",
@@ -1076,18 +1021,17 @@
     "id": "002",
     "fileName": "002 - SEKAI NO OWARI「Habit」.webm",
     "youtubeTitle": "SEKAI NO OWARI「Habit」",
-    "correctAnswers": [
-      "SEKAI NO OWARI「Habit」",
-      "Habit",
-      "하빗"
-    ]
+    "correctAnswers": ["SEKAI NO OWARI「Habit」", "Habit", "하빗"]
   },
   "003": {
     "id": "003",
     "fileName": "003 - GO! GO! MANIAC.webm",
     "youtubeTitle": "GO! GO! MANIAC",
     "correctAnswers": [
-      "GO! GO! MANIAC"
+      "GO! GO! MANIAC",
+      "고고매니악",
+      "고! 고! 매니악",
+      "GO GO MANIAC"
     ]
   },
   "004": {
@@ -1115,17 +1059,17 @@
     "id": "006",
     "fileName": "006 - 구루타밍 - 호시아이 [고음질].webm",
     "youtubeTitle": "구루타밍 - 호시아이 [고음질]",
-    "correctAnswers": [
-      "구루타밍 - 호시아이 [고음질]",
-      "호시아이"
-    ]
+    "correctAnswers": ["구루타밍 - 호시아이 [고음질]", "호시아이"]
   },
   "008": {
     "id": "008",
     "fileName": "008 - Super Bright Shining Girl ＂Chika＂.webm",
     "youtubeTitle": "Super Bright Shining Girl ＂Chika＂",
     "correctAnswers": [
-      "Super Bright Shining Girl ＂Chika＂"
+      "Super Bright Shining Girl ＂Chika＂",
+      "반짝반짝 치카치카",
+      "チカっとチカ千花っ",
+      "치카토 치카치카"
     ]
   },
   "009": {
@@ -1133,7 +1077,10 @@
     "fileName": "009 - The Disastrous Life of Saiki K S2 Ending 2「Duet Shitekudasai」.webm",
     "youtubeTitle": "The Disastrous Life of Saiki K S2 Ending 2「Duet Shitekudasai」",
     "correctAnswers": [
-      "The Disastrous Life of Saiki K S2 Ending 2「Duet Shitekudasai」"
+      "The Disastrous Life of Saiki K S2 Ending 2「Duet Shitekudasai」",
+      "듀엣 시테구다사이",
+      "듀엣 시테쿠다사이",
+      "듀엣 해주세요"
     ]
   },
   "010": {
@@ -1315,7 +1262,9 @@
     "fileName": "026 - だいしきゅーだいしゅき.webm",
     "youtubeTitle": "だいしきゅーだいしゅき",
     "correctAnswers": [
-      "だいしきゅーだいしゅき"
+      "だいしきゅーだいしゅき",
+      "다이시큐 다이슈키",
+      "だいしきゅ だいしゅき"
     ]
   },
   "027": {
@@ -1323,7 +1272,10 @@
     "fileName": "027 - やっぱりみゃー姉なんばーわん.webm",
     "youtubeTitle": "やっぱりみゃー姉なんばーわん",
     "correctAnswers": [
-      "やっぱりみゃー姉なんばーわん"
+      "やっぱりみゃー姉なんばーわん",
+      "やっぱりみゃ 姉なんばーわん",
+      "역시 먀언니 넘버원",
+      "얏파리 네난바완"
     ]
   },
   "028": {
@@ -1331,7 +1283,17 @@
     "fileName": "028 - ベースラインやってる？笑 - かめりあ feat. ななひら.webm",
     "youtubeTitle": "ベースラインやってる？笑 - かめりあ feat. ななひら",
     "correctAnswers": [
-      "ベースラインやってる？笑 - かめりあ feat. ななひら"
+      "ベースラインやってる？笑 - かめりあ feat. ななひら",
+      "베이스라인 하고 있니?ㅋ",
+      "베이스라인 하고 있니?",
+      "베이스라인 하고 있니ㅋ",
+      "베이스라인 하고 있니",
+      "ベースラインやってる？笑",
+      "ベースラインやってる？",
+      "ベースラインやってる",
+      "베이스라인 얏테루",
+      "베이스라인 얏테루?",
+      "베이스라인 얏테루?ㅋ"
     ]
   },
   "029": {
@@ -1348,11 +1310,7 @@
     "id": "030",
     "fileName": "030 - うまぴょい伝説.webm",
     "youtubeTitle": "うまぴょい伝説",
-    "correctAnswers": [
-      "うまぴょい伝説",
-      "우마뾰이 전설",
-      "うまぴょい伝説"
-    ]
+    "correctAnswers": ["うまぴょい伝説", "우마뾰이 전설", "うまぴょい伝説"]
   },
   "031": {
     "id": "031",
@@ -1433,9 +1391,7 @@
     "id": "038",
     "fileName": "038 - [한글자막] 나의 히어로 아카데미아 7기 2쿨 op Full - 커튼콜 ⧸ 유우리.webm",
     "youtubeTitle": "[한글자막] 나의 히어로 아카데미아 7기 2쿨 op Full - 커튼콜 ⧸ 유우리",
-    "correctAnswers": [
-      "커튼콜"
-    ]
+    "correctAnswers": ["커튼콜"]
   },
   "039": {
     "id": "039",
@@ -1463,11 +1419,7 @@
     "id": "041",
     "fileName": "041 - METEOR ／ DIVELA feat.初音ミク.webm",
     "youtubeTitle": "METEOR ／ DIVELA feat.初音ミク",
-    "correctAnswers": [
-      "METEOR ／ DIVELA feat.初音ミク",
-      "METEOR",
-      "메테오"
-    ]
+    "correctAnswers": ["METEOR ／ DIVELA feat.初音ミク", "METEOR", "메테오"]
   },
   "042": {
     "id": "042",
@@ -1699,11 +1651,7 @@
     "id": "062",
     "fileName": "062 - なとり - Overdose.webm",
     "youtubeTitle": "なとり - Overdose",
-    "correctAnswers": [
-      "なとり - Overdose",
-      "오버도즈",
-      "overdose"
-    ]
+    "correctAnswers": ["なとり - Overdose", "오버도즈", "overdose"]
   },
   "063": {
     "id": "063",
@@ -1777,11 +1725,7 @@
     "id": "069",
     "fileName": "069 - シャルル／flower.webm",
     "youtubeTitle": "シャルル／flower",
-    "correctAnswers": [
-      "シャルル／flower",
-      "シャルル",
-      "샤를"
-    ]
+    "correctAnswers": ["シャルル／flower", "シャルル", "샤를"]
   },
   "070": {
     "id": "070",
@@ -1850,12 +1794,7 @@
     "id": "076",
     "fileName": "076 - 【Ado】踊.webm",
     "youtubeTitle": "【Ado】踊",
-    "correctAnswers": [
-      "【Ado】踊",
-      "踊",
-      "춤",
-      "오도"
-    ]
+    "correctAnswers": ["【Ado】踊", "踊", "춤", "오도"]
   },
   "077": {
     "id": "077",
@@ -1963,11 +1902,7 @@
     "id": "086",
     "fileName": "086 - POP IN 2.webm",
     "youtubeTitle": "POP IN 2",
-    "correctAnswers": [
-      "POP IN 2",
-      "팝인투",
-      "팝인2"
-    ]
+    "correctAnswers": ["POP IN 2", "팝인투", "팝인2"]
   },
   "087": {
     "id": "087",
@@ -1997,10 +1932,7 @@
     "id": "089",
     "fileName": "089 - シカ色デイズ.webm",
     "youtubeTitle": "シカ色デイズ",
-    "correctAnswers": [
-      "シカ色デイズ",
-      "사슴색 데이즈"
-    ]
+    "correctAnswers": ["シカ色デイズ", "사슴색 데이즈"]
   },
   "090": {
     "id": "090",

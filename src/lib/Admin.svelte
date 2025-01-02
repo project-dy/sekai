@@ -101,7 +101,7 @@
         // audio = new Audio(data.replace("youtube", "/b/audio"));
         audio = document.getElementById("audioPlayer") as HTMLAudioElement;
         audio.src = data.replace("youtube", "/b/audio");
-        audio.volume = 1;
+        audio.volume = 0;
         audio.load();
         audio.play();
         audio.loop = false;
@@ -168,7 +168,9 @@
         // 정답 리스트에 답이 있는지
         if (correctAnswers.includes(userAnswer)) {
           const currentTime = audio.currentTime * 1000;
-          ws.send(`adminCorrect ${username} ${1000 - 0.04 * currentTime}`);
+          let score = 2000 - 0.04 * currentTime;
+          if (0 > score) score = 0;
+          ws.send(`adminCorrect ${username} ${score}`);
         } else {
           ws.send(`adminCorrect ${username} 0`);
         }
@@ -300,6 +302,7 @@
   <div id="ready" class="full hidden">
     <h1>준비</h1>
     <audio id="audioPlayer" controls />
+    <button id="nextSong" aria-label="다음 노래"></button>
   </div>
 
   <div id="player"></div>
