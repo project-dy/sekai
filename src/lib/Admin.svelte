@@ -111,13 +111,66 @@
         obj = JSON.parse(data.replace("ytMeta", ""));
       } else if (data == "ready") {
         (document.getElementById("ready") as HTMLDivElement).classList.remove(
-          "hidden",
+          "hidden"
         );
       } else if (data.startsWith("setSong")) {
         currentSong = data.replace("setSong", "").split("$")[0];
         currentAnswers = JSON.parse(data.replace("setSong", "").split("$")[1]);
         console.log(id, currentAnswers);
         ws.send(`adminYoutube ${id} ${currentSong}`);
+      } else if (data.startsWith("answer")) {
+        function convert(str: string): string {
+          function convertToHalfWidth(str: string) {
+            return str
+              .replaceAll("　", " ")
+              .replace(
+                /[\uFF01-\uFF5E\uFF10-\uFF19\u3000]/g,
+                function (char: string) {
+                  // 전각 문자 → 반각 문자 변환
+                  return String.fromCharCode(char.charCodeAt(0) - 0xfee0);
+                }
+              );
+          }
+
+          // const fullWidthStr = "Ｈｅｌｌｏ　１２３";
+          // const halfWidthStr = convertToHalfWidth(fullWidthStr);
+
+          // console.log(halfWidthStr); // 출력: Hello 123
+
+          function removeUnwantedChars(str: string) {
+            // 알파벳, 숫자, 공백, 일본어, 일본어 한자, 한국어를 제외한 모든 특수문자 제거
+            return str.replace(
+              /[^\w\s\u3040-\u30FF\u31F0-\u31FF\u4E00-\u9FFF\uAC00-\uD7AF]/g,
+              ""
+            );
+          }
+
+          // const inputStr = "Hello! こんにちは, 今日は 2025年 #한글 예시 🏮";
+          // const cleanedStr = removeUnwantedChars(inputStr);
+
+          // console.log(cleanedStr); // 출력: Hello こんにちは 今日は 2025年 한글 예시
+
+          let answer: string = str;
+          // if (!answer) return;
+          answer = answer.replaceAll(" ", "");
+          answer = convertToHalfWidth(answer);
+          answer = removeUnwantedChars(answer);
+          answer = answer.toLocaleLowerCase();
+          return answer;
+        }
+        const username = data.replace("answer", "").split("$")[0];
+        const userAnswer = convert(data.replace("answer", "").split("$")[1]);
+        let correctAnswers: string[] = [];
+        currentAnswers.forEach((e) => {
+          correctAnswers.push(convert(e));
+        });
+        // 정답 리스트에 답이 있는지
+        if (correctAnswers.includes(userAnswer)) {
+          const currentTime = audio.currentTime * 1000;
+          ws.send(`adminCorrect ${username} ${1000 - 0.04 * currentTime}`);
+        } else {
+          ws.send(`adminCorrect ${username} 0`);
+        }
       }
     };
     ws.onclose = (event) => {
@@ -125,7 +178,7 @@
       reconnectInterval = setInterval(connectWs, 3000, code);
       location.replace("./#popup1");
     };
-    // @ts-expect-error window에 ws를 넣어줌 (디버그 목적임 ㅇㅇ)
+    // @ts-expect-error window에s를 넣어줌 (디버그 목적임 ㅇㅇ)
     window.ws = ws;
   }
   function addList(name: string) {

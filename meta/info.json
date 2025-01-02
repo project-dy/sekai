@@ -6,7 +6,10 @@
     "correctAnswers": [
       "【original anime MV】美少女無罪♡パイレーツ【hololive⧸宝鐘マリン】",
       "미소녀 무죄♡파이레츠",
-      "미소녀 무죄 파이레츠"
+      "미소녀 무죄 파이레츠",
+      "미소녀 무죄",
+      "Bishoujyo Muzai♡Pirates",
+      "Bishoujyo Muzai Pirates"
     ]
   },
   "101": {
@@ -40,7 +43,9 @@
       "아호이!! 우리는 호쇼해적단",
       "아호이! 우리는 호쇼해적단",
       "아호이!! 우리는 호쇼해적단☆",
-      "아호이! 우리는 호쇼해적단☆"
+      "아호이! 우리는 호쇼해적단☆",
+      "Ahoy 我ら宝鐘海賊団",
+      "Ahoy 우리는 호쇼해적단"
     ]
   },
   "103": {
@@ -61,10 +66,13 @@
       "Sʼil vous President",
       "S'il vous President",
       "S`il vous President",
-      "실・부・프레지지덴트",
+      "Sil vous President",
+      "실・부・프레지덴트",
       "실 부 프레지덴트",
       "실・부・프레지던트",
-      "실 부 프레지던트"
+      "실 부 프레지던트",
+      "시루부 프레지던트",
+      "실부 프레지덴트"
     ]
   },
   "105": {
@@ -73,7 +81,9 @@
     "youtubeTitle": "DECO＊27 - ラビットホール feat. 初音ミク",
     "correctAnswers": [
       "DECO＊27 - ラビットホール feat. 初音ミク",
-      "래빗 홀"
+      "래빗 홀",
+      "Rabbit hole",
+      "레빗 홀"
     ]
   },
   "106": {
@@ -137,7 +147,7 @@
     "youtubeTitle": "YOASOBI「たぶん」Official Music  Video",
     "correctAnswers": [
       "YOASOBI「たぶん」Official Music  Video",
-      "아마도",
+      "아마",
       "Haven't",
       "たぶん",
       "타분"
@@ -149,17 +159,17 @@
     "youtubeTitle": "ここで生きてる",
     "correctAnswers": [
       "ここで生きてる",
-      "코코데 이키테이루",
+      "코코데 이키테루",
       "여기에 살아있어"
     ]
   },
   "113": {
     "id": "113",
-    "fileName": " - Don't say ＂lazy＂.webm",
+    "fileName": "113 - Don't say ＂lazy＂.webm",
     "youtubeTitle": "Don't say ＂lazy＂",
     "correctAnswers": [
       "Don't say ＂lazy＂",
-      "돈 세이 ＂레이지＂"
+      "Don't say lazy"
     ]
   },
   "114": {
@@ -170,7 +180,22 @@
       "Carpe Diem! ⧸ Compass Cat feat. SeeU, UNI ＂세레나데 유니버스＂ 엔딩 테마 MV",
       "Carpe Diem!",
       "Carpe Diem",
-      "카르페 딩"
+      "카르페 딩",
+      "카르페 디엠",
+      "카르페 DM",
+      "카르페 딤",
+      "칼페 딤",
+      "칼페 딩",
+      "칼패 딩",
+      "칼패 딤",
+      "카르패 디엠",
+      "카르패 딩",
+      "카르페 뎀",
+      "칼페 뎀",
+      "칼패 뎀",
+      "카르페 댐",
+      "칼페 댐",
+      "칼패 댐"
     ]
   },
   "115": {
@@ -180,7 +205,9 @@
     "correctAnswers": [
       "ずっと真夜中でいいのに。『綺羅キラー (feat. Mori Calliope)』MV (ZUTOMAYO – Kira Killer)",
       "綺羅キラー",
-      "키라 컬러"
+      "키라 킬러",
+      "키라 킬라",
+      "키라 키라"
     ]
   },
   "116": {
@@ -197,9 +224,10 @@
     "fileName": "117 - ドラマツルギー - Eve  MV.webm",
     "youtubeTitle": "ドラマツルギー - Eve  MV",
     "correctAnswers": [
-      "ドラマツルギー - Eve  MV",
+      "ドラマツルギー - Eve",
       "Dramaturgy",
-      "드라마투르기"
+      "드라마투르기",
+      "드라마툴기"
     ]
   },
   "118": {
@@ -207,7 +235,7 @@
     "fileName": "118 - 【初音ミク】 恋愛裁判 Love Trial 【オリジナルMV】.webm",
     "youtubeTitle": "【初音ミク】 恋愛裁判 Love Trial 【オリジナルMV】",
     "correctAnswers": [
-      "【初音ミク】 恋愛裁判 Love Trial 【オリジナルMV】",
+      "恋愛裁判",
       "연애재판",
       "Love Trial"
     ]
@@ -230,7 +258,8 @@
     "correctAnswers": [
       "Chinozo 'エリート' feat.KafU",
       "エリート",
-      "엘리트"
+      "엘리트",
+      "Elite"
     ]
   },
   "121": {
@@ -311,7 +340,10 @@
     "correctAnswers": [
       "初音ミクオリジナル曲 「Calc.」",
       "Calc.",
-      "Calc"
+      "Calc",
+      "calc.exe",
+      "계산기",
+      "Windows 도구"
     ]
   },
   "129": {
@@ -366,7 +398,16 @@
     "correctAnswers": [
       "恋愛脳 ⧸ ナナヲアカリ",
       "연애뇌",
-      "Love Brain"
+      "Love Brain",
+      "恋愛脳",
+      "れんあいのう",
+      "れん愛のう",
+      "れん愛脳",
+      "れんあい脳",
+      "恋あいのう",
+      "恋愛のう",
+      "恋愛脳",
+      "恋あい脳"
     ]
   },
   "134": {
@@ -404,9 +445,10 @@
     "fileName": "137 - キャットラビング ⧸ 香椎モイミ feat. 可不.webm",
     "youtubeTitle": "キャットラビング ⧸ 香椎モイミ feat. 可不",
     "correctAnswers": [
-      "キャットラビング ⧸ 香椎モイミ feat. 可不",
+      "キャットラビング",
       "캣 러빙",
-      "香椎モイミ"
+      "Cat Loving",
+      "켓 러빙"
     ]
   },
   "138": {
@@ -446,9 +488,11 @@
     "fileName": "141 - 「Creditless」Konosuba OP ⧸ Opening 1「UHD 60FPS」.webm",
     "youtubeTitle": "「Creditless」Konosuba OP ⧸ Opening 1「UHD 60FPS」",
     "correctAnswers": [
-      "「Creditless」Konosuba OP ⧸ Opening 1「UHD 60FPS」",
+      "Konosuba OP",
       "fantastic dreamer",
-      "판타스틱 드리머"
+      "판타스틱 드리머",
+      "코노스바 오프닝",
+      "코노스바 OP"
     ]
   },
   "142": {
@@ -456,8 +500,8 @@
     "fileName": "142 - JUMPIN' OVER ! ⧸ 初音ミク.webm",
     "youtubeTitle": "JUMPIN' OVER ! ⧸ 初音ミク",
     "correctAnswers": [
-      "JUMPIN' OVER ! ⧸ 初音ミク",
       "JUMPIN' OVER !",
+      "JUMPIN' OVER",
       "점핑 오버!",
       "점핑 오버"
     ]
@@ -470,7 +514,8 @@
       "神のまにまに - れるりりfeat.ミク&リン&GUMI ⧸ At God's Mercy - rerulili feat.Vocaloids",
       "神のまにまに",
       "신의 뜻대로",
-      "카미노 마니마니"
+      "카미노 마니마니",
+      "At God's Mercy"
     ]
   },
   "144": {
@@ -607,7 +652,8 @@
       "オーバーライド - 重音テトSV[吉田夜世]",
       "オーバーライド",
       "Override",
-      "오버라이드"
+      "오버라이드",
+      "@Override"
     ]
   },
   "157": {
@@ -637,7 +683,8 @@
     "correctAnswers": [
       "[Official] 炉心融解 feat.鏡音リン  ⧸  Meltdown feat.Kagamine Rin",
       "炉心融解",
-      "노심융해"
+      "노심융해",
+      "Meltdown"
     ]
   },
   "160": {
@@ -718,7 +765,15 @@
     "correctAnswers": [
       "Giga - '劣等上等'(BRING IT ON) ft.鏡音リン・レン【MV】",
       "劣等上等",
-      "열등상등"
+      "열등상등",
+      "열등上등",
+      "열등상等",
+      "劣등上등",
+      "열등上等",
+      "열등上등",
+      "劣等상等",
+      "劣等上등",
+      "열등上等"
     ]
   },
   "167": {
@@ -726,7 +781,7 @@
     "fileName": "167 - テトリス ⧸ 重音テトSV.webm",
     "youtubeTitle": "テトリス ⧸ 重音テトSV",
     "correctAnswers": [
-      "テトリス ⧸ 重音テトSV",
+      "Tetoris",
       "테토리스",
       "テトリス"
     ]
@@ -750,7 +805,9 @@
     "correctAnswers": [
       "初音ミクの激唱(2018Remake) - cosMo＠暴走P",
       "하츠네 미쿠의 격창",
-      "初音ミクの激唱"
+      "初音ミクの激唱",
+      "하츠네 미쿠노 게키쇼",
+      "하츠네 미쿠노 게키쇼오"
     ]
   },
   "170": {
@@ -781,8 +838,7 @@
     "fileName": "172 - Orangestar - Surges (feat. 夏背 & ルワン) ⧸ カロリーメイト web movie.webm",
     "youtubeTitle": "Orangestar - Surges (feat. 夏背 & ルワン) ⧸ カロリーメイト web movie",
     "correctAnswers": [
-      "Orangestar - Surges (feat. 夏背 & ルワン) ⧸ カロリーメイト web movie",
-      "Surges"
+      "Orangestar - Surges (feat. 夏背 & ルワン) ⧸ カロリーメイト web movie"
     ]
   },
   "173": {
@@ -832,7 +888,8 @@
     "correctAnswers": [
       "1000年生きてる ⧸ いよわ feat.初音ミク（living millennium ⧸ Iyowa feat.Hatsune Miku）",
       "1000年生きてる",
-      "1000년 살고 있어"
+      "1000년 살고 있어",
+      "1000년을ㅡ 살고 있어"
     ]
   },
   "178": {
@@ -882,7 +939,7 @@
     "fileName": "182 - ディスコミュ星人(Discommunication alien) ⧸ ナナヲアカリ.webm",
     "youtubeTitle": "ディスコミュ星人(Discommunication alien) ⧸ ナナヲアカリ",
     "correctAnswers": [
-      "ディスコミュ星人(Discommunication alien) ⧸ ナナヲアカリ",
+      "Discommunication alien",
       "ディスコミュ星人",
       "디스커뮤성인"
     ]
@@ -894,7 +951,8 @@
     "correctAnswers": [
       "人マニア - 重音テト",
       "人マニア",
-      "사람 마니아"
+      "사람 마니아",
+      "히토"
     ]
   },
   "184": {
