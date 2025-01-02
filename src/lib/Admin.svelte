@@ -103,6 +103,39 @@
       return value;
     }
     let audio: HTMLAudioElement;
+    let scoreByUser: { [key: string]: number } = {};
+    function renderScore() {
+      // 점수 순으로 사용자 정렬
+      const sortedUsers = Object.entries(scoreByUser).sort(
+        (a, b) => b[1] - a[1],
+      );
+      console.log(sortedUsers);
+
+      // 랭킹 표에 데이터를 추가
+      const rankingTable = document.getElementById("rankingTable");
+
+      if (rankingTable !== null)
+        sortedUsers.forEach((entry, index) => {
+          const row = document.createElement("tr");
+          // 순위 셀
+          const rankCell = document.createElement("td");
+          rankCell.textContent = String(index + 1); // 순위
+          row.appendChild(rankCell);
+
+          // 사용자 이름 셀
+          const nameCell = document.createElement("td");
+          nameCell.textContent = entry[0]; // 사용자 이름
+          row.appendChild(nameCell);
+
+          // 점수 셀
+          const scoreCell = document.createElement("td");
+          scoreCell.textContent = String(entry[1]); // 점수
+          row.appendChild(scoreCell);
+
+          // 표에 행 추가
+          rankingTable.appendChild(row);
+        });
+    }
     ws.onmessage = (event) => {
       console.log(event.data);
       const data: string = event.data;
@@ -191,10 +224,14 @@
           const currentTime = audio.currentTime * 1000;
           let score = 2000 - 0.04 * currentTime;
           if (0 > score) score = 0;
+          score = Math.round(score);
+          if (!scoreByUser[username]) scoreByUser[username] = 0;
+          scoreByUser[username] = score;
           ws.send(`adminCorrect ${username} ${score}`);
         } else {
           ws.send(`adminCorrect ${username} 0`);
         }
+        renderScore();
       } else if (data.startsWith("ytList")) {
         arr = JSON.parse(data.replace("ytList", ""));
         (document.getElementById("ready") as HTMLDivElement).addEventListener(
@@ -341,6 +378,7 @@
       <h1>준비</h1>
       <audio id="audioPlayer" controls />
       <button id="nextSong" aria-label="다음 노래">다음 노래</button>
+      <div id="rankingTable" />
     </div>
   </div>
 </div>

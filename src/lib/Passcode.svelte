@@ -95,12 +95,12 @@
           // (document.getElementById("roomCode") as HTMLElement).style.display =
           //   "none";
           (document.getElementById("roomCode") as HTMLElement).classList.add(
-            "hidden"
+            "hidden",
           );
           // (document.getElementById("welcome") as HTMLElement).style.display =
           //   "block";
           (document.getElementById("welcome") as HTMLElement).classList.remove(
-            "hidden"
+            "hidden",
           );
           (document.getElementById("welcome") as HTMLElement).innerText =
             `${name}님, 환영합니다.`;
@@ -138,6 +138,7 @@
     // const quizSubmit = document.getElementById("quizSubmit");
     // if (!quiz || !quizTitle || !quizPadding || !quizContent || !quizSubmit)
     //   return;
+    let score: number = 0;
     ws.onmessage = (event) => {
       // debugger;
       console.log(event.data);
@@ -147,7 +148,7 @@
         // quizTitle.innerText = data.split(" ")[1];
       } else if (data == "start") {
         (document.getElementById("welcome") as HTMLElement).classList.add(
-          "hidden"
+          "hidden",
         );
         // alert("시작");
         // quiz.style.display = "block";
@@ -155,7 +156,7 @@
         // quizPadding.innerText = "invisible";
       } else if (data == "ready") {
         (document.getElementById("welcome") as HTMLElement).classList.add(
-          "hidden"
+          "hidden",
         );
         (
           document.getElementById("quizInput") as HTMLInputElement
@@ -185,12 +186,15 @@
           ).innerText = "제출중";
         });
         (document.getElementById("quiz") as HTMLElement).classList.remove(
-          "hidden"
+          "hidden",
         );
       } else if (data.startsWith("scoreAdd")) {
-        console.log(data);
+        console.log(data, Number(data.replace("scoreAdd", "")));
         (document.getElementById("quizSubmit") as HTMLButtonElement).innerText =
           "제출완료";
+        score += parseInt(data.replace("scoreAdd", ""));
+        (document.getElementById("scoreNum") as HTMLSpanElement).innerText =
+          score.toString();
       } else if (data.startsWith("showForm")) {
         (document.getElementById("quizSubmit") as HTMLButtonElement).innerText =
           "제출";
@@ -322,6 +326,9 @@
   <!-- <h1 id="quizTitle">퀴즈</h1> -->
   <!-- <h1 id="quizPadding" style="color: rgba(0, 0, 0, 0);">error</h1> -->
   <!-- <div id="quizContent" class="hidden"></div> -->
+  <p id="score">점수: <span id="scoreNum">0</span></p>
+  <br />
   <input id="quizInput" />
+  <br />
   <button id="quizSubmit">제출</button>
 </div>
