@@ -60,7 +60,7 @@
         prompt("id") ||
         "info";
       console.log(id);
-      ws.send("");
+      // ws.send("");
       ws.send("adminQuizReady");
     };
     // theButton.onclick = () => {
@@ -107,6 +107,7 @@
         audio.loop = false;
         // @ts-expect-error window에 audio를 넣어줌 (디버그 목적임 ㅇㅇ)
         window.audio = audio;
+        ws.send("adminShow");
       } else if (data.startsWith("ytMeta")) {
         obj = JSON.parse(data.replace("ytMeta", ""));
       } else if (data == "ready") {

@@ -167,6 +167,11 @@
         (
           document.getElementById("quizSubmit") as HTMLButtonElement
         ).addEventListener("click", () => {
+          (
+            document.getElementById("quizSubmit") as HTMLButtonElement
+          ).disabled = true;
+          (document.getElementById("quizInput") as HTMLInputElement).disabled =
+            true;
           const valueToSend = (
             document.getElementById("quizInput") as HTMLInputElement
           ).value;
@@ -178,11 +183,6 @@
           (
             document.getElementById("quizSubmit") as HTMLButtonElement
           ).innerText = "제출중";
-          (
-            document.getElementById("quizSubmit") as HTMLButtonElement
-          ).disabled = true;
-          (document.getElementById("quizInput") as HTMLInputElement).disabled =
-            true;
         });
         (document.getElementById("quiz") as HTMLElement).classList.remove(
           "hidden"
@@ -191,6 +191,14 @@
         console.log(data);
         (document.getElementById("quizSubmit") as HTMLButtonElement).innerText =
           "제출완료";
+      } else if (data.startsWith("showForm")) {
+        (document.getElementById("quizSubmit") as HTMLButtonElement).innerText =
+          "제출";
+        (document.getElementById("quizSubmit") as HTMLButtonElement).disabled =
+          false;
+        (document.getElementById("quizInput") as HTMLInputElement).disabled =
+          false;
+        (document.getElementById("quizInput") as HTMLInputElement).value = "";
       }
     };
     ws.onclose = (event) => {

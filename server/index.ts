@@ -11,7 +11,7 @@ import http from "http";
 const server = http.createServer(app);
 server.listen(process.env.PORT || 3000, () => {
   console.log(
-    "Server is running on port http://localhost:" + process.env.PORT || 3000,
+    "Server is running on port http://localhost:" + process.env.PORT || 3000
   );
 });
 
@@ -53,7 +53,7 @@ export function getRoomIndex(id: string): number {
   const index = rooms.findIndex((room) => room.id === id);
   if (index === -1) {
     // console.log(rooms);
-    throw new Error("Room not found");
+    throw new Error(id + "Room not found");
   }
   return index;
 }

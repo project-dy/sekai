@@ -11,8 +11,11 @@ export default async (params: CommandParams) => {
   // console.log(params.params);
   // 클라에서 답 다 정리(특수문자 제거 공백 제거후 제출.)
   console.log(params.params.join(" "));
+  console.log(clients[params.rn]);
+  let done = false;
   clients[params.rn].forEach((client) => {
-    if (client.name === params.params[0]) {
+    if (!done && client.name === params.params[0]) {
+      done = true;
       client.ws.send(`scoreAdd${params.params[1]}`);
     }
   });
