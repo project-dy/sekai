@@ -106,9 +106,9 @@
     let scoreByUser: { [key: string]: number } = {};
     function renderScore() {
       // 점수 순으로 사용자 정렬
-      const sortedUsers = Object.entries(scoreByUser).sort(
-        (a, b) => b[1] - a[1],
-      );
+      const sortedUsers = Object.entries(scoreByUser)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 5);
       console.log(sortedUsers);
 
       // 랭킹 표에 데이터를 추가
@@ -162,10 +162,10 @@
         obj = JSON.parse(data.replace("ytMeta", ""));
       } else if (data == "ready") {
         (document.getElementById("ready") as HTMLDivElement).classList.remove(
-          "hidden",
+          "hidden"
         );
         (document.getElementById("wrap") as HTMLDivElement).classList.add(
-          "hidden",
+          "hidden"
         );
         ws.send(`adminYoutubeList ${id}`);
       } else if (data.startsWith("setSong")) {
@@ -183,7 +183,7 @@
                 function (char: string) {
                   // 전각 문자 → 반각 문자 변환
                   return String.fromCharCode(char.charCodeAt(0) - 0xfee0);
-                },
+                }
               );
           }
 
@@ -196,7 +196,7 @@
             // 알파벳, 숫자, 공백, 일본어, 일본어 한자, 한국어를 제외한 모든 특수문자 제거
             return str.replace(
               /[^\w\s\u3040-\u30FF\u31F0-\u31FF\u4E00-\u9FFF\uAC00-\uD7AF]/g,
-              "",
+              ""
             );
           }
 
@@ -242,7 +242,7 @@
             if (random) {
               ws.send(`adminSetSong ${id} ${random}`);
             }
-          },
+          }
           // { once: true },
         );
         (document.getElementById("ready") as HTMLDivElement).click();
@@ -373,12 +373,15 @@
     <div id="list"></div>
   </div>
 
-  <div id="ready" class="full hidden">
+  <div id="ready" class="hidden">
     <div id="spe">
-      <h1>준비</h1>
-      <audio id="audioPlayer" controls />
       <button id="nextSong" aria-label="다음 노래">다음 노래</button>
-      <div id="rankingTable" />
+      <br />
+      <h1 id="status" class="hidden">준비</h1>
+      <br />
+      <audio id="audioPlayer" controls />
+      <br />
+      <table id="rankingTable" />
     </div>
   </div>
 </div>

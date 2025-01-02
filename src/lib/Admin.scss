@@ -94,8 +94,7 @@ form {
     background-size: 30%;
     background-repeat: no-repeat;
     transition: var(--ease);
-    animation: tension 0.36s cubic-bezier(0.2, 0.4, 0.5, 1) paused alternate
-      infinite;
+    animation: tension 0.36s cubic-bezier(0.2, 0.4, 0.5, 1) paused alternate infinite;
 
     &:focus {
       background-color: var(--primary);
@@ -116,17 +115,17 @@ form {
   }
 }
 
-.submit:focus ~ .indicator {
+.submit:focus~.indicator {
   --i: 9;
 }
 
 @for $i from 1 through 6 {
-  #n#{$i}:focus ~ .indicator {
+  #n#{$i}:focus~.indicator {
     --i: #{$i};
   }
 }
 
-#submitted:checked ~ form {
+#submitted:checked~form {
   background: var(--primary);
   transform: translateX(100vw);
   transition:
@@ -239,4 +238,52 @@ form {
   .popup {
     width: 70%;
   }
+}
+
+/* 테이블 스타일 */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  /* 셀 간격 없애기 */
+  margin: 20px 0;
+  font-family: Arial, sans-serif;
+  /* 폰트 스타일 */
+}
+
+/* 테이블 헤더 스타일 */
+th {
+  background-color: #4CAF50;
+  /* 헤더 배경색 */
+  color: white;
+  /* 헤더 글자 색 */
+  padding: 12px;
+  /* 셀 안의 여백 */
+  text-align: left;
+  /* 글자 왼쪽 정렬 */
+}
+
+/* 테이블 데이터 스타일 */
+td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  /* 테이블 셀 경계선 */
+  text-align: left;
+  /* 글자 왼쪽 정렬 */
+}
+
+/* 홀수 행 배경색 */
+tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+/* 마우스 오버 시 행 색상 변경 */
+tr:hover {
+  background-color: #ddd;
+}
+
+/* 테이블 경계선 */
+table,
+th,
+td {
+  border: 1px solid #ddd;
 }

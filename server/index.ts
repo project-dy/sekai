@@ -50,6 +50,7 @@ function checkRoom(name) {
 }
 
 export function getRoomIndex(id: string): number {
+  id = id.padStart(6, "0");
   const index = rooms.findIndex((room) => room.id === id);
   if (index === -1) {
     // console.log(rooms);
