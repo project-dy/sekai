@@ -112,7 +112,8 @@
       console.log(sortedUsers);
 
       // 랭킹 표에 데이터를 추가
-      const rankingTable = document.getElementById("rankingTable");
+      const rankingTable = document.getElementById("rankingTable")!;
+      rankingTable.innerHTML = "";
 
       if (rankingTable !== null)
         sortedUsers.forEach((entry, index) => {
@@ -226,7 +227,8 @@
           if (0 > score) score = 0;
           score = Math.round(score);
           if (!scoreByUser[username]) scoreByUser[username] = 0;
-          scoreByUser[username] = score;
+          scoreByUser[username] += score;
+          // debugger;
           ws.send(`adminCorrect ${username} ${score}`);
         } else {
           ws.send(`adminCorrect ${username} 0`);

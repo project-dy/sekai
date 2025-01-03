@@ -25,11 +25,28 @@ export class ChartDoongi {
     // console.log(this.songList);
   }
   async download() {
+    let jsonMeta: string;
+    try {
+      jsonMeta = (await readFile(`./meta/${this.name}.json`)).toString();
+    } catch {
+      jsonMeta = "";
+    }
+    const list: metadataMap = jsonMeta ? JSON.parse(jsonMeta) : {};
     this.songList.forEach((e, i) => {
       if (e == "") return;
       const result = execSync(
-        `yt-dlp ytsearch:${'"' + (e + " 가사").replace(/(["'$`\\])/g, "\\$1") + '"'} -f bestaudio -o "./audio/${this.name}/${i + 1} - %(title)s.%(ext)s"`,
+        `yt-dlp ytsearch:${'"' + (e + " 가사").replace(/(["'$`\\])/g, "\\$1") + '"'} -f bestaudio -o "./audio/${this.name}/${i + 1} - %(title)s.%(ext)s"`
       );
+      const id = e.split(" - ")[0];
+      const fileName = e;
+      // console.log(JSON.stringify(path.parse(e)));
+      const youtubeTitle = e;
+      const correctAnswers = [youtubeTitle];
+      if (list[id] && list[id].id == id && list[id].fileName == fileName) {
+        return;
+      }
+      // list.push({ id, fileName, youtubeTitle, correctAnswers });
+      list[id] = { id, fileName, youtubeTitle, correctAnswers };
       console.log(result);
     });
   }
@@ -197,10 +214,10 @@ const chatDoongi = new ChartDoongi(
 049. Just Bones - Zorro 2:32:26
 
 050.  Letter To Myself - 태연 2:34:38
-`,
+`
 );
 chatDoongi.jsonInit();
-// chatDoongi.download();
+// chatDoongi.download().then();
 
 /*
 function test(order) {
